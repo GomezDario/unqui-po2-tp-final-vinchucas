@@ -32,4 +32,13 @@ public class AdministradorZona {
 		}
 	}
 
+	public void muestraValidada(Muestra unaMuestra) {
+		// TODO Auto-generated method stub
+		for(ZonaDeCobertura zona : zonasDeCobertura) {
+			if(zona.estaDentroDeZona(unaMuestra)) {
+				zona.notificarMuestraValidada(unaMuestra);
+			}
+		}
+	}
+
 }

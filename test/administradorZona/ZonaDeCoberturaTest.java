@@ -194,4 +194,16 @@ public class ZonaDeCoberturaTest {
 		verify(unaOrganizacionNoGubernamental, times(1)).funcionNuevaMuestra(zonaDeCobertura, unaMuestra);
 	}
 	
+	@Test
+	public void notificarMuestraValidadaTest() {
+		//setup
+		zonaDeCobertura.registrar(unaOrganizacionNoGubernamental);
+		
+		//exercise
+		zonaDeCobertura.notificarMuestraValidada(unaMuestra);
+		
+		//verify
+		verify(unaOrganizacionNoGubernamental, times(1)).funcionValidacionMuestra(zonaDeCobertura, unaMuestra);
+	}
+	
 }

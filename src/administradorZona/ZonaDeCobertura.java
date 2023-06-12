@@ -107,5 +107,12 @@ public class ZonaDeCobertura {
 			observador.funcionNuevaMuestra(this, unaMuestra);
 		}
 	}
+
+	public void notificarMuestraValidada(Muestra unaMuestra) {
+		// TODO Auto-generated method stub
+		for(Observador observador : observadores) {
+			observador.funcionValidacionMuestra(this, unaMuestra);
+		}
+	}
 	
 }

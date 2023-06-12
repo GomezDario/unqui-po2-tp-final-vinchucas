@@ -99,4 +99,18 @@ public class AdministradorZonaTest {
 			verify(unaZonaDeCobertura, times(1)).estaDentroDeZona(unaMuestra);
 			verify(unaZonaDeCobertura, times(0)).agregarMuestra(unaMuestra);
 		}
+		
+		@Test
+		public void muestraValidadaTest() {
+			//setup
+			when(unaZonaDeCobertura.estaDentroDeZona(unaMuestra)).thenReturn(true);			
+			administradorZona.agregarZona(unaZonaDeCobertura);
+			administradorZona.agregarMuestra(unaMuestra);
+			
+			//exercise
+			administradorZona.muestraValidada(unaMuestra);
+			
+			//verify
+			verify(unaZonaDeCobertura, times(1)).notificarMuestraValidada(unaMuestra);
+		}
 }
