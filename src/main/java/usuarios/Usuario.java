@@ -6,7 +6,7 @@ import main.java.SitioWeb.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 
 
 public class Usuario {
@@ -89,6 +89,7 @@ public class Usuario {
 		}
 		
 		return fechas;
+		
 	}
 	
 	public  ArrayList<LocalDateTime> fechasDeMuestrasPublicadas(ArrayList<Muestra> muestras){
