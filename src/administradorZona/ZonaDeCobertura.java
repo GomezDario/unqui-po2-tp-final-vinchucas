@@ -114,5 +114,10 @@ public class ZonaDeCobertura {
 			observador.funcionValidacionMuestra(this, unaMuestra);
 		}
 	}
+
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

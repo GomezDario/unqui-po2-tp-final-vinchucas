@@ -7,4 +7,9 @@ public class Muestra {
 		return null;
 	}
 
+	public Object resultadoActual() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
