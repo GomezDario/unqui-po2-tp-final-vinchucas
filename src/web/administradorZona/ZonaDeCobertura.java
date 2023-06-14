@@ -3,6 +3,9 @@ package web.administradorZona;
 import java.util.ArrayList;
 import java.util.List;
 
+import web.administradorMuestra.Muestra;
+import web.extras.Ubicacion;
+
 public class ZonaDeCobertura {
 	
 	Ubicacion ubicacion;
@@ -29,7 +32,7 @@ public class ZonaDeCobertura {
 
 	public boolean estaDentroDeZona(Muestra unaMuestra) {
 		// TODO Auto-generated method stub
-		float distancia = this.ubicacion.distanciaEntre(unaMuestra.getUbicacion());
+		double distancia = this.ubicacion.distanciaEntre(unaMuestra.getUbicacion());
 		
 		return distancia <= radio;
 	}
@@ -47,28 +50,10 @@ public class ZonaDeCobertura {
 
 	public boolean solapaCon(ZonaDeCobertura otraZonaDeCobertura) {
 		// TODO Auto-generated method stub
-		// Convertir las coordenadas a radianes
-		double latitud1 = Math.toRadians(this.ubicacion.getLatitud());
-        double longitud1 = Math.toRadians(this.ubicacion.getLongitud());
-        Ubicacion ubiZona = otraZonaDeCobertura.getUbicacion();
-        double latitud2 = Math.toRadians(ubiZona.getLatitud());
-        double longitud2 = Math.toRadians(ubiZona.getLongitud());
-        
-        // Calcular la distancia entre los puntos utilizando la fórmula de haversine
-        double distancia = haversine(latitud1, longitud1, latitud2, longitud2);
+        double distancia = ubicacion.distanciaEntre(otraZonaDeCobertura.getUbicacion());
         // Verificar si la distancia es menor o igual a la suma de los radios
         return distancia <= (this.radio + otraZonaDeCobertura.getRadio());
 	}
-	
-	// Calcular la distancia entre dos puntos utilizando la fórmula de haversine
-    private double haversine(double latitud1, double longitud1, double latitud2, double longitud2) {
-        double dlat = latitud2 - latitud1;
-        double dlon = longitud2 - longitud1;
-        double a = Math.pow(Math.sin(dlat / 2), 2) + Math.cos(latitud1) * Math.cos(latitud2) * Math.pow(Math.sin(dlon / 2), 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        double distancia = 6371 * c; // Radio promedio de la Tierra en kilómetros
-        return distancia;
-    }
 
 	public void agregarZona(ZonaDeCobertura otraZonaDeCobertura) {
 		// TODO Auto-generated method stub

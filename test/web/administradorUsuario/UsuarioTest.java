@@ -1,35 +1,21 @@
-package main.java.usuarios;
+package web.administradorUsuario;
 
-
-import main.java.Muestra.*;
-import main.java.SitioWeb.*;
-import main.java.Opinion.*;
+import web.extras.*;
+import web.administradorMuestra.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-
- 
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-
-
-	
-
 
 class UsuarioTest {
 
 	Usuario user1;
 	
-	
-	
-	
 	EstadoUsuario estado;
-	Web web;
 	
 	@BeforeEach
 	
@@ -37,10 +23,9 @@ class UsuarioTest {
 		
 		
 		estado = mock(EstadoUsuario.class);
-		web = mock(Web.class);
 		
 		
-		user1 = new Usuario("Gabriel Gomez", web);
+		user1 = new Usuario("Gabriel Gomez");
 		user1.setEstadoUsuario(estado);
 		
 
@@ -54,12 +39,6 @@ class UsuarioTest {
 	@Test
 	void getNombreTest() {
 		assertEquals(user1.getNombre(), "Gabriel Gomez");
-	}
-	
-	
-	@Test
-	void getSitioTest() {
-		assertEquals(user1.getSitio(), web);
 	}
 	
 	@Test
@@ -86,13 +65,6 @@ class UsuarioTest {
 		assertEquals(user1.getNombre(), "Gabi");
 	}
 	
-	
-	@Test
-	void setSitioTest() {
-		Web vinchucaWeb = mock(Web.class);
-		user1.setSitio(vinchucaWeb);
-		assertEquals(user1.getSitio(), vinchucaWeb);
-	}
 	
 	@Test
 	void setTipoTest() {
@@ -177,7 +149,7 @@ class UsuarioTest {
 		ArrayList<Muestra> muestras = user1.getMuestras();
 		
 		
-        ArrayList<LocalDateTime> result = user1.fechasDeMuestrasPublicadas(user1.getMuestras());
+        user1.fechasDeMuestrasPublicadas(user1.getMuestras());
 		
         assertEquals(user1.getMuestras().size(), 3);
         
@@ -196,7 +168,7 @@ class UsuarioTest {
 		
 		ArrayList<Opinion> opiniones = user1.getOpiniones();
 		
-		ArrayList<LocalDateTime> result = user1.fechasDeOpiniones(user1.getOpiniones());
+		user1.fechasDeOpiniones(user1.getOpiniones());
 		
 		assertEquals(user1.getOpiniones().size(), 3);
 		

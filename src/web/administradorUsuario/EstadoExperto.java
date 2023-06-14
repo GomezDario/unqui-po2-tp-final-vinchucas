@@ -1,4 +1,4 @@
-package main.java.usuarios;
+package web.administradorUsuario;
 
 public class EstadoExperto extends EstadoUsuario{
 

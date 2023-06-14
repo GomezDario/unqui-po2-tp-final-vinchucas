@@ -1,4 +1,4 @@
-package main.java.usuarios;
+package web.administradorUsuario;
 
 public class EstadoValidado extends EstadoUsuario {
 
@@ -7,7 +7,6 @@ public class EstadoValidado extends EstadoUsuario {
 		// TODO Auto-generated method stub
 		
 		usuario.setEstadoUsuario(this);
-		
 		
 	}
 

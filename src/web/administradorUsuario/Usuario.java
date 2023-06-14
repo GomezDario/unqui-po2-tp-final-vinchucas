@@ -1,34 +1,27 @@
-package main.java.usuarios;
-import main.java.Muestra.*;
-import main.java.Opinion.*;
-import main.java.SitioWeb.*;
+package web.administradorUsuario;
 
+import web.extras.*;
+import web.administradorMuestra.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
-
-
 
 public class Usuario {
 
-	private Web sitio;
 	private String nombre;
 	private EstadoUsuario estadoUsuario;
 	private ArrayList<Muestra> muestras;
 	private ArrayList<Opinion> opiniones;
-	
-	
+
 	// CONSTRUCTOR
-	public Usuario(String nombre, Web sitio) {
+	public Usuario(String nombre) {
 		
 		this.nombre = nombre;
 		this.estadoUsuario = new EstadoBasico();
 		this.muestras  = new ArrayList<Muestra>();
 		this.opiniones = new ArrayList<Opinion>();
-		this.sitio = sitio;
 	}
 
-	
 	// GET´S Y SET´S
 	
 	public String getNombre() {
@@ -63,24 +56,14 @@ public class Usuario {
 		this.opiniones = opiniones;
 		
 	}
-	
-	public Web getSitio() {
-		return sitio;
-	}
 
-
-	public void setSitio(Web sitio) {
-		this.sitio = sitio;
-	}
-
-	
 	// -------------Metodos----------------- //
 	
 	
-	public ArrayList<LocalDateTime> fechasDeOpiniones(ArrayList<Opinion> opiniones){
+	public ArrayList<LocalDate> fechasDeOpiniones(ArrayList<Opinion> opiniones){
 		
-		
-		ArrayList<LocalDateTime> fechas = new ArrayList<>();
+		 
+		ArrayList<LocalDate> fechas = new ArrayList<>();
 		
 		for (Opinion opinion : opiniones) {
 			
@@ -92,9 +75,9 @@ public class Usuario {
 		
 	}
 	
-	public  ArrayList<LocalDateTime> fechasDeMuestrasPublicadas(ArrayList<Muestra> muestras){
+	public  ArrayList<LocalDate> fechasDeMuestrasPublicadas(ArrayList<Muestra> muestras){
 		
-		ArrayList<LocalDateTime> fechas = new ArrayList<>();
+		ArrayList<LocalDate> fechas = new ArrayList<>();
 		
 		for (Muestra muestra : muestras) {
 			

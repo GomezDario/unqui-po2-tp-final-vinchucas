@@ -1,4 +1,4 @@
-package main.java.usuarios;
+package web.administradorUsuario;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,18 +7,13 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
-
-import main.java.Muestra.*;
-import main.java.SitioWeb.*;
-import main.java.Opinion.*;
 
 import org.junit.jupiter.api.BeforeEach;
 
-
+import web.extras.*;
+import web.administradorMuestra.*;
 
 class EstadoExpertoTest {
 
@@ -29,25 +24,17 @@ class EstadoExpertoTest {
 	
 	    EstadoBasico tipoBasico;
 	    EstadoExperto tipoExperto;
-	    Web web;
 	   
 	    @BeforeEach
 	    
 		void setUp() {
 		        user = mock(Usuario.class);
-		        web = mock(Web.class);
 		        
 		        tipoBasico = new EstadoBasico();
 		        tipoExperto = new EstadoExperto();
 		        
 		      
-		        user1 = new Usuario("Gabriel Gomez", web);
-		        
-		        when(user.getSitio()).thenReturn(web);
-		        
-		        
-		        
-		        
+		        user1 = new Usuario("Gabriel Gomez");
 
 		    }
 	    
@@ -59,7 +46,7 @@ class EstadoExpertoTest {
 		    ArrayList<Muestra> muestras = new ArrayList<>();
 
 		    // Simulo tene opiniones y muestras en el mes actual
-		    LocalDateTime fechaActual = LocalDateTime.now();
+		    LocalDate fechaActual = LocalDate.now();
 		    
 		    
 
@@ -96,7 +83,7 @@ class EstadoExpertoTest {
 	    ArrayList<Muestra> muestras = new ArrayList<>();
 
 	    // Simulo tene opiniones y muestras en el mes actual
-	    LocalDateTime fechaActual = LocalDateTime.now();
+	    LocalDate fechaActual = LocalDate.now();
 	    
 	    
 
@@ -131,7 +118,7 @@ class EstadoExpertoTest {
 	    ArrayList<Muestra> muestras = new ArrayList<>();
 
 	    // Simulo tene opiniones y muestras en el mes actual
-	    LocalDateTime fechaActual = LocalDateTime.now();
+	    LocalDate fechaActual = LocalDate.now();
 	    
 	    
 
@@ -169,7 +156,7 @@ class EstadoExpertoTest {
 	    ArrayList<Muestra> muestras = new ArrayList<>();
 
 	    // Simulo tene opiniones y muestras en el mes actual
-	    LocalDateTime fechaActual = LocalDateTime.now();
+	    LocalDate fechaActual = LocalDate.now();
 	    
 	    
 

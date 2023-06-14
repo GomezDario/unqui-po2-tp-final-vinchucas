@@ -7,6 +7,8 @@ import static org.mockito.Mockito.verify;
 import org.junit.Before;
 import org.junit.Test;
 
+import web.administradorMuestra.Muestra;
+
 public class OrganizacionNoGubernamentalTest {
 
 	OrganizacionNoGubernamental organizacionNoGubernamental;

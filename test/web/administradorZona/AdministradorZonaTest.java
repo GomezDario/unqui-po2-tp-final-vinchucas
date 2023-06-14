@@ -9,6 +9,8 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
+import web.administradorMuestra.Muestra;
+
 
 public class AdministradorZonaTest {
 

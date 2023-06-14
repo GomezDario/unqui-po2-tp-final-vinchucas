@@ -1,6 +1,7 @@
 package web;
 
 import web.administradorMuestra.AdministradorMuestra;
+import web.administradorMuestra.Muestra;
 import web.administradorUsuario.AdministradorUsuario;
 import web.administradorZona.*;
 

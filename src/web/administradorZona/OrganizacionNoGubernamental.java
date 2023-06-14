@@ -1,5 +1,7 @@
 package web.administradorZona;
 
+import web.administradorMuestra.Muestra;
+
 public class OrganizacionNoGubernamental implements Observador {
 
 	private TipoDeOrganizacion tipoDeOrganizacion;

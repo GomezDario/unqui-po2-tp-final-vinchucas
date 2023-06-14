@@ -3,6 +3,8 @@ package web.administradorZona;
 import java.util.ArrayList;
 import java.util.List;
 
+import web.administradorMuestra.Muestra;
+
 public class AdministradorZona {
 
 	List<ZonaDeCobertura> zonasDeCobertura = new ArrayList<>();

@@ -11,6 +11,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import web.administradorMuestra.Muestra;
+import web.extras.Ubicacion;
+
 public class ZonaDeCoberturaTest {
 
 	ZonaDeCobertura zonaDeCobertura;
@@ -51,7 +54,7 @@ public class ZonaDeCoberturaTest {
 	public void estaDentroDeZonaTest_ConUnaMuestraDentroDelRadio() {
 		//setup
 		when(unaMuestra.getUbicacion()).thenReturn(otraUbicacion);
-		when(unaUbicacion.distanciaEntre(otraUbicacion)).thenReturn((float) 9);
+		when(unaUbicacion.distanciaEntre(otraUbicacion)).thenReturn(9.0);
 		
 		//exercise
 		boolean estaDentro = zonaDeCobertura.estaDentroDeZona(unaMuestra);
@@ -66,7 +69,7 @@ public class ZonaDeCoberturaTest {
 	public void estaDentroDeZonaTest_ConUnaMuestraFueraDelRadio() {
 		//setup
 		when(unaMuestra.getUbicacion()).thenReturn(otraUbicacion);
-		when(unaUbicacion.distanciaEntre(otraUbicacion)).thenReturn((float) 11);
+		when(unaUbicacion.distanciaEntre(otraUbicacion)).thenReturn(11.0);
 		
 		//exercise
 		boolean estaDentro = zonaDeCobertura.estaDentroDeZona(unaMuestra);
@@ -106,14 +109,10 @@ public class ZonaDeCoberturaTest {
 	@Test
 	public void solapaConTest_CuandoUnaZonaSolapaConOtra() {
 		//setup
+		//setup
 		when(otraZonaDeCobertura.getUbicacion()).thenReturn(otraUbicacion);
-		
-		when(unaUbicacion.getLatitud()).thenReturn(-34.6037);
-		when(unaUbicacion.getLongitud()).thenReturn(-58.3816);
-		
-		when(otraUbicacion.getLatitud()).thenReturn(-34.6074);
-		when(otraUbicacion.getLongitud()).thenReturn(-58.3862);
-		when(otraZonaDeCobertura.getRadio()).thenReturn(10.0);
+		when(unaUbicacion.distanciaEntre(otraUbicacion)).thenReturn(14.0);
+		when(otraZonaDeCobertura.getRadio()).thenReturn(5.0);
 		
 		//exercise
 		boolean solapa = zonaDeCobertura.solapaCon(otraZonaDeCobertura);
@@ -121,24 +120,16 @@ public class ZonaDeCoberturaTest {
 		//verify
 		assertEquals(true, solapa);
 		verify(otraZonaDeCobertura, times(1)).getUbicacion();
+		verify(unaUbicacion, times(1)).distanciaEntre(otraUbicacion);
 		verify(otraZonaDeCobertura, times(1)).getRadio();
-		verify(otraUbicacion, times(1)).getLatitud();
-		verify(otraUbicacion, times(1)).getLongitud();
-		verify(unaUbicacion, times(1)).getLatitud();
-		verify(unaUbicacion, times(1)).getLongitud();
 	}
 	
 	@Test
 	public void solapaConTest_CuandoUnaZonaNoSolapaConOtra() {
 		//setup
 		when(otraZonaDeCobertura.getUbicacion()).thenReturn(otraUbicacion);
-		
-		when(unaUbicacion.getLatitud()).thenReturn(-34.6037);
-		when(unaUbicacion.getLongitud()).thenReturn(-58.3816);
-		
-		when(otraUbicacion.getLatitud()).thenReturn(-28.6074);
-		when(otraUbicacion.getLongitud()).thenReturn(-60.3862);
-		when(otraZonaDeCobertura.getRadio()).thenReturn(1.0);
+		when(unaUbicacion.distanciaEntre(otraUbicacion)).thenReturn(16.0);
+		when(otraZonaDeCobertura.getRadio()).thenReturn(5.0);
 		
 		//exercise
 		boolean solapa = zonaDeCobertura.solapaCon(otraZonaDeCobertura);
@@ -146,11 +137,8 @@ public class ZonaDeCoberturaTest {
 		//verify
 		assertEquals(false, solapa);
 		verify(otraZonaDeCobertura, times(1)).getUbicacion();
+		verify(unaUbicacion, times(1)).distanciaEntre(otraUbicacion);
 		verify(otraZonaDeCobertura, times(1)).getRadio();
-		verify(otraUbicacion, times(1)).getLatitud();
-		verify(otraUbicacion, times(1)).getLongitud();
-		verify(unaUbicacion, times(1)).getLatitud();
-		verify(unaUbicacion, times(1)).getLongitud();
 	}
 	
 	@Test

@@ -1,4 +1,4 @@
-package main.java.usuarios;
+package web.administradorUsuario;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,18 +7,13 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
-
-import main.java.Muestra.*;
-import main.java.SitioWeb.*;
-import main.java.Opinion.*;
-
 
 import org.junit.jupiter.api.BeforeEach;
 
-
+import web.extras.*;
+import web.administradorMuestra.*;
 
 class EstadoBasicoTest {
 
@@ -29,26 +24,18 @@ class EstadoBasicoTest {
 	
 	    EstadoBasico tipoBasico;
 	    EstadoExperto tipoExperto;
-	    Web web;
 	   
 	
 	@BeforeEach
 	    
 	void setUp() {
 	        user = mock(Usuario.class);
-	        web = mock(Web.class);
 	        
 	        tipoBasico = new EstadoBasico();
 	        tipoExperto = new EstadoExperto();
 	        
 	      
-	        user1 = new Usuario("Gabriel Gomez", web);
-	        
-	        when(user.getSitio()).thenReturn(web);
-	        
-	        
-	        
-	        
+	        user1 = new Usuario("Gabriel Gomez");          
 
 	    }
 	
@@ -62,7 +49,7 @@ class EstadoBasicoTest {
 		    ArrayList<Muestra> muestras = new ArrayList<>();
 
 		    // Simulo tene opiniones y muestras en el mes actual
-		    LocalDateTime fechaActual = LocalDateTime.now();
+		    LocalDate fechaActual = LocalDate.now();
 		    
 		    
 
@@ -102,7 +89,7 @@ class EstadoBasicoTest {
 		    ArrayList<Muestra> muestras = new ArrayList<>();
 
 		    // Simulo tene opiniones y muestras en el mes actual
-		    LocalDateTime fechaActual = LocalDateTime.now();
+		    LocalDate fechaActual = LocalDate.now();
 		    
 		    
 
@@ -122,14 +109,14 @@ class EstadoBasicoTest {
 		    user1.setMuestras(muestras);
 		    
 		    for (Opinion opinion : opiniones) {
-		        LocalDateTime fechaOpinion = opinion.getFecha();
+		        LocalDate fechaOpinion = opinion.getFecha();
 		        assertEquals(fechaActual.getMonth(), fechaOpinion.getMonth());
 		        assertEquals(fechaActual.getYear(), fechaOpinion.getYear());
 		    }
 		    
 		    
 		    for (Muestra muestra : muestras) {
-		        LocalDateTime fechaMuestra = muestra.getFecha();
+		        LocalDate fechaMuestra = muestra.getFecha();
 		        assertEquals(fechaActual.getMonth(), fechaMuestra.getMonth());
 		        assertEquals(fechaActual.getYear(), fechaMuestra.getYear());
 		    }
@@ -153,7 +140,7 @@ class EstadoBasicoTest {
 		    ArrayList<Muestra> muestras = new ArrayList<>();
 
 		    // Simulo tene opiniones y muestras en el mes actual
-		    LocalDateTime fechaActual = LocalDateTime.now();
+		    LocalDate fechaActual = LocalDate.now();
 		    
 		    
 

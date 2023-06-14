@@ -1,4 +1,6 @@
-package main.java.usuarios;
+package web.administradorUsuario;
+
+import web.extras.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -6,19 +8,10 @@ import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
-import main.java.Muestra.Muestra;
-import main.java.Opinion.Opinion;
-import main.java.SitioWeb.Web;
-
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
 import java.util.Arrays;
 import java.util.List;
 
-
-class AdministradorDeUsuarioTest {
+class AdministradorUsuarioTest {
 
 	Usuario user1;
 	Usuario user2;
@@ -26,20 +19,16 @@ class AdministradorDeUsuarioTest {
 	Usuario user4;
 	Usuario user5;
 	
-	Web web;
-	
 	
 @BeforeEach
 	
 	void setUp() {
 	
-	web = mock(Web.class);
-	
-	user1 = new Usuario("Gabriel Gomez", web);
-	user2 = new Usuario("Juan Martínez", web);
-	user3 = new Usuario("Alejandro Fernández", web);
-	user4 = new Usuario("Guillermo González", web);
-	user5 = new Usuario("Esteban López", web);
+	user1 = new Usuario("Gabriel Gomez");
+	user2 = new Usuario("Juan Martínez");
+	user3 = new Usuario("Alejandro Fernández");
+	user4 = new Usuario("Guillermo González");
+	user5 = new Usuario("Esteban López");
 	
 
 	
@@ -50,7 +39,7 @@ class AdministradorDeUsuarioTest {
 	@Test
 	void testCantidadDeUsuarios() {
     
-	AdministradorDeUsuario administrador = new AdministradorDeUsuario();
+	AdministradorUsuario administrador = new AdministradorUsuario();
 
     administrador.agregarUsuario(user1);
     administrador.agregarUsuario(user2);
@@ -69,7 +58,7 @@ class AdministradorDeUsuarioTest {
 
 	@Test
 	void testAgregarOpinion() {
-		AdministradorDeUsuario administrador = new AdministradorDeUsuario();
+		AdministradorUsuario administrador = new AdministradorUsuario();
 
 		Opinion opinion = mock(Opinion.class);
 
