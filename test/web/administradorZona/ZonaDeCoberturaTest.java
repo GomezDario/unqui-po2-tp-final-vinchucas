@@ -1,4 +1,4 @@
-package administradorZona;
+package web.administradorZona;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;

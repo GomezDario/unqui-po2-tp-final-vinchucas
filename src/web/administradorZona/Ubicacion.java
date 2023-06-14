@@ -1,4 +1,4 @@
-package administradorZona;
+package web.administradorZona;
 
 public class Ubicacion {
 
