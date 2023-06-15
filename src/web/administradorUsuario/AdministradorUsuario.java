@@ -10,46 +10,26 @@ public class AdministradorUsuario {
 
 	List<Usuario> usuarios = new ArrayList<>();
 	
-	
 	public int cantidadDeUsuarios() {
 		// TODO Auto-generated method stub
-		
 		return usuarios.size();
 	}
-	
-	
-	public void agregarUsuario(Usuario unUsuario) {
 		
-			usuarios.add(unUsuario);
-		
-		
-	}
-	
 	public void agregarOpinion(Opinion unaOpinion) {
-		
-			
-				for (Usuario usuario : usuarios) {
-					
-					usuario.agregarOpinion(unaOpinion);
-					
-				}
-		
-		
+		Usuario usuario = unaOpinion.getUsuario();
+		usuario.agregarOpinion(unaOpinion);
+		agregarUsuarioSiNoExiste(usuario);
 	}
-	
 	
 	public void agregarMuestra(Muestra unaMuestra) {
-		
-		for (Usuario usuario : usuarios) {
-			
-			usuario.agregarMuestra(unaMuestra);
-			
-		}
-		
-		
-		
+		Usuario usuario = unaMuestra.getUsuario();
+		usuario.agregarMuestra(unaMuestra);
+		agregarUsuarioSiNoExiste(usuario);
 	}
 	
-	
-	
+	private void agregarUsuarioSiNoExiste(Usuario unUsuario) {
+		if (!usuarios.contains(unUsuario)) {
+			usuarios.add(unUsuario);
+		}
+	}
 }

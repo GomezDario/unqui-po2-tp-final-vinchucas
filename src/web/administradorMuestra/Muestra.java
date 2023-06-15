@@ -2,6 +2,7 @@ package web.administradorMuestra;
 
 import java.time.LocalDate;
 
+import web.administradorUsuario.Usuario;
 import web.extras.TipoDeOpinion;
 import web.extras.Ubicacion;
 
@@ -25,6 +26,11 @@ public class Muestra {
 	public boolean estaVerificada() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public Usuario getUsuario() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
