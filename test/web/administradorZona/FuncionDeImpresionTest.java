@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import web.administradorMuestra.Muestra;
+import web.extras.TipoDeOpinion;
 
 
 public class FuncionDeImpresionTest {
@@ -33,7 +34,7 @@ public class FuncionDeImpresionTest {
 	public void nuevoEventoTest() {
 		//setup
 		when(unaZonaDeCobertura.getNombre()).thenReturn("Quilmes");
-		when(unaMuestra.resultadoActual()).thenReturn("Vinchuca");
+		when(unaMuestra.resultadoActual()).thenReturn(TipoDeOpinion.VINCHUCAINFESTANS);
 		when(unaOrganizacionNoGubernamental.getTipoDeOrganizacion()).thenReturn(TipoDeOrganizacion.EDUCATIVA);
 		
 		//exercise

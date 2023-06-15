@@ -19,42 +19,29 @@ class AdministradorUsuarioTest {
 	Usuario user4;
 	Usuario user5;
 	
-	
-@BeforeEach
-	
+	@BeforeEach
 	void setUp() {
-	
-	user1 = new Usuario("Gabriel Gomez");
-	user2 = new Usuario("Juan Martínez");
-	user3 = new Usuario("Alejandro Fernández");
-	user4 = new Usuario("Guillermo González");
-	user5 = new Usuario("Esteban López");
-	
-
-	
-	
-}
-
+		user1 = new Usuario("Gabriel Gomez");
+		user2 = new Usuario("Juan Martínez");
+		user3 = new Usuario("Alejandro Fernández");
+		user4 = new Usuario("Guillermo González");
+		user5 = new Usuario("Esteban López");
+	}
 
 	@Test
 	void testCantidadDeUsuarios() {
-    
-	AdministradorUsuario administrador = new AdministradorUsuario();
-
-    administrador.agregarUsuario(user1);
-    administrador.agregarUsuario(user2);
-    administrador.agregarUsuario(user3);
-    administrador.agregarUsuario(user4);
-    administrador.agregarUsuario(user5);
-    
-
-    int cantidadUsuarios = administrador.cantidadDeUsuarios();
-
-    assertEquals(5, cantidadUsuarios);
+		AdministradorUsuario administrador = new AdministradorUsuario();
 	
+	    administrador.agregarUsuario(user1);
+	    administrador.agregarUsuario(user2);
+	    administrador.agregarUsuario(user3);
+	    administrador.agregarUsuario(user4);
+	    administrador.agregarUsuario(user5);
 	
+	    int cantidadUsuarios = administrador.cantidadDeUsuarios();
+	
+	    assertEquals(5, cantidadUsuarios);
 	}
-
 
 	@Test
 	void testAgregarOpinion() {
@@ -70,14 +57,7 @@ class AdministradorUsuarioTest {
 		administrador.agregarOpinion(opinion);
 
 		for (Usuario usuario : usuarios) {
-    	
 			assertTrue(usuario.getOpiniones().contains(opinion));
-        
 		}
-
-		
 	}
-	
-	
-	
 }

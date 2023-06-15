@@ -2,6 +2,7 @@ package web.administradorMuestra;
 
 import java.time.LocalDate;
 
+import web.extras.TipoDeOpinion;
 import web.extras.Ubicacion;
 
 public class Muestra {
@@ -11,7 +12,7 @@ public class Muestra {
 		return null;
 	}
 
-	public Object resultadoActual() {
+	public TipoDeOpinion resultadoActual() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -19,6 +20,11 @@ public class Muestra {
 	public LocalDate getFecha() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public boolean estaVerificada() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
