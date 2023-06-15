@@ -8,18 +8,13 @@ import web.administradorMuestra.Muestra;
 public class AdministradorZona {
 
 	List<ZonaDeCobertura> zonasDeCobertura = new ArrayList<>();
-	
-	public int cantidadDeZonasDeCobertura() {
-		// TODO Auto-generated method stub
-		return zonasDeCobertura.size();
-	}
 
 	public void agregarZona(ZonaDeCobertura unaZonaDeCobertura) {
 		// TODO Auto-generated method stub
 		for(ZonaDeCobertura zona : zonasDeCobertura) {
 			if(zona.solapaCon(unaZonaDeCobertura)) {
-				zona.agregarZona(unaZonaDeCobertura);
-				unaZonaDeCobertura.agregarZona(zona);
+				zona.agregarZonaQueSolapa(unaZonaDeCobertura);
+				unaZonaDeCobertura.agregarZonaQueSolapa(zona);
 			}
 		}
 		zonasDeCobertura.add(unaZonaDeCobertura);
@@ -41,6 +36,11 @@ public class AdministradorZona {
 				zona.notificarMuestraValidada(unaMuestra);
 			}
 		}
+	}
+	
+	public int cantidadDeZonasDeCobertura() {
+		// TODO Auto-generated method stub
+		return zonasDeCobertura.size();
 	}
 
 }

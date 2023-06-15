@@ -3,14 +3,11 @@ package web.administradorZona;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import web.administradorMuestra.Muestra;
-import web.extras.TipoDeOpinion;
-
 
 public class FuncionDeImpresionTest {
 
@@ -21,22 +18,17 @@ public class FuncionDeImpresionTest {
 
 	@Before
 	public void setUp() {
-		//setup
+		//DOC
 		unaZonaDeCobertura = mock(ZonaDeCobertura.class);
 		unaMuestra = mock(Muestra.class);
 		unaOrganizacionNoGubernamental = mock(OrganizacionNoGubernamental.class);
 		
-		//test double installation
+		//SUT
 		unaFuncionDeImpresion = new FuncionDeImpresion();
 	}
 
 	@Test
 	public void nuevoEventoTest() {
-		//setup
-		when(unaZonaDeCobertura.getNombre()).thenReturn("Quilmes");
-		when(unaMuestra.resultadoActual()).thenReturn(TipoDeOpinion.VINCHUCAINFESTANS);
-		when(unaOrganizacionNoGubernamental.getTipoDeOrganizacion()).thenReturn(TipoDeOrganizacion.EDUCATIVA);
-		
 		//exercise
 		unaFuncionDeImpresion.nuevoEvento(unaZonaDeCobertura, unaMuestra, unaOrganizacionNoGubernamental);
 		

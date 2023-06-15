@@ -15,6 +15,21 @@ public class OrganizacionNoGubernamental implements Observador {
 		eventoNuevaMuestra = unEventoNuevaMuestra;
 		eventoValidacionMuestra = unEventoValidacionMuestra;
 	}
+	
+	public TipoDeOrganizacion getTipoDeOrganizacion() {
+		// TODO Auto-generated method stub
+		return tipoDeOrganizacion;
+	}
+
+	public FuncionExterna getFuncionNuevaMuestra() {
+		// TODO Auto-generated method stub
+		return eventoNuevaMuestra;
+	}
+
+	public FuncionExterna getFuncionValidacionMuestra() {
+		// TODO Auto-generated method stub
+		return eventoValidacionMuestra;
+	}
 
 	@Override
 	public void funcionNuevaMuestra(ZonaDeCobertura unaZonaDeCobertura, Muestra unaMuestra) {
@@ -27,10 +42,4 @@ public class OrganizacionNoGubernamental implements Observador {
 		// TODO Auto-generated method stub
 		eventoValidacionMuestra.nuevoEvento(unaZonaDeCobertura, unaMuestra, this);
 	}
-
-	public TipoDeOrganizacion getTipoDeOrganizacion() {
-		// TODO Auto-generated method stub
-		return tipoDeOrganizacion;
-	}
-	
 }
