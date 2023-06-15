@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public abstract class EstadoUsuario {
 
 	public abstract void updateUsuario(Usuario usuario);
-	
+	public abstract boolean esExperto();
 	
 	public boolean puedeSerExperto(Usuario usuario) {
 		
