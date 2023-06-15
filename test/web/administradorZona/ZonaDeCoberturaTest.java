@@ -39,7 +39,7 @@ public class ZonaDeCoberturaTest {
 	}
 	
 	@Test
-	public void cuandoUnaZonaDeCoberturaSeCreaEsConUnaUbicacionUnRadioYUnNombre() {
+	public void cuandoUnaZonaDeCoberturaSeCreaEsConUnaUbicacionUnRadioYUnNombreTest() {
 		//verify
 		assertEquals(unaUbicacion, zonaDeCobertura.getUbicacion());
 		assertEquals(10.0, zonaDeCobertura.getRadio(), 0);
@@ -47,7 +47,7 @@ public class ZonaDeCoberturaTest {
 	}
 	
 	@Test
-	public void cuandoUnaZonaDeCoberturaSeCreaNoTieneMuestrasNiZonasQueSolapanNiObservadoresRegistradas() {
+	public void cuandoUnaZonaDeCoberturaSeCreaNoTieneMuestrasNiZonasQueSolapanNiObservadoresRegistradasTest() {
 		//verify
 		assertEquals(0, zonaDeCobertura.cantidadDeMuestras());
 		assertEquals(0, zonaDeCobertura.cantidadDeZonasQueSolapan());

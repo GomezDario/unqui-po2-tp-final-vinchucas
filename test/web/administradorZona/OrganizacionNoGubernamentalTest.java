@@ -31,7 +31,7 @@ public class OrganizacionNoGubernamentalTest {
 	}
 	
 	@Test
-	public void cuandoUnaOrganizacionNoGubernamentalSeCreaEsConUnTipoDeOrganizacionYDosFuncionesExternas() {
+	public void cuandoUnaOrganizacionNoGubernamentalSeCreaEsConUnTipoDeOrganizacionYDosFuncionesExternasTest() {
 		//verify
 		assertEquals(TipoDeOrganizacion.EDUCATIVA, organizacionNoGubernamental.getTipoDeOrganizacion());
 		assertEquals(unaFuncionNuevaMuestra, organizacionNoGubernamental.getFuncionNuevaMuestra());

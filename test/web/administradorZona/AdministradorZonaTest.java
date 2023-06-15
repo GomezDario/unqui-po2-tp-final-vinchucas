@@ -30,7 +30,7 @@ public class AdministradorZonaTest {
 	}
 	
 	@Test
-	public void cuandoUnAdministradorDeZonaSeCreaNoTieneNingunaZona() {
+	public void cuandoUnAdministradorDeZonaSeCreaNoTieneNingunaZonaTest() {
 		//exercise
 		int cantidad = administradorZona.cantidadDeZonasDeCobertura();
 				
