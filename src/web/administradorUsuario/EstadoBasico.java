@@ -10,14 +10,10 @@ public class EstadoBasico extends EstadoUsuario{
 			usuario.setEstado(this);
 		}
 	}
-
+	
 	@Override
 	public boolean esExperto() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-
-	
-	
 }

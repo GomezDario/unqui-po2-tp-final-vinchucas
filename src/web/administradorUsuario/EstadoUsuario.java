@@ -8,12 +8,13 @@ import java.time.LocalDate;
 
 public abstract class EstadoUsuario {
 
-	public abstract void updateUsuario(Usuario unUsuario);
-
 //	public boolean puedeSerExperto(Usuario unUsuario) {
 //		return unUsuario.cantidadDeMuestrasAMenosDeTreintaDias() >= 10 &&
 //				unUsuario.cantidadDeOpinionesAMenosDeTreintaDias() >= 20;
 //	}
+	public abstract void updateUsuario(Usuario usuario);
+	
+	public abstract boolean esExperto();
 	
 	public boolean puedeSerExperto(Usuario usuario) {
 		ArrayList<Muestra> muestras = usuario.getMuestras();
@@ -32,8 +33,6 @@ public abstract class EstadoUsuario {
 		
 		return fecha.isAfter(f1);
 	}
-
-	public abstract boolean esExperto();
 }
 
 

@@ -1,5 +1,6 @@
 package web.administradorZona;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -19,14 +20,22 @@ public class OrganizacionNoGubernamentalTest {
 	
 	@Before
 	public void setUp() {
-		//setup
+		//DOC
 		unaZonaDeCobertura = mock(ZonaDeCobertura.class);
 		unaMuestra = mock(Muestra.class);
-		unaFuncionNuevaMuestra = mock(FuncionDeImpresion.class);
-		unaFuncionValidacionMuestra = mock(FuncionDeImpresion.class);
+		unaFuncionNuevaMuestra = mock(FuncionExterna.class);
+		unaFuncionValidacionMuestra = mock(FuncionExterna.class);
 		
-		//Test Double Installation
+		//SUT
 		organizacionNoGubernamental = new OrganizacionNoGubernamental(TipoDeOrganizacion.EDUCATIVA, unaFuncionNuevaMuestra, unaFuncionValidacionMuestra);
+	}
+	
+	@Test
+	public void cuandoUnaOrganizacionNoGubernamentalSeCreaEsConUnTipoDeOrganizacionYDosFuncionesExternasTest() {
+		//verify
+		assertEquals(TipoDeOrganizacion.EDUCATIVA, organizacionNoGubernamental.getTipoDeOrganizacion());
+		assertEquals(unaFuncionNuevaMuestra, organizacionNoGubernamental.getFuncionNuevaMuestra());
+		assertEquals(unaFuncionValidacionMuestra, organizacionNoGubernamental.getFuncionValidacionMuestra());
 	}
 	
 	@Test

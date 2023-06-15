@@ -29,18 +29,23 @@ public class ZonaDeCobertura {
 	public double getRadio() {
 		return radio;
 	}
+	
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return nombre;
+	}
+	
+	public void agregarMuestra(Muestra unaMuestra) {
+		// TODO Auto-generated method stub
+		muestras.add(unaMuestra);
+		this.notificarNuevaMuestra(unaMuestra);
+	}
 
 	public boolean estaDentroDeZona(Muestra unaMuestra) {
 		// TODO Auto-generated method stub
 		double distancia = this.ubicacion.distanciaEntre(unaMuestra.getUbicacion());
 		
 		return distancia <= radio;
-	}
-
-	public void agregarMuestra(Muestra unaMuestra) {
-		// TODO Auto-generated method stub
-		muestras.add(unaMuestra);
-		this.notificarNuevaMuestra(unaMuestra);
 	}
 
 	public int cantidadDeMuestras() {
@@ -55,7 +60,7 @@ public class ZonaDeCobertura {
         return distancia <= (this.radio + otraZonaDeCobertura.getRadio());
 	}
 
-	public void agregarZona(ZonaDeCobertura otraZonaDeCobertura) {
+	public void agregarZonaQueSolapa(ZonaDeCobertura otraZonaDeCobertura) {
 		// TODO Auto-generated method stub
 		zonasQueSolapan.add(otraZonaDeCobertura);
 		
@@ -71,16 +76,13 @@ public class ZonaDeCobertura {
 		return zonasQueSolapan.size();
 	}
 
-	public int cantidadDeObservadores() {
-		// TODO Auto-generated method stub
-		return observadores.size();
-	}
-
 	public void registrar(Observador unObservador) {
 		// TODO Auto-generated method stub
-		observadores.add(unObservador);
+		if(!observadores.contains(unObservador)) {
+			observadores.add(unObservador);			
+		}
 	}
-
+	
 	public void desregistrar(Observador unaOrganizacionNoGubernamental) {
 		// TODO Auto-generated method stub
 		observadores.remove(unaOrganizacionNoGubernamental);
@@ -98,11 +100,11 @@ public class ZonaDeCobertura {
 		for(Observador observador : observadores) {
 			observador.funcionValidacionMuestra(this, unaMuestra);
 		}
-	}
-
-	public String getNombre() {
+	}	
+	
+	public int cantidadDeObservadores() {
 		// TODO Auto-generated method stub
-		return null;
+		return observadores.size();
 	}
 	
 }

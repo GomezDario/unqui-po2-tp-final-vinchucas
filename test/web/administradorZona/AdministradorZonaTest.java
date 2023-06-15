@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import web.administradorMuestra.Muestra;
 
-
 public class AdministradorZonaTest {
 
 	ZonaDeCobertura unaZonaDeCobertura;
@@ -21,15 +20,24 @@ public class AdministradorZonaTest {
 
 	@Before
 	public void setUp() {
-		//setup
+		//DOC
 		unaZonaDeCobertura = mock(ZonaDeCobertura.class);
 		otraZonaDeCobertura = mock(ZonaDeCobertura.class);
 		unaMuestra = mock(Muestra.class);
 		
-		//test double installation
+		//SUT
 		administradorZona = new AdministradorZona();
 	}
-
+	
+	@Test
+	public void cuandoUnAdministradorDeZonaSeCreaNoTieneNingunaZonaTest() {
+		//exercise
+		int cantidad = administradorZona.cantidadDeZonasDeCobertura();
+				
+		//verify
+		assertEquals(0, cantidad);
+	}
+	
 	@Test
 	public void agregarZonaTest_CuandoEsLaPrimerZona() {
 		//setup
@@ -37,7 +45,6 @@ public class AdministradorZonaTest {
 		
 		//exercise
 		administradorZona.agregarZona(unaZonaDeCobertura);
-		
 		int cantidadDeZonasDespues = administradorZona.cantidadDeZonasDeCobertura();
 		
 		//verify
@@ -56,8 +63,8 @@ public class AdministradorZonaTest {
 		
 		//verify
 		verify(unaZonaDeCobertura, times(1)).solapaCon(otraZonaDeCobertura);
-		verify(unaZonaDeCobertura, times(1)).agregarZona(otraZonaDeCobertura);
-		verify(otraZonaDeCobertura, times(1)).agregarZona(unaZonaDeCobertura);
+		verify(unaZonaDeCobertura, times(1)).agregarZonaQueSolapa(otraZonaDeCobertura);
+		verify(otraZonaDeCobertura, times(1)).agregarZonaQueSolapa(unaZonaDeCobertura);
 	}
 	
 	@Test
@@ -71,8 +78,8 @@ public class AdministradorZonaTest {
 		
 		//verify
 		verify(unaZonaDeCobertura, times(1)).solapaCon(otraZonaDeCobertura);
-		verify(unaZonaDeCobertura, times(0)).agregarZona(otraZonaDeCobertura);
-		verify(otraZonaDeCobertura, times(0)).agregarZona(unaZonaDeCobertura);
+		verify(unaZonaDeCobertura, times(0)).agregarZonaQueSolapa(otraZonaDeCobertura);
+		verify(otraZonaDeCobertura, times(0)).agregarZonaQueSolapa(unaZonaDeCobertura);
 	}
 	
 	@Test
@@ -104,10 +111,10 @@ public class AdministradorZonaTest {
 	}
 	
 	@Test
-	public void muestraValidadaTest() {
+	public void muestraValidadaTest_CuandoLaMuestraPerteneceAUnaZona() {
 		//setup
-		when(unaZonaDeCobertura.estaDentroDeZona(unaMuestra)).thenReturn(true);			
 		administradorZona.agregarZona(unaZonaDeCobertura);
+		when(unaZonaDeCobertura.estaDentroDeZona(unaMuestra)).thenReturn(true);			
 		administradorZona.agregarMuestra(unaMuestra);
 		
 		//exercise
@@ -115,5 +122,19 @@ public class AdministradorZonaTest {
 		
 		//verify
 		verify(unaZonaDeCobertura, times(1)).notificarMuestraValidada(unaMuestra);
+	}
+	
+	@Test
+	public void muestraValidadaTest_CuandoLaMuestraNoPerteneceAUnaZona() {
+		//setup
+		administradorZona.agregarZona(unaZonaDeCobertura);
+		when(unaZonaDeCobertura.estaDentroDeZona(unaMuestra)).thenReturn(false);			
+		administradorZona.agregarMuestra(unaMuestra);
+		
+		//exercise
+		administradorZona.muestraValidada(unaMuestra);
+		
+		//verify
+		verify(unaZonaDeCobertura, times(0)).notificarMuestraValidada(unaMuestra);
 	}
 }

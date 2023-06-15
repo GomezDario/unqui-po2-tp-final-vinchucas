@@ -11,9 +11,6 @@ public class EstadoValidado extends EstadoUsuario {
 	@Override
 	public boolean esExperto() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
-
-	
-	
 }
