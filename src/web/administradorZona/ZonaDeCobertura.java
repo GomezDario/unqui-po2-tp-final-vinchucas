@@ -60,6 +60,8 @@ public class ZonaDeCobertura {
         return distancia <= (this.radio + otraZonaDeCobertura.getRadio());
 	}
 
+	
+	//PREC: la zona de cobertura a agregar dada debe solapar
 	public void agregarZonaQueSolapa(ZonaDeCobertura otraZonaDeCobertura) {
 		// TODO Auto-generated method stub
 		zonasQueSolapan.add(otraZonaDeCobertura);
