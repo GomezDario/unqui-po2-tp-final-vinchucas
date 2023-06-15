@@ -10,6 +10,11 @@ public class EstadoValidado extends EstadoUsuario {
 		
 	}
 
+	public boolean esExperto() {
+		
+		return true;
+		
+	}
 	
 	
 }
