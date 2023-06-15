@@ -75,7 +75,7 @@ class EstadoValidadoTest {
 	    
 	    tipoValidado.updateUsuario(user1);
 	    
-	    assertTrue(user1.getEstadoUsuario() instanceof EstadoValidado);
+	    assertTrue(user1.getEstado() instanceof EstadoValidado);
 		
 		
 	}

@@ -139,7 +139,7 @@ class EstadoExpertoTest {
 		
 	    tipoExperto.updateUsuario(user1);
 	   
-	    assertTrue(user1.getEstadoUsuario() instanceof EstadoBasico);
+	    assertTrue(user1.getEstado() instanceof EstadoBasico);
 	    
 		
 		
@@ -177,7 +177,7 @@ class EstadoExpertoTest {
 		
 	    tipoExperto.updateUsuario(user1);
 	   
-	    assertTrue(user1.getEstadoUsuario() instanceof EstadoExperto);
+	    assertTrue(user1.getEstado() instanceof EstadoExperto);
 		
 		
 	}

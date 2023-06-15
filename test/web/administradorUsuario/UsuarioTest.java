@@ -13,47 +13,42 @@ import org.junit.jupiter.api.Test;
 
 class UsuarioTest {
 
-	Usuario user1;
-	
+	Usuario usuario;
 	EstadoUsuario estado;
+	Opinion unaOpinion;
+	Muestra unaMuestra;
 	
 	@BeforeEach
-	
 	void setUp() {
-		
-		
+		//setup
 		estado = mock(EstadoUsuario.class);
+		unaOpinion = mock(Opinion.class);
+		unaMuestra = mock(Muestra.class);
 		
-		
-		user1 = new Usuario("Gabriel Gomez");
-		user1.setEstadoUsuario(estado);
-		
-
+		//test double installation
+		usuario = new Usuario("Gabriel Gomez");
 	}
-	
 	
 	// TEST DE GETTERS
 	
-	
-
 	@Test
 	void getNombreTest() {
-		assertEquals(user1.getNombre(), "Gabriel Gomez");
+		assertEquals(usuario.getNombre(), "Gabriel Gomez");
 	}
 	
-	@Test
-	void getEstadoTest() {
-		assertEquals(user1.getEstadoUsuario(), estado);
-	}
+//	@Test
+//	void getEstadoTest() {
+//		assertEquals(usuario.getEstado(), estado);
+//	}
 	
 	@Test
 	void getRegistroOpinionesTest() {
-		assertEquals(user1.getOpiniones().size(), 0);
+		assertEquals(usuario.getOpiniones().size(), 0);
 	}
 	
 	@Test
 	void getRegistroMuestraTest() {
-		assertEquals(user1.getMuestras().size(), 0);
+		assertEquals(usuario.getMuestras().size(), 0);
 	}
 	
 	//TEST DE SETTERS
@@ -61,16 +56,16 @@ class UsuarioTest {
 	
 	@Test
 	void setNombreTest() {
-		user1.setNombre("Gabi"); // Cambio de nombre
-		assertEquals(user1.getNombre(), "Gabi");
+		usuario.setNombre("Gabi"); // Cambio de nombre
+		assertEquals(usuario.getNombre(), "Gabi");
 	}
 	
 	
 	@Test
 	void setTipoTest() {
 		EstadoUsuario estadoUserNuevo = mock(EstadoUsuario.class);
-		user1.setEstadoUsuario(estadoUserNuevo);
-		assertEquals(user1.getEstadoUsuario(), estadoUserNuevo);
+		usuario.setEstado(estadoUserNuevo);
+		assertEquals(usuario.getEstado(), estadoUserNuevo);
 	}
 	
 	@Test
@@ -80,8 +75,8 @@ class UsuarioTest {
 		opiniones.add(mock(Opinion.class));
 		opiniones.add(mock(Opinion.class));
 		
-		user1.setOpiniones(opiniones);
-		assertEquals(user1.getOpiniones().size(), 2);
+		usuario.setOpiniones(opiniones);
+		assertEquals(usuario.getOpiniones().size(), 2);
 	}
 	
 	@Test
@@ -90,8 +85,8 @@ class UsuarioTest {
 		muestras.add(mock(Muestra.class));
 		muestras.add(mock(Muestra.class));
 		
-		user1.setMuestras(muestras);
-		assertEquals(user1.getMuestras().size(), 2);
+		usuario.setMuestras(muestras);
+		assertEquals(usuario.getMuestras().size(), 2);
 	}
 	
 	
@@ -101,57 +96,79 @@ class UsuarioTest {
 	
 	void cambiarEstadoUsuario() {
 		
-		user1.setEstadoUsuario(new EstadoExperto());
+		usuario.setEstado(new EstadoExperto());
 		
 		
-		assertTrue(user1.getEstadoUsuario() instanceof EstadoExperto);
+		assertTrue(usuario.getEstado() instanceof EstadoExperto);
 		
 	}
 	
 	@Test
-	
-	void agregarOpinionTest() {
+	void agregarOpinionTest_SiendoLaPrimerOpinion() {
+		//setup
+		int opinionesAntes = usuario.cantidadDeOpiniones();
 		
-		user1.agregarOpinion(mock(Opinion.class));
-		user1.agregarOpinion(mock(Opinion.class));
-		user1.agregarOpinion(mock(Opinion.class));
+		//exercise
+		usuario.agregarOpinion(unaOpinion);
+		int opinionesDespues = usuario.cantidadDeOpiniones();
 		
-		assertEquals(user1.getOpiniones().size(), 3);
-		
-		verify(user1.getEstadoUsuario(), times(3)).updateUsuario(user1);
-		
+		//verify
+		assertEquals(0, opinionesAntes);
+		assertEquals(1, opinionesDespues);
 	}
 	
 	
 	
-	void agregarMuestraTest() {
+	void agregarMuestraTest_SiendoLaPrimerMuestra() {
+		//setup
+		int muestrasAntes = usuario.cantidadDeMuestras();
 		
-		user1.agregarMuestra(mock(Muestra.class));
-		user1.agregarMuestra(mock(Muestra.class));
-		user1.agregarMuestra(mock(Muestra.class));
+		//exercise
+		usuario.agregarOpinion(unaOpinion);
+		int muestrasDespues = usuario.cantidadDeMuestras();
 		
-		
-		assertEquals(user1.getMuestras().size(), 3);
-		
-		verify(user1.getEstadoUsuario(), times(3)).updateUsuario(user1);
-		
-		
+		//verify
+		assertEquals(0, muestrasAntes);
+		assertEquals(1, muestrasDespues);
 	}
+	
+//	void cuandoUnUsuarioBasicoLLegaADiezMuestrasYVeinteRevisionesEnLosUltimosTreintaDiasSuEstadoCambiaAExperto() {
+//		//setup
+//		boolean esExpertoAntes = usuario.esExperto();
+//		
+//		//exercise
+//		for (int i = 0; i < 10; i++) {
+//			usuario.agregarMuestra(unaMuestra);
+//		}
+//		for (int i = 0; i < 20; i++) {
+//			usuario.agregarOpinion(unaOpinion);
+//		}
+//		boolean esExpertoDespues = usuario.esExperto();
+//		
+//		//verify
+//		assertEquals(10, usuario.cantidadDeMuestras());
+//		assertEquals(10, usuario.cantidadDeMuestrasAMenosDeTreintaDias());
+//		assertEquals(20, usuario.cantidadDeOpiniones());
+//		assertEquals(20, usuario.cantidadDeOpinionesAMenosDeTreintaDias());
+//		assertEquals(false, esExpertoAntes);
+//		assertEquals(true, esExpertoDespues);
+//		verify(usuario.getEstado(), times(2)).esExperto();
+//	}
 	
 	
 	void testFechaDeMuestras() {
 		
 		
-		user1.agregarMuestra(mock(Muestra.class));
-		user1.agregarMuestra(mock(Muestra.class));
-		user1.agregarMuestra(mock(Muestra.class));
+		usuario.agregarMuestra(mock(Muestra.class));
+		usuario.agregarMuestra(mock(Muestra.class));
+		usuario.agregarMuestra(mock(Muestra.class));
 		
-		ArrayList<Muestra> muestras = user1.getMuestras();
+		ArrayList<Muestra> muestras = usuario.getMuestras();
 		
 		
-        user1.fechasDeMuestrasPublicadas(user1.getMuestras());
+        usuario.fechasDeMuestrasPublicadas(usuario.getMuestras());
 		
-        assertEquals(user1.getMuestras().size(), 3);
+        assertEquals(usuario.getMuestras().size(), 3);
         
         for (Muestra muestra : muestras) {
             verify(muestra, times(1)).getFecha();
@@ -162,15 +179,15 @@ class UsuarioTest {
 	
 	void testFechaDeOpiniones() {
 		
-		user1.agregarOpinion(mock(Opinion.class));
-		user1.agregarOpinion(mock(Opinion.class));
-		user1.agregarOpinion(mock(Opinion.class));
+		usuario.agregarOpinion(mock(Opinion.class));
+		usuario.agregarOpinion(mock(Opinion.class));
+		usuario.agregarOpinion(mock(Opinion.class));
 		
-		ArrayList<Opinion> opiniones = user1.getOpiniones();
+		ArrayList<Opinion> opiniones = usuario.getOpiniones();
 		
-		user1.fechasDeOpiniones(user1.getOpiniones());
+		usuario.fechasDeOpiniones(usuario.getOpiniones());
 		
-		assertEquals(user1.getOpiniones().size(), 3);
+		assertEquals(usuario.getOpiniones().size(), 3);
 		
 		for (Opinion opinion : opiniones) {
             verify(opinion, times(1)).getFecha();

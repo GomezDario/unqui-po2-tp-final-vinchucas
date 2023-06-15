@@ -9,15 +9,14 @@ import java.util.ArrayList;
 public class Usuario {
 
 	private String nombre;
-	private EstadoUsuario estadoUsuario;
+	private EstadoUsuario estado;
 	private ArrayList<Muestra> muestras;
 	private ArrayList<Opinion> opiniones;
 
 	// CONSTRUCTOR
 	public Usuario(String nombre) {
-		
 		this.nombre = nombre;
-		this.estadoUsuario = new EstadoBasico();
+		this.estado = new EstadoBasico();
 		this.muestras  = new ArrayList<Muestra>();
 		this.opiniones = new ArrayList<Opinion>();
 	}
@@ -32,12 +31,12 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public EstadoUsuario getEstadoUsuario() {
-		return estadoUsuario;
+	public EstadoUsuario getEstado() {
+		return estado;
 	}
 
-	public void setEstadoUsuario(EstadoUsuario estadoUsuario) {
-		this.estadoUsuario = estadoUsuario;
+	public void setEstado(EstadoUsuario estado) {
+		this.estado = estado;
 	}
 
 	public ArrayList<Muestra> getMuestras() {
@@ -90,23 +89,67 @@ public class Usuario {
 	
 
 	public void agregarOpinion(Opinion opinion) {
-		
 		opiniones.add(opinion);
-		this.getEstadoUsuario().updateUsuario(this);
+		this.getEstado().updateUsuario(this);
 		
 	}
 	
 	public void agregarMuestra(Muestra muestra) {
 		
 		muestras.add(muestra);
-		this.getEstadoUsuario().updateUsuario(this);
+		this.getEstado().updateUsuario(this);
 	}
 	
 	public void validacionExterna() {
 		
-		this.setEstadoUsuario(new EstadoValidado());
+		this.setEstado(new EstadoValidado());
 		 
 	}
+
+	public int cantidadDeOpiniones() {
+		// TODO Auto-generated method stub
+		return opiniones.size();
+	}
+
+	public int cantidadDeMuestras() {
+		// TODO Auto-generated method stub
+		return muestras.size();
+	}
+
+	public boolean esExperto() {
+		// TODO Auto-generated method stub
+		return estado.esExperto();
+	}
+
+//	public Integer cantidadDeMuestrasAMenosDeTreintaDias() {
+//		// TODO Auto-generated method stub
+//		LocalDate fechaActual = LocalDate.now();
+//		List<Muestra> muestrasAMenos = new ArrayList<>();
+//		
+//		for (Muestra muestra : muestras) {
+//            long diferenciaDias = ChronoUnit.DAYS.between(muestra.getFecha(), fechaActual);
+//            if (diferenciaDias < 30) {
+//                muestrasAMenos.add(muestra);
+//            }
+//        }
+//		
+//		return muestrasAMenos.size();
+//	}
+//
+//	public Integer cantidadDeOpinionesAMenosDeTreintaDias() {
+//		// TODO Auto-generated method stub
+//		LocalDate fechaActual = LocalDate.now();
+//		List<Opinion> opinionesAMenos = new ArrayList<>();
+//		
+//		for (Opinion opinion : opiniones) {
+//            long diferenciaDias = ChronoUnit.DAYS.between(opinion.getFecha(), fechaActual);
+//            if (diferenciaDias < 30) {
+//            	opinionesAMenos.add(opinion);
+//            }
+//        }
+//		
+//		return opinionesAMenos.size();
+//	}
 	
 	
 	

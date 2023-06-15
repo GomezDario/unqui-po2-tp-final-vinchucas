@@ -6,13 +6,16 @@ public class EstadoExperto extends EstadoUsuario{
 	
 	public void updateUsuario(Usuario usuario) {
 		if (!this.puedeSerExperto(usuario)) {
-			usuario.setEstadoUsuario(new EstadoBasico());
+			usuario.setEstado(new EstadoBasico());
+		} else {
+			usuario.setEstado(this);
 		}
-		else {
-			
-			usuario.setEstadoUsuario(this);
-			
-			}
+	}
+
+	@Override
+	public boolean esExperto() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	

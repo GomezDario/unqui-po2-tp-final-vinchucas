@@ -17,63 +17,62 @@ import web.administradorMuestra.*;
 
 class EstadoBasicoTest {
 
-	    Usuario user;
-	    Usuario user1;
-	  
-	 
-	
-	    EstadoBasico tipoBasico;
-	    EstadoExperto tipoExperto;
-	   
+	EstadoBasico estadoBasico;
+    Usuario unUsuario;
+    Usuario otroUsuario;
+    EstadoExperto unEstadoExperto;
 	
 	@BeforeEach
-	    
 	void setUp() {
-	        user = mock(Usuario.class);
-	        
-	        tipoBasico = new EstadoBasico();
-	        tipoExperto = new EstadoExperto();
-	        
-	      
-	        user1 = new Usuario("Gabriel Gomez");          
-
-	    }
+		//doc
+        unUsuario = new Usuario("unUsario");
+        otroUsuario = new Usuario("otroUsuario");
+        unEstadoExperto = mock(EstadoExperto.class);
+        
+        //sut
+        estadoBasico = new EstadoBasico();    
+	}
 	
+//	@Test
+//	void updateUsuarioTest_CuandoCumple() {
+//		//setup
+//		when(unUsuario.cantidadDeMuestrasAMenosDeTreintaDias()).thenReturn(10);
+//		when(unUsuario.cantidadDeOpinionesAMenosDeTreintaDias()).thenReturn(20);
+//		
+//		//exercise
+//		estadoBasico.updateUsuario(unUsuario);
+//		
+//		//verify
+//		verify(unUsuario, times(1)).setEstado(unEstadoExperto);
+//	}
 	
-	 @Test
+	@Test
 	void usuarioBasicoNocumpleCondicionDeExpertoTest() {
-		 
 		 // TEST DE UN USUARIO CON 8 OPINIONES, Y 5 MUESTRAS. NO CUMPLE CONDICION PARA SER EXPERTO
 		 
 		 ArrayList<Opinion> opiniones = new ArrayList<>();
-		    ArrayList<Muestra> muestras = new ArrayList<>();
+		 ArrayList<Muestra> muestras = new ArrayList<>();
 
-		    // Simulo tene opiniones y muestras en el mes actual
-		    LocalDate fechaActual = LocalDate.now();
+		 // Simulo tene opiniones y muestras en el mes actual
+		 LocalDate fechaActual = LocalDate.now();
 		    
-		    
-
-		    for (int i = 0; i < 8; i++) {
-		        Opinion opinion = mock(Opinion.class);
-		        when(opinion.getFecha()).thenReturn(fechaActual);
-		        opiniones.add(opinion);
-		    }
-
-		    for (int i = 0; i < 5; i++) {
-		        Muestra muestra = mock(Muestra.class);
-		        when(muestra.getFecha()).thenReturn(fechaActual);
-		        muestras.add(muestra);
-		    }
-		    
-		    user1.setOpiniones(opiniones);
-		    user1.setMuestras(muestras);
-		 	
+	     for (int i = 0; i < 8; i++) {
+	         Opinion opinion = mock(Opinion.class);
+	         when(opinion.getFecha()).thenReturn(fechaActual);
+	         opiniones.add(opinion);
+	     }
+	     
+	     for (int i = 0; i < 5; i++) {
+	         Muestra muestra = mock(Muestra.class);
+	         when(muestra.getFecha()).thenReturn(fechaActual);
+	         muestras.add(muestra);
+	     }
+	     
+	     otroUsuario.setOpiniones(opiniones);
+	     otroUsuario.setMuestras(muestras);
 		 
-		 
-		 
-	        tipoBasico.updateUsuario(user1);
-	        assertFalse(tipoBasico.puedeSerExperto(user1));
-		 
+         estadoBasico.updateUsuario(otroUsuario);
+         assertFalse(estadoBasico.puedeSerExperto(otroUsuario));
 		 
 	 }
 	 
@@ -88,7 +87,7 @@ class EstadoBasicoTest {
 		    ArrayList<Opinion> opiniones = new ArrayList<>();
 		    ArrayList<Muestra> muestras = new ArrayList<>();
 
-		    // Simulo tene opiniones y muestras en el mes actual
+		    // Simulo tener opiniones y muestras en el mes actual
 		    LocalDate fechaActual = LocalDate.now();
 		    
 		    
@@ -105,8 +104,8 @@ class EstadoBasicoTest {
 		        muestras.add(muestra);
 		    }
 		    
-		    user1.setOpiniones(opiniones);
-		    user1.setMuestras(muestras);
+		    otroUsuario.setOpiniones(opiniones);
+		    otroUsuario.setMuestras(muestras);
 		    
 		    for (Opinion opinion : opiniones) {
 		        LocalDate fechaOpinion = opinion.getFecha();
@@ -123,10 +122,10 @@ class EstadoBasicoTest {
 	
 		    
 
-		    tipoBasico.updateUsuario(user1);
+		    estadoBasico.updateUsuario(otroUsuario);
 		    
-		    assertTrue(tipoBasico.puedeSerExperto(user1));
-		    assertTrue(user1.getEstadoUsuario() instanceof EstadoExperto);
+		    assertTrue(estadoBasico.puedeSerExperto(otroUsuario));
+		    assertTrue(otroUsuario.getEstado() instanceof EstadoExperto);
 	    	
 
 		    
@@ -156,12 +155,12 @@ class EstadoBasicoTest {
 		        muestras.add(muestra);
 		    }
 		    
-		    user1.setOpiniones(opiniones);
-		    user1.setMuestras(muestras);
+		    otroUsuario.setOpiniones(opiniones);
+		    otroUsuario.setMuestras(muestras);
 		
 		    
-		    tipoBasico.updateUsuario(user1);
-		    assertTrue(user1.getEstadoUsuario() instanceof EstadoBasico);
+		    estadoBasico.updateUsuario(otroUsuario);
+		    assertTrue(otroUsuario.getEstado() instanceof EstadoBasico);
 		    
 		
 		
