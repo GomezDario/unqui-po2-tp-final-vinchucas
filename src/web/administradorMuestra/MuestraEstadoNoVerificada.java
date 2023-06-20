@@ -17,11 +17,11 @@ public class MuestraEstadoNoVerificada implements  MuestraEstado
 	}
 	
 	@Override
-    public TipoDeOpinion resultadoActual(ArrayList<Opinion> historialDeVotaciones) 
+    public TipoDeOpinion resultadoActual(Muestra muestra) 
     {
     	 Map<TipoDeOpinion, Integer> frecuencias = new HashMap<>();
     	
-    	 for (Opinion opinion : historialDeVotaciones) 
+    	 for (Opinion opinion : muestra.getlistaDeOpiniones()) 
     	 {
              frecuencias.put(opinion.getTipo(), frecuencias.getOrDefault(opinion.getTipo(), 0) + 1);
          }
@@ -47,8 +47,21 @@ public class MuestraEstadoNoVerificada implements  MuestraEstado
              return elementoMasFrecuente;
          }
     }
-	
-    
+
+	@Override
+	public void agregarOpinion(Opinion opinion, Muestra muestra) 
+	{
+		muestra.getlistaDeOpiniones().add(opinion);
+		
+		if (opinion.getUsuario().esExperto()) 
+		{
+			muestra.cambiarEstado(new MuestraEstadoVerificadaPorExperto()); // error de imports creo, arreglar despues
+		}
+		
+	}
+
+
+   
     
     
 }

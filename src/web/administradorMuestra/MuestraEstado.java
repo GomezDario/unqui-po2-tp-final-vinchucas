@@ -10,7 +10,9 @@ public interface MuestraEstado {
 
 	 
 
-	 public TipoDeOpinion resultadoActual(ArrayList<Opinion> historialDeVotaciones);
+	 public TipoDeOpinion resultadoActual(Muestra muestra);
+	 public void agregarOpinion(Opinion opinion, Muestra muestra);
+	
 	 
 		
 }

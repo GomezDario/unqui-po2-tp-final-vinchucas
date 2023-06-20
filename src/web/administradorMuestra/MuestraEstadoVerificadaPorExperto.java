@@ -15,11 +15,11 @@ public class MuestraEstadoVerificadaPorExperto implements MuestraEstado {
 	
 	}
 	  @Override
-	  public TipoDeOpinion resultadoActual(ArrayList<Opinion> historialDeVotaciones )
+	  public TipoDeOpinion resultadoActual(Muestra muestra)
 	    {
 	    	 Map<TipoDeOpinion, Integer> frecuencias = new HashMap<>();
 	    	
-	    	 for (Opinion opinion : historialDeVotaciones) 
+	    	 for (Opinion opinion : muestra.getlistaDeOpiniones()) 
 	    	 {
 	    		 if(opinion.getUsuario().esExperto())         
 	    		 {
@@ -52,6 +52,20 @@ public class MuestraEstadoVerificadaPorExperto implements MuestraEstado {
 	         // ESTOY REPITIENDO CODIGO PERO TAMPOCO CREO QUE SEA BUENA PRACTICA SUBIRLO A LA INTERFAZ, ESTOY DUDANDO TAMBIEN DE QUE SEA UN PATRON STRATEGY 
 	         // AUNQUE REALMENTE ES UN ESTADO DE LA MUESTRA
 	    }
+	
+	public void agregarOpinion(Opinion opinion, Muestra muestra)
+	{
+		if (opinion.getUsuario().esExperto()) 
+		{
+			muestra.getlistaDeOpiniones().add(opinion);
+		}
+		else
+		{
+			throw new Exception("No se puede agregar la opinión. El usuario no es un experto.");
+			  
+		}
+		
+	}
 
 	
 	
