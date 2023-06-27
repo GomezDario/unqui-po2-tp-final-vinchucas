@@ -2,12 +2,16 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="lib" path="C:/Users/aaron/OneDrive/Documentos/mockito/byte-buddy-1.14.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aaron/OneDrive/Documentos/mockito/byte-buddy-agent-1.14.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aaron/OneDrive/Documentos/mockito/mockito-core-5.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aaron/OneDrive/Documentos/mockito/mockito-subclass-5.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/aaron/OneDrive/Documentos/mockito/objenesis-3.3.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-19.0.2"/>
+	<classpathentry kind="lib" path="C:/Users/aaron/git/unqui-po2-tp-final-vinchucas/mockito/byte-buddy-1.14.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aaron/git/unqui-po2-tp-final-vinchucas/mockito/byte-buddy-agent-1.14.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aaron/git/unqui-po2-tp-final-vinchucas/mockito/mockito-core-5.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aaron/git/unqui-po2-tp-final-vinchucas/mockito/mockito-subclass-5.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/aaron/git/unqui-po2-tp-final-vinchucas/mockito/objenesis-3.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

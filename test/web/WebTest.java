@@ -41,7 +41,7 @@ public class WebTest {
 	@Test
 	public void agregarNuevaZonaTest() {
 		//exercise
-		web.agregarNuevaZona(unaZonaDeCobertura);
+		web.agregarNuevaZonaDeCobertura(unaZonaDeCobertura);
 		
 		//verify
 		verify(unAdministradorZona, times(1)).agregarZona(unaZonaDeCobertura);

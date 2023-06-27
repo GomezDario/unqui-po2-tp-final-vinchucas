@@ -21,7 +21,7 @@ public class Web {
 		administradorZona = unAdministradorZona;
 	}
 
-	public void agregarNuevaZona(ZonaDeCobertura unaZonaDeCobertura) {
+	public void agregarNuevaZonaDeCobertura(ZonaDeCobertura unaZonaDeCobertura) {
 		// TODO Auto-generated method stub
 		administradorZona.agregarZona(unaZonaDeCobertura);
 	}
