@@ -1,10 +1,10 @@
 package web.usuario;
 
-import web.extras.*;
-import web.administradorMuestra.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import web.muestra.Muestra;
+import web.opinion.Opinion;
 
 public class Usuario {
 

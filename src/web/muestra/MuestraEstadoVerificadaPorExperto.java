@@ -1,20 +1,16 @@
 package web.muestra;
-import web.administradorUsuario;
-import web.extras.Opinion;
-import web.extras.TipoDeOpinion;
-
 import java.util.ArrayList;
-import java.time.LocalDate;
-import java.lang.String;
 import java.util.HashMap;
 import java.util.Map;
+
+import web.opinion.Opinion;
+import web.opinion.TipoDeOpinion;
 
 public class MuestraEstadoVerificadaPorExperto implements MuestraEstado {
 
 	public MuestraEstadoVerificadaPorExperto() {
 	
 	}
-	  @Override
 	  public TipoDeOpinion resultadoActual(Muestra muestra)
 	    {
 	    	 Map<TipoDeOpinion, Integer> frecuencias = new HashMap<>();
@@ -23,7 +19,7 @@ public class MuestraEstadoVerificadaPorExperto implements MuestraEstado {
 	    	 {
 	    		 if(opinion.getUsuario().esExperto())         
 	    		 {
-	    			 frecuencias.put(opinion.getTipo(), frecuencias.getOrDefault(opinion.getTipo(), 0) + 1); 
+	    			 frecuencias.put(opinion.getTipoDeOpinion(), frecuencias.getOrDefault(opinion.getTipoDeOpinion(), 0) + 1); 
 	    		 }
 	             
 	         }
@@ -53,7 +49,7 @@ public class MuestraEstadoVerificadaPorExperto implements MuestraEstado {
 	         // AUNQUE REALMENTE ES UN ESTADO DE LA MUESTRA
 	    }
 	
-	public void agregarOpinion(Opinion opinion, Muestra muestra)
+	public void agregarOpinion(Opinion opinion, Muestra muestra) throws Exception
 	{
 		if (opinion.getUsuario().esExperto()) 
 		{
@@ -65,6 +61,11 @@ public class MuestraEstadoVerificadaPorExperto implements MuestraEstado {
 			  
 		}
 		
+	}
+	@Override
+	public TipoDeOpinion resultadoActual(ArrayList<Opinion> listaDeOpiniones) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

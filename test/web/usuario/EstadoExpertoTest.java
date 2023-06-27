@@ -1,9 +1,7 @@
 package web.usuario;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -11,9 +9,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import web.extras.*;
-import web.administradorMuestra.*;
+import web.muestra.Muestra;
+import web.opinion.Opinion;
 
 class EstadoExpertoTest {
 

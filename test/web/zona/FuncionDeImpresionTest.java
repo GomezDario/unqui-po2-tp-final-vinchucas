@@ -7,7 +7,7 @@ import static org.mockito.Mockito.verify;
 import org.junit.Before;
 import org.junit.Test;
 
-import web.administradorMuestra.Muestra;
+import web.muestra.Muestra;
 
 public class FuncionDeImpresionTest {
 

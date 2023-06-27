@@ -1,6 +1,6 @@
 package web.zona;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
-import web.administradorMuestra.Muestra;
+import web.muestra.Muestra;
 
 public class AdministradorZonaTest {
 

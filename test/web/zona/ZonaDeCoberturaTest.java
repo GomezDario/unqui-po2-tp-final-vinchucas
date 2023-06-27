@@ -1,6 +1,6 @@
 package web.zona;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -11,8 +11,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import web.administradorMuestra.Muestra;
-import web.extras.Ubicacion;
+import web.muestra.Muestra;
+import web.ubicacion.Ubicacion;
 
 public class ZonaDeCoberturaTest {
 

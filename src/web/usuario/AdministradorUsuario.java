@@ -3,8 +3,8 @@ package web.usuario;
 import java.util.ArrayList;
 import java.util.List;
 
-import web.extras.*;
-import web.administradorMuestra.*;
+import web.muestra.Muestra;
+import web.opinion.Opinion;
 
 public class AdministradorUsuario {
 

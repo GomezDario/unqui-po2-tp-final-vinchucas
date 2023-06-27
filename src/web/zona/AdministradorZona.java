@@ -3,7 +3,7 @@ package web.zona;
 import java.util.ArrayList;
 import java.util.List;
 
-import web.administradorMuestra.Muestra;
+import web.muestra.Muestra;
 
 public class AdministradorZona {
 

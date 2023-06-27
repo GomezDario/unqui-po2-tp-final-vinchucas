@@ -1,11 +1,11 @@
 package web;
 
-import web.administradorMuestra.AdministradorMuestra;
-import web.administradorMuestra.Muestra;
-import web.administradorUsuario.AdministradorUsuario;
-import web.administradorZona.AdministradorZona;
-import web.administradorZona.ZonaDeCobertura;
-import web.extras.Opinion;
+import web.muestra.AdministradorMuestra;
+import web.muestra.Muestra;
+import web.usuario.AdministradorUsuario;
+import web.zona.AdministradorZona;
+import web.zona.ZonaDeCobertura;
+import web.opinion.Opinion;
 
 public class Web {
 

@@ -1,6 +1,6 @@
 package web.zona;
 
-import web.administradorMuestra.Muestra;
+import web.muestra.Muestra;
 
 public interface FuncionExterna {
 

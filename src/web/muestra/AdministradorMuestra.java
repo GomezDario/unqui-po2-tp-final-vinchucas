@@ -1,6 +1,6 @@
 package web.muestra;
 
-import web.extras.Opinion;
+import web.opinion.Opinion;
 
 public class AdministradorMuestra {
 

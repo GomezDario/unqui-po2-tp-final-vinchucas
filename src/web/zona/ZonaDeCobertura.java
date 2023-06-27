@@ -3,8 +3,8 @@ package web.zona;
 import java.util.ArrayList;
 import java.util.List;
 
-import web.administradorMuestra.Muestra;
-import web.extras.Ubicacion;
+import web.muestra.Muestra;
+import web.ubicacion.Ubicacion;
 
 public class ZonaDeCobertura {
 	

@@ -1,13 +1,12 @@
 package web.muestra;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-import web.administradorUsuario.Usuario;
-import web.administradorZona.ArrayList;
-import web.administradorZona.MuestraEstado;
-import web.administradorZona.Opinion;
-import web.extras.TipoDeOpinion;
-import web.extras.Ubicacion;
+import web.opinion.Opinion;
+import web.opinion.TipoDeOpinion;
+import web.ubicacion.Ubicacion;
+import web.usuario.Usuario;
 
 public class Muestra {
 	
@@ -19,7 +18,7 @@ public class Muestra {
 	private Usuario usuarioQueLaRecolecto;
 
 
-	public Muestra(Ubicacion ubicacion, String foto, Opinion opinion, Usuario usuariousuarioQueLaRecolecto ) 
+	public Muestra(Ubicacion ubicacion, String foto, Opinion opinion, MuestraEstado estado, Usuario usuariousuarioQueLaRecolecto ) 
 	{
 		this.ubicacion = ubicacion;
         this.foto = foto;
@@ -49,7 +48,7 @@ public class Muestra {
 		return this.foto;
 	}
 	
-	public void agregarOpinion(Opinion opinion) 
+	public void agregarOpinion(Opinion opinion) throws Exception 
 	{
 		estado.agregarOpinion(opinion, this);
 	}
@@ -90,12 +89,17 @@ public class Muestra {
 	{
 		if(usuarioQueLaRecolecta.esExperto()) 
 		{
-			this.estado = new MuestraEstadoVerificadaPorExperado();
+			this.estado = new MuestraEstadoVerificadaPorExperto();
 		}
 		else
 		{
-			this.estado = new MUestraEstadoNoVerificada();
+			this.estado = new MuestraEstadoNoVerificada();
 		}
+	}
+
+	public boolean estaVerificada() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -2,8 +2,8 @@ package web.opinion;
 
 import java.time.LocalDate;
 
-import web.administradorMuestra.Muestra;
-import web.administradorUsuario.Usuario;
+import web.muestra.Muestra;
+import web.usuario.Usuario;
 
 public class Opinion {
 	
@@ -38,6 +38,4 @@ public class Opinion {
 		return tipoDeOpinion;
 	}
 
-	
-	
 }

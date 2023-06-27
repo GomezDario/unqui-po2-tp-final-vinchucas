@@ -1,14 +1,14 @@
 package web.opinion;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import web.administradorUsuario.Usuario;
-import web.administradorMuestra.Muestra;
+import web.muestra.Muestra;
+import web.usuario.Usuario;
 
 public class OpinionTest {
 	

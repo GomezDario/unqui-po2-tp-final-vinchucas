@@ -1,19 +1,17 @@
 package web.usuario;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import web.extras.*;
-import web.administradorMuestra.*;
-
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import web.muestra.Muestra;
+import web.opinion.Opinion;
 
 class EstadoValidadoTest {
 
