@@ -18,7 +18,7 @@ public class Muestra {
 	private Usuario usuarioQueLaRecolecto;
 
 
-	public Muestra(Ubicacion ubicacion, String foto, Opinion opinion, MuestraEstado estado, Usuario usuariousuarioQueLaRecolecto ) 
+	public Muestra(Ubicacion ubicacion, String foto, Opinion opinion, Usuario usuariousuarioQueLaRecolecto ) 
 	{
 		this.ubicacion = ubicacion;
         this.foto = foto;
@@ -48,7 +48,7 @@ public class Muestra {
 		return this.foto;
 	}
 	
-	public void agregarOpinion(Opinion opinion) throws Exception 
+	public void agregarOpinion(Opinion opinion) 
 	{
 		estado.agregarOpinion(opinion, this);
 	}
@@ -89,17 +89,12 @@ public class Muestra {
 	{
 		if(usuarioQueLaRecolecta.esExperto()) 
 		{
-			this.estado = new MuestraEstadoVerificadaPorExperto();
+			this.estado = new MuestraEstadoVerificadaPorExperado();
 		}
 		else
 		{
-			this.estado = new MuestraEstadoNoVerificada();
+			this.estado = new MUestraEstadoNoVerificada();
 		}
-	}
-
-	public boolean estaVerificada() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

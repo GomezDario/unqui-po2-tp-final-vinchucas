@@ -6,20 +6,22 @@ import java.util.Map;
 import web.opinion.Opinion;
 import web.opinion.TipoDeOpinion;
 
-public class MuestraEstadoVerificadaPorExperto implements MuestraEstado {
+public class MuestraEstadoVerificadaPorExperto implements MuestraEstado 
+{
 
 	public MuestraEstadoVerificadaPorExperto() {
 	
 	}
+	  @Override
 	  public TipoDeOpinion resultadoActual(Muestra muestra)
-	    {
+	  {
 	    	 Map<TipoDeOpinion, Integer> frecuencias = new HashMap<>();
 	    	
 	    	 for (Opinion opinion : muestra.getlistaDeOpiniones()) 
 	    	 {
 	    		 if(opinion.getUsuario().esExperto())         
 	    		 {
-	    			 frecuencias.put(opinion.getTipoDeOpinion(), frecuencias.getOrDefault(opinion.getTipoDeOpinion(), 0) + 1); 
+	    			 frecuencias.put(opinion.getTipo(), frecuencias.getOrDefault(opinion.getTipo(), 0) + 1); 
 	    		 }
 	             
 	         }
@@ -47,9 +49,9 @@ public class MuestraEstadoVerificadaPorExperto implements MuestraEstado {
 	         
 	         // ESTOY REPITIENDO CODIGO PERO TAMPOCO CREO QUE SEA BUENA PRACTICA SUBIRLO A LA INTERFAZ, ESTOY DUDANDO TAMBIEN DE QUE SEA UN PATRON STRATEGY 
 	         // AUNQUE REALMENTE ES UN ESTADO DE LA MUESTRA
-	    }
+	}
 	
-	public void agregarOpinion(Opinion opinion, Muestra muestra) throws Exception
+	public void agregarOpinion(Opinion opinion, Muestra muestra)
 	{
 		if (opinion.getUsuario().esExperto()) 
 		{
@@ -62,14 +64,10 @@ public class MuestraEstadoVerificadaPorExperto implements MuestraEstado {
 		}
 		
 	}
-	@Override
-	public TipoDeOpinion resultadoActual(ArrayList<Opinion> listaDeOpiniones) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 	
 	
 	
 }
+

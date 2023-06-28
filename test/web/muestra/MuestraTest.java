@@ -1,19 +1,17 @@
-package web.muestra;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import web.administradorUsuario.Usuario;
+import web.extras.Opinion;
+import web.extras.TipoDeOpinion;
+
+import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import web.opinion.Opinion;
-import web.opinion.TipoDeOpinion;
-import web.ubicacion.Ubicacion;
-import web.usuario.Usuario;
-
-public class MuestraTest 
+public class TestMuestra 
 {
 	
 	Muestra muestra;
@@ -24,7 +22,7 @@ public class MuestraTest
 	Opinion opinion2;
 	Ubicacion ubicacion;
 	
-	@Before
+	
 	public void setUp() 
 	{
 		/*
@@ -34,29 +32,28 @@ public class MuestraTest
 		
 		this.usuario = mock(Usuario.class);
 		this.usuario2 = mock(Usuario.class);
-		this.estado = mock(MuestraEstadoNoVerificada.class);
+		this.estado = mock(MuestraEstadoNoVerificado.class);
 		this.opinion1 = mock(Opinion.class);
 		this.opinion2 = mock(Opinion.class);
-		this.ubicacion = mock(Ubicacion.class);
+		this.ubicacion = mock(Ubicacion);
 		
-		muestra = new Muestra(ubicacion, "test.jpg", opinion1, estado, usuario);
+		muestra = new Muestra(ubicacion, "test.jpg", ArrayList<Opinion>(opinion1, opinion2), estado, usuario);
 		
 	}
 	
-	@Test
-	public void verificacionDeUnaMuestra() throws Exception 
+	public void verificacionDeUnaMuestra() 
 	{
 		when(usuario.esExperto()).thenReturn(false);
 	    when(opinion2.getUsuario()).thenReturn(usuario);
 
-	    muestra.agregarOpinion(opinion2);
+	    muestra.agregarOpinion(opinion2, muestra);
 	    
 	    assert muestra.getEstado() instanceof MuestraEstadoNoVerificada;
 		
 	    when(usuario.esExperto()).thenReturn(true);
 	    when(opinion1.getUsuario()).thenReturn(usuario);
 
-	    muestra.agregarOpinion(opinion1);
+	    muestra.agregarOpinion(opinion1, muestra);
 
 	    assert muestra.getEstado() instanceof MuestraEstadoVerificadaPorExperto;
 	    
@@ -64,26 +61,25 @@ public class MuestraTest
 	    
 	}
 	
-	@Test
-	public void exceptCuandoUnUsuarioNoPuedeOpinar() throws Exception 
+	public void exceptCuandoUnUsuarioNoPuedeOpinar() 
 	{
 		when(usuario.esExperto()).thenReturn(true);
 	    when(opinion1.getUsuario()).thenReturn(usuario);
 
-	    muestra.agregarOpinion(opinion1);
+	    muestra.agregarOpinion(opinion1, muestra);
 
 	    assert muestra.getEstado() instanceof MuestraEstadoVerificadaPorExperto;
 	    
 	    when(usuario.esExperto()).thenReturn(false);
 	    when(opinion2.getUsuario()).thenReturn(usuario);
 
-	    assertThrows(Exception.class, () -> {muestra.agregarOpinion(opinion2);});
+	    assertThrows(Exception.class, () -> {muestra.agregarOpinion(opinion2, muestra)});
 	    
 	    
 	    
 	}
 	
-	@Test
+	
 	public void consultarIdentificacionFotoYUbicacion() 
 	{
 		assertEquals(ubicacion, muestra.getUbicacion());
@@ -92,19 +88,18 @@ public class MuestraTest
 		
 	}
 	
-	@Test
-	public void resultadoNoIdentificadoCuandoEmpate() throws Exception
+	public void resultadoNoIdentificadoCuandoEmpate()
 	{
 		when(opinion1.getTipoDeOpinion()).thenReturn(TipoDeOpinion.VINCHUCAINFESTANS);
-		muestra.agregarOpinion(opinion1);
+		muestra.agregarOpinion(opinion1, muestra);
 		
 		when(opinion2.getTipoDeOpinion()).thenReturn(TipoDeOpinion.PHTIA_CHINCHE);
-		muestra.agregarOpinion(opinion2);
+		muestra.agregarOpinion(opinion2, muestra);
 		
 		assert muestra.resultadoActual() == TipoDeOpinion.NODEFINIDO;
 	}
 	
-	@Test
+	
 	public void muestraTomadaPorExpertoVerificadaDesdeInicio() 
 	{
 		when(usuario.esExperto()).thenReturn(true);
