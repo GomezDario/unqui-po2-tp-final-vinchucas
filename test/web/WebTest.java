@@ -1,125 +1,107 @@
 package web;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import web.muestra.AdministradorMuestra;
 import web.muestra.Muestra;
 import web.opinion.Opinion;
-import web.usuario.AdministradorUsuario;
-import web.zona.AdministradorZona;
 import web.zona.ZonaDeCobertura;
 
 public class WebTest {
 	
 	Web web;
-	AdministradorUsuario unAdministradorUsuario;
-	AdministradorMuestra unAdministradorMuestra;
-	AdministradorZona unAdministradorZona;
-	ZonaDeCobertura unaZonaDeCobertura;
 	Muestra unaMuestra;
 	Opinion unaOpinion;
+	ZonaDeCobertura unaZonaDeCobertura;
+	ZonaDeCobertura otraZonaDeCobertura;
 	
 	@Before
 	public void setUp() {
-		//setup
-		unAdministradorUsuario = mock(AdministradorUsuario.class);
-		unAdministradorMuestra = mock(AdministradorMuestra.class);
-		unAdministradorZona = mock(AdministradorZona.class);		
-		unaZonaDeCobertura = mock(ZonaDeCobertura.class);
+		//DOC
 		unaMuestra = mock(Muestra.class);
 		unaOpinion = mock(Opinion.class);
+		unaZonaDeCobertura = mock(ZonaDeCobertura.class);
+		otraZonaDeCobertura = mock(ZonaDeCobertura.class);
 		
-		//test double installation
-		web = new Web(unAdministradorUsuario, unAdministradorMuestra, unAdministradorZona);
+		//SUT
+		web = new Web();
+	}
+	
+	//ZONAS
+	
+	@Test
+	public void cuandoUnaWebSeCreaNoTieneNingunaZonaNiMuestrasNiUsuariosTest() {
+		//exercise
+		int cantidadZonas = web.cantidadDeZonasDeCobertura();
+		int cantidadUsuarios = web.cantidadDeUsuarios();
+		int cantidadMuestras = web.cantidadDeMuestras();
+				
+		//verify
+		assertEquals(0, cantidadZonas);
+		assertEquals(0, cantidadUsuarios);
+		assertEquals(0, cantidadMuestras);
 	}
 	
 	@Test
-	public void agregarNuevaZonaTest() {
+	public void agregarNuevaZonaDeCoberturaTest_CuandoEsLaPrimerZona() {
+		//setup
+		int cantidadDeZonasAntes = web.cantidadDeZonasDeCobertura();
+		
 		//exercise
 		web.agregarNuevaZonaDeCobertura(unaZonaDeCobertura);
+		int cantidadDeZonasDespues = web.cantidadDeZonasDeCobertura();
 		
 		//verify
-		verify(unAdministradorZona, times(1)).agregarZona(unaZonaDeCobertura);
+		assertEquals(0, cantidadDeZonasAntes);
+		assertEquals(1, cantidadDeZonasDespues);
 	}
 	
 	@Test
-	public void agregarNuevaMuestraTest() {
+	public void agregarNuevaZonaDeCoberturaTest_CuandoEsLaSegundaZonaYNoSeRepite() {
+		//setup
+		web.agregarNuevaZonaDeCobertura(unaZonaDeCobertura);
+		int cantidadDeZonasAntes = web.cantidadDeZonasDeCobertura();
+		
+		//exercise
+		web.agregarNuevaZonaDeCobertura(otraZonaDeCobertura);
+		int cantidadDeZonasDespues = web.cantidadDeZonasDeCobertura();
+		
+		//verify
+		assertEquals(1, cantidadDeZonasAntes);
+		assertEquals(2, cantidadDeZonasDespues);
+	}
+	
+	@Test
+	public void agregarNuevaZonaDeCoberturaTest_CuandoEsLaSegundaZonaYSeRepite() {
+		//setup
+		web.agregarNuevaZonaDeCobertura(unaZonaDeCobertura);
+		int cantidadDeZonasAntes = web.cantidadDeZonasDeCobertura();
+		
+		//exercise
+		web.agregarNuevaZonaDeCobertura(unaZonaDeCobertura);
+		int cantidadDeZonasDespues = web.cantidadDeZonasDeCobertura();
+		
+		//verify
+		assertEquals(1, cantidadDeZonasAntes);
+		assertEquals(1, cantidadDeZonasDespues);
+	}
+	
+	@Test
+	public void agregarNuevaMuestraTest_CuandoEsLaPrimerMuestra() {
+		//setup
+		int cantidadDeMuestrasAntes = web.cantidadDeMuestras();
+		
 		//exercise
 		web.agregarNuevaMuestra(unaMuestra);
+		int cantidadDeMuestrasDespues = web.cantidadDeMuestras();
 		
 		//verify
-		verify(unAdministradorMuestra, times(1)).agregarMuestra(unaMuestra);
-		verify(unAdministradorUsuario, times(1)).agregarMuestra(unaMuestra);
-		verify(unAdministradorZona, times(1)).agregarMuestra(unaMuestra);
+		assertEquals(0, cantidadDeMuestrasAntes);
+		assertEquals(1, cantidadDeMuestrasDespues);
 	}
 	
-	@Test
-	public void agregarNuevaOpinionTest_ConOpinionDeUsuarioExpertoAMuestraNoValidada() {
-		//setup
-		when(unAdministradorMuestra.agregarOpinion(unaOpinion)).thenReturn(true);
-		when(unaOpinion.getMuestra()).thenReturn(unaMuestra);
-		when(unaMuestra.estaVerificada()).thenReturn(false, true);
-		
-		//exercise
-		web.agregarNuevaOpinion(unaOpinion);
-		
-		//verify
-		verify(unAdministradorMuestra, times(1)).agregarOpinion(unaOpinion);
-		verify(unAdministradorUsuario, times(1)).agregarOpinion(unaOpinion);
-		verify(unAdministradorZona, times(1)).muestraValidada(unaMuestra);		
-	}
 	
-	@Test
-	public void agregarNuevaOpinionTest_ConOpinionDeUsuarioBasicoAMuestraNoValidada() {
-		//setup
-		when(unAdministradorMuestra.agregarOpinion(unaOpinion)).thenReturn(true);
-		when(unaOpinion.getMuestra()).thenReturn(unaMuestra);
-		when(unaMuestra.estaVerificada()).thenReturn(false, false);
-		
-		//exercise
-		web.agregarNuevaOpinion(unaOpinion);
-		
-		//verify
-		verify(unAdministradorMuestra, times(1)).agregarOpinion(unaOpinion);
-		verify(unAdministradorUsuario, times(1)).agregarOpinion(unaOpinion);
-		verify(unAdministradorZona, times(0)).muestraValidada(unaMuestra);		
-	}
-	
-	@Test
-	public void agregarNuevaOpinionTest_ConOpinionDeUsuarioBasicoAMuestraValidada() {
-		//setup
-		when(unAdministradorMuestra.agregarOpinion(unaOpinion)).thenReturn(false);
-		when(unaOpinion.getMuestra()).thenReturn(unaMuestra);
-		when(unaMuestra.estaVerificada()).thenReturn(true, true);
-		
-		//exercise
-		web.agregarNuevaOpinion(unaOpinion);
-		
-		//verify
-		verify(unAdministradorMuestra, times(1)).agregarOpinion(unaOpinion);
-		verify(unAdministradorUsuario, times(0)).agregarOpinion(unaOpinion);
-		verify(unAdministradorZona, times(0)).muestraValidada(unaMuestra);		
-	}
-	
-	@Test
-	public void agregarNuevaOpinionTest_ConOpinionDeUsuarioExpertoAMuestraValidada() {
-		//setup
-		when(unAdministradorMuestra.agregarOpinion(unaOpinion)).thenReturn(true);
-		when(unaOpinion.getMuestra()).thenReturn(unaMuestra);
-		when(unaMuestra.estaVerificada()).thenReturn(true, true);
-		
-		//exercise
-		web.agregarNuevaOpinion(unaOpinion);
-		
-		//verify
-		verify(unAdministradorMuestra, times(1)).agregarOpinion(unaOpinion);
-		verify(unAdministradorUsuario, times(1)).agregarOpinion(unaOpinion);
-		verify(unAdministradorZona, times(0)).muestraValidada(unaMuestra);		
-	}
 }

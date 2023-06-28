@@ -2,13 +2,13 @@ package web.zona;
 
 import web.muestra.Muestra;
 
-public class OrganizacionNoGubernamental implements Observador {
+public class Organizacion implements ObservadorOrg {
 
 	private TipoDeOrganizacion tipoDeOrganizacion;
 	private FuncionExterna eventoNuevaMuestra;
 	private FuncionExterna eventoValidacionMuestra;
 
-	public OrganizacionNoGubernamental(TipoDeOrganizacion unTipoDeOrganizacion, FuncionExterna unEventoNuevaMuestra, 
+	public Organizacion(TipoDeOrganizacion unTipoDeOrganizacion, FuncionExterna unEventoNuevaMuestra, 
 			FuncionExterna unEventoValidacionMuestra) {
 		// TODO Auto-generated constructor stub
 		tipoDeOrganizacion = unTipoDeOrganizacion;
@@ -34,12 +34,12 @@ public class OrganizacionNoGubernamental implements Observador {
 	@Override
 	public void funcionNuevaMuestra(ZonaDeCobertura unaZonaDeCobertura, Muestra unaMuestra) {
 		// TODO Auto-generated method stub
-		eventoNuevaMuestra.nuevoEvento(unaZonaDeCobertura, unaMuestra, this);
+		eventoNuevaMuestra.nuevoEvento(this, unaZonaDeCobertura, unaMuestra);
 	}
 
 	@Override
 	public void funcionValidacionMuestra(ZonaDeCobertura unaZonaDeCobertura, Muestra unaMuestra) {
 		// TODO Auto-generated method stub
-		eventoValidacionMuestra.nuevoEvento(unaZonaDeCobertura, unaMuestra, this);
+		eventoValidacionMuestra.nuevoEvento(this, unaZonaDeCobertura, unaMuestra);
 	}
 }

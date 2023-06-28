@@ -4,7 +4,7 @@ import web.muestra.Muestra;
 
 public interface FuncionExterna {
 
-	void nuevoEvento(ZonaDeCobertura unaZonaDeCobertura, Muestra unaMuestra,
-			OrganizacionNoGubernamental unaOrganizacionNoGubernamental);
+	void nuevoEvento(Organizacion unaOrganizacion, ZonaDeCobertura unaZonaDeCobertura, 
+			Muestra unaMuestra);
 
 }
