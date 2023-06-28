@@ -1,12 +1,15 @@
 package web.zona;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,144 +20,81 @@ import web.ubicacion.Ubicacion;
 public class ZonaDeCoberturaTest {
 
 	ZonaDeCobertura zonaDeCobertura;
-	ZonaDeCobertura otraZonaDeCobertura;
-	Ubicacion unaUbicacion;
-	Ubicacion otraUbicacion;
-	Muestra unaMuestra;
-	Observador unObserver;
-	Observador otroObserver;
+	ZonaDeCobertura unaZonaDeCoberturaQueSolapa;
+	ZonaDeCobertura otraZonaDeCoberturaQueSolapa;
+	ZonaDeCobertura unaZonaDeCoberturaQueNoSolapa;
+	Ubicacion unaUbicacionDeZonaDeCobertura;
+	Ubicacion unaUbicacionDeMuestraDentro;
+	Ubicacion unaUbicacionDeMuestraFuera;
+	Muestra unaMuestraDentroDeZona;
+	Muestra unaMuestraFueraDeZona;
+	ObservadorOrg unObservadorOrg;
+	ObservadorOrg otroObservadorOrg;
 
 	@Before
 	public void setUp() {
 		//DOC
-		unaUbicacion = mock(Ubicacion.class);
-		otraUbicacion = mock(Ubicacion.class);
-		unaMuestra = mock(Muestra.class);
-		otraZonaDeCobertura = mock(ZonaDeCobertura.class);
-		unObserver = mock(Observador.class);
-		otroObserver = mock(Observador.class);
+		unaUbicacionDeZonaDeCobertura = mock(Ubicacion.class);
+		unaUbicacionDeMuestraDentro = mock(Ubicacion.class);
+		unaUbicacionDeMuestraFuera = mock(Ubicacion.class);
+		
+		unaZonaDeCoberturaQueSolapa = mock(ZonaDeCobertura.class);
+		otraZonaDeCoberturaQueSolapa = mock(ZonaDeCobertura.class);
+		unaZonaDeCoberturaQueNoSolapa = mock(ZonaDeCobertura.class);
+		
+		unObservadorOrg = mock(ObservadorOrg.class);
+		otroObservadorOrg = mock(ObservadorOrg.class);
+		
+		unaMuestraDentroDeZona = mock(Muestra.class);
+		when(unaMuestraDentroDeZona.getUbicacion()).thenReturn(unaUbicacionDeMuestraDentro);
+		when(unaUbicacionDeZonaDeCobertura.distanciaEntre(unaUbicacionDeMuestraDentro)).thenReturn(9.0);
+		
+		unaMuestraFueraDeZona = mock(Muestra.class);
+		when(unaMuestraFueraDeZona.getUbicacion()).thenReturn(unaUbicacionDeMuestraFuera);
+		when(unaUbicacionDeZonaDeCobertura.distanciaEntre(unaUbicacionDeMuestraFuera)).thenReturn(11.0);
 		
 		//SUT
-		zonaDeCobertura = new ZonaDeCobertura(unaUbicacion, 10.0, "Quilmes");
+		zonaDeCobertura = new ZonaDeCobertura(unaUbicacionDeZonaDeCobertura, 10.0, "Quilmes");
 	}
 	
 	@Test
-	public void cuandoUnaZonaDeCoberturaSeCreaEsConUnaUbicacionUnRadioYUnNombreTest() {
+	public void cuandoUnaZonaDeCoberturaSeCreaEsConUnaUbicacionUnRadioUnNombreYNotieneObservadoresTest() {
 		//verify
-		assertEquals(unaUbicacion, zonaDeCobertura.getUbicacion());
+		assertEquals(unaUbicacionDeZonaDeCobertura, zonaDeCobertura.getUbicacion());
 		assertEquals(10.0, zonaDeCobertura.getRadio(), 0);
 		assertEquals("Quilmes", zonaDeCobertura.getNombre());
-	}
-	
-	@Test
-	public void cuandoUnaZonaDeCoberturaSeCreaNoTieneMuestrasNiZonasQueSolapanNiObservadoresRegistradasTest() {
-		//verify
-		assertEquals(0, zonaDeCobertura.cantidadDeMuestras());
-		assertEquals(0, zonaDeCobertura.cantidadDeZonasQueSolapan());
 		assertEquals(0, zonaDeCobertura.cantidadDeObservadores());
-	}
-
-	@Test
-	public void agregarMuestraTest() {
-		//setup
-		int cantidadDeMuestrasAntes = zonaDeCobertura.cantidadDeMuestras();
-		
-		//exercise
-		zonaDeCobertura.agregarMuestra(unaMuestra);
-		int cantidadDeMuestrasDespues = zonaDeCobertura.cantidadDeMuestras();
-		
-		//verify
-		assertEquals(0, cantidadDeMuestrasAntes);
-		assertEquals(1, cantidadDeMuestrasDespues);
 	}
 	
 	@Test
 	public void estaDentroDeZonaTest_ConUnaMuestraDentroDelRadio() {
-		//setup
-		when(unaMuestra.getUbicacion()).thenReturn(otraUbicacion);
-		when(unaUbicacion.distanciaEntre(otraUbicacion)).thenReturn(9.0);
-		
 		//exercise
-		boolean estaDentro = zonaDeCobertura.estaDentroDeZona(unaMuestra);
+		boolean estaDentro = zonaDeCobertura.estaDentroDeZona(unaMuestraDentroDeZona);
 		
 		//verify
 		assertEquals(true, estaDentro);
-		verify(unaMuestra, times(1)).getUbicacion();
-		verify(unaUbicacion, times(1)).distanciaEntre(unaMuestra.getUbicacion());
+		verify(unaMuestraDentroDeZona, times(1)).getUbicacion();
+		verify(unaUbicacionDeZonaDeCobertura, times(1)).distanciaEntre(unaMuestraDentroDeZona.getUbicacion());
 	}
 	
 	@Test
 	public void estaDentroDeZonaTest_ConUnaMuestraFueraDelRadio() {
-		//setup
-		when(unaMuestra.getUbicacion()).thenReturn(otraUbicacion);
-		when(unaUbicacion.distanciaEntre(otraUbicacion)).thenReturn(11.0);
-		
 		//exercise
-		boolean estaDentro = zonaDeCobertura.estaDentroDeZona(unaMuestra);
+		boolean estaDentro = zonaDeCobertura.estaDentroDeZona(unaMuestraFueraDeZona);
 		
 		//verify
 		assertEquals(false, estaDentro);
-		verify(unaMuestra, times(1)).getUbicacion();
-		verify(unaUbicacion, times(1)).distanciaEntre(unaMuestra.getUbicacion());
+		verify(unaMuestraFueraDeZona, times(1)).getUbicacion();
+		verify(unaUbicacionDeZonaDeCobertura, times(1)).distanciaEntre(unaMuestraFueraDeZona.getUbicacion());
 	}
 	
-	@Test
-	public void agregarZonaQueSolapaTest() {
-		//setup
-		int cantidadDeZonasAntes = zonaDeCobertura.cantidadDeZonasQueSolapan();
-		
-		//exercise
-		zonaDeCobertura.agregarZonaQueSolapa(otraZonaDeCobertura);
-		int cantidadDeZonasDespues = zonaDeCobertura.cantidadDeZonasQueSolapan();
-		List<ZonaDeCobertura> zonasQueSolapan = zonaDeCobertura.getZonasQueSolapan();
-		
-		//verify
-		assertEquals(0, cantidadDeZonasAntes);
-		assertEquals(1, cantidadDeZonasDespues);
-		assertEquals(otraZonaDeCobertura, zonasQueSolapan.get(0));
-	}
-	
-	@Test
-	public void solapaConTest_CuandoUnaZonaSolapaConOtra() {
-		//setup
-		when(otraZonaDeCobertura.getUbicacion()).thenReturn(otraUbicacion);
-		when(unaUbicacion.distanciaEntre(otraUbicacion)).thenReturn(14.0);
-		when(otraZonaDeCobertura.getRadio()).thenReturn(5.0);
-		
-		//exercise
-		boolean solapa = zonaDeCobertura.solapaCon(otraZonaDeCobertura);
-		
-		//verify
-		assertEquals(true, solapa);
-		verify(otraZonaDeCobertura, times(1)).getUbicacion();
-		verify(unaUbicacion, times(1)).distanciaEntre(otraUbicacion);
-		verify(otraZonaDeCobertura, times(1)).getRadio();
-	}
-	
-	@Test
-	public void solapaConTest_CuandoUnaZonaNoSolapaConOtra() {
-		//setup
-		when(otraZonaDeCobertura.getUbicacion()).thenReturn(otraUbicacion);
-		when(unaUbicacion.distanciaEntre(otraUbicacion)).thenReturn(16.0);
-		when(otraZonaDeCobertura.getRadio()).thenReturn(5.0);
-		
-		//exercise
-		boolean solapa = zonaDeCobertura.solapaCon(otraZonaDeCobertura);
-		
-		//verify
-		assertEquals(false, solapa);
-		verify(otraZonaDeCobertura, times(1)).getUbicacion();
-		verify(unaUbicacion, times(1)).distanciaEntre(otraUbicacion);
-		verify(otraZonaDeCobertura, times(1)).getRadio();
-	}
-
 	@Test
 	public void registrarTest_ConUnObserverInexistente() {
 		//setup
 		int observadoresAntes = zonaDeCobertura.cantidadDeObservadores();
 
 		//exercise
-		zonaDeCobertura.registrar(unObserver);
+		zonaDeCobertura.registrar(unObservadorOrg);
 		int observadoresDespues = zonaDeCobertura.cantidadDeObservadores();
 
 		//verify
@@ -165,11 +105,11 @@ public class ZonaDeCoberturaTest {
 	@Test
 	public void registrarTest_CuandoUnObserverYaExisteNoLoRegistra() {
 		//setup
-		zonaDeCobertura.registrar(unObserver);
+		zonaDeCobertura.registrar(unObservadorOrg);
 		int observadoresAntes = zonaDeCobertura.cantidadDeObservadores();
 
 		//exercise
-		zonaDeCobertura.registrar(unObserver);
+		zonaDeCobertura.registrar(unObservadorOrg);
 		int observadoresDespues = zonaDeCobertura.cantidadDeObservadores();
 
 		//verify
@@ -180,11 +120,11 @@ public class ZonaDeCoberturaTest {
 	@Test
 	public void desregistrarTest_ConUnObserverExistente() {
 		//setup
-		zonaDeCobertura.registrar(unObserver);
+		zonaDeCobertura.registrar(unObservadorOrg);
 		int observadoresAntes = zonaDeCobertura.cantidadDeObservadores();
 
 		//exercise
-		zonaDeCobertura.desregistrar(unObserver);
+		zonaDeCobertura.desregistrar(unObservadorOrg);
 		int observadoresDespues = zonaDeCobertura.cantidadDeObservadores();
 
 		//verify
@@ -195,11 +135,11 @@ public class ZonaDeCoberturaTest {
 	@Test
 	public void desregistrarTest_ConUnObserverInexistente() {
 		//setup
-		zonaDeCobertura.registrar(unObserver);
+		zonaDeCobertura.registrar(unObservadorOrg);
 		int observadoresAntes = zonaDeCobertura.cantidadDeObservadores();
 
 		//exercise
-		zonaDeCobertura.desregistrar(otroObserver);
+		zonaDeCobertura.desregistrar(otroObservadorOrg);
 		int observadoresDespues = zonaDeCobertura.cantidadDeObservadores();
 
 		//verify
@@ -208,29 +148,106 @@ public class ZonaDeCoberturaTest {
 	}
 	
 	@Test
-	public void agregarMuestraTest_SeNotificaATodosLosObservadoresRegistrados() {
+	public void notificarNuevaMuestraSiEstaDentroDeZonaTest_CuandoEstaDentroDeZona() {
 		//setup
-		zonaDeCobertura.registrar(unObserver);
+		zonaDeCobertura.registrar(unObservadorOrg);
 		
 		//exercise
-		zonaDeCobertura.agregarMuestra(unaMuestra);
+		zonaDeCobertura.notificarNuevaMuestraSiEstaDentroDeZona(unaMuestraDentroDeZona);
 		
 		//verify
-		verify(unObserver, times(1)).funcionNuevaMuestra(zonaDeCobertura, unaMuestra);
-		verify(otroObserver, times(0)).funcionNuevaMuestra(zonaDeCobertura, unaMuestra);
+		verify(unObservadorOrg, times(1)).funcionNuevaMuestra(zonaDeCobertura, unaMuestraDentroDeZona);
+		verify(unaMuestraDentroDeZona, times(1)).registrar(zonaDeCobertura);
+	}
+	
+	@Test
+	public void notificarNuevaMuestraSiEstaDentroDeZonaTest_CuandoNoEstaDentroDeZona() {
+		//setup
+		zonaDeCobertura.registrar(unObservadorOrg);
+		
+		//exercise
+		zonaDeCobertura.notificarNuevaMuestraSiEstaDentroDeZona(unaMuestraFueraDeZona);
+		
+		//verify
+		verify(unObservadorOrg, times(0)).funcionNuevaMuestra(zonaDeCobertura, unaMuestraFueraDeZona);
+		verify(unaMuestraFueraDeZona, times(0)).registrar(zonaDeCobertura);
 	}
 	
 	@Test
 	public void notificarMuestraValidadaTest_ATodosLosObservadoresRegistrados() {
 		//setup
-		zonaDeCobertura.registrar(unObserver);
+		zonaDeCobertura.registrar(unObservadorOrg);
+		zonaDeCobertura.registrar(otroObservadorOrg);
 		
 		//exercise
-		zonaDeCobertura.notificarMuestraValidada(unaMuestra);
+		zonaDeCobertura.notificarMuestraValidada(unaMuestraDentroDeZona);
 		
 		//verify
-		verify(unObserver, times(1)).funcionValidacionMuestra(zonaDeCobertura, unaMuestra);
-		verify(otroObserver, times(0)).funcionValidacionMuestra(zonaDeCobertura, unaMuestra);
+		verify(unObservadorOrg, times(1)).funcionValidacionMuestra(zonaDeCobertura, unaMuestraDentroDeZona);
+		verify(otroObservadorOrg, times(1)).funcionValidacionMuestra(zonaDeCobertura, unaMuestraDentroDeZona);
 	}
 	
+	@Test
+	public void solapaConTest_CuandoUnaZonaSolapaConOtra() {
+		//setup
+		when(unaZonaDeCoberturaQueSolapa.getUbicacion()).thenReturn(unaUbicacionDeMuestraDentro);
+		when(unaUbicacionDeZonaDeCobertura.distanciaEntre(unaUbicacionDeMuestraDentro)).thenReturn(14.0);
+		when(unaZonaDeCoberturaQueSolapa.getRadio()).thenReturn(5.0);
+		
+		//exercise
+		boolean solapa = zonaDeCobertura.solapaCon(unaZonaDeCoberturaQueSolapa);
+		
+		//verify
+		assertEquals(true, solapa);
+		verify(unaZonaDeCoberturaQueSolapa, times(1)).getUbicacion();
+		verify(unaUbicacionDeZonaDeCobertura, times(1)).distanciaEntre(unaUbicacionDeMuestraDentro);
+		verify(unaZonaDeCoberturaQueSolapa, times(1)).getRadio();
+	}
+	
+	@Test
+	public void solapaConTest_CuandoUnaZonaNoSolapaConOtra() {
+		//setup
+		when(unaZonaDeCoberturaQueNoSolapa.getUbicacion()).thenReturn(unaUbicacionDeMuestraFuera);
+		when(unaUbicacionDeZonaDeCobertura.distanciaEntre(unaUbicacionDeMuestraFuera)).thenReturn(16.0);
+		when(unaZonaDeCoberturaQueNoSolapa.getRadio()).thenReturn(5.0);
+		
+		//exercise
+		boolean solapa = zonaDeCobertura.solapaCon(unaZonaDeCoberturaQueNoSolapa);
+		
+		//verify
+		assertEquals(false, solapa);
+		verify(unaZonaDeCoberturaQueNoSolapa, times(1)).getUbicacion();
+		verify(unaUbicacionDeZonaDeCobertura, times(1)).distanciaEntre(unaUbicacionDeMuestraFuera);
+		verify(unaZonaDeCoberturaQueNoSolapa, times(1)).getRadio();
+	}
+	
+	@Test
+	public void zonasQueSolapanTest() {
+		//setup
+		when(unaZonaDeCoberturaQueSolapa.getUbicacion()).thenReturn(unaUbicacionDeMuestraDentro);
+		when(unaUbicacionDeZonaDeCobertura.distanciaEntre(unaUbicacionDeMuestraDentro)).thenReturn(14.0);
+		when(unaZonaDeCoberturaQueSolapa.getRadio()).thenReturn(5.0);
+		
+		when(otraZonaDeCoberturaQueSolapa.getUbicacion()).thenReturn(unaUbicacionDeMuestraDentro);
+		when(unaUbicacionDeZonaDeCobertura.distanciaEntre(unaUbicacionDeMuestraDentro)).thenReturn(14.0);
+		when(otraZonaDeCoberturaQueSolapa.getRadio()).thenReturn(5.0);
+		
+		when(unaZonaDeCoberturaQueNoSolapa.getUbicacion()).thenReturn(unaUbicacionDeMuestraFuera);
+		when(unaUbicacionDeZonaDeCobertura.distanciaEntre(unaUbicacionDeMuestraFuera)).thenReturn(16.0);
+		when(unaZonaDeCoberturaQueNoSolapa.getRadio()).thenReturn(5.0);
+		
+		Set<ZonaDeCobertura> zonasAEvaluar = new HashSet<>();
+		zonasAEvaluar.add(unaZonaDeCoberturaQueSolapa);
+		zonasAEvaluar.add(otraZonaDeCoberturaQueSolapa);
+		zonasAEvaluar.add(unaZonaDeCoberturaQueNoSolapa);
+		
+		//exercise
+		Set<ZonaDeCobertura> zonasResultantes = zonaDeCobertura.zonasQueSolapan(zonasAEvaluar);
+		
+		//verify
+		assertEquals(2, zonasResultantes.size());
+		assertTrue(zonasResultantes.contains(unaZonaDeCoberturaQueSolapa));
+		assertTrue(zonasResultantes.contains(otraZonaDeCoberturaQueSolapa));
+		assertFalse(zonasResultantes.contains(unaZonaDeCoberturaQueNoSolapa));
+	}
 }

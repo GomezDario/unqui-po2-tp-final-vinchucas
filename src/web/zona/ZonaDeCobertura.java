@@ -1,19 +1,18 @@
 package web.zona;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import web.muestra.Muestra;
 import web.ubicacion.Ubicacion;
 
-public class ZonaDeCobertura {
+public class ZonaDeCobertura implements ObservableOrg, ObservadorZona{
 	
 	Ubicacion ubicacion;
 	double radio; 
 	String nombre;
-	List<Muestra> muestras = new ArrayList<>();
-	List<ZonaDeCobertura> zonasQueSolapan = new ArrayList<>();
-	List<Observador> observadores = new ArrayList<>();
+	Set<ObservadorOrg> observadores = new HashSet<>();
 	
 	public ZonaDeCobertura(Ubicacion unaUbicacion, double unRadio, String unNombre) {
 		// TODO Auto-generated constructor stub
@@ -35,24 +34,53 @@ public class ZonaDeCobertura {
 		return nombre;
 	}
 	
-	public void agregarMuestra(Muestra unaMuestra) {
+	public void registrar(ObservadorOrg unObservador) {
 		// TODO Auto-generated method stub
-		muestras.add(unaMuestra);
-		this.notificarNuevaMuestra(unaMuestra);
+		observadores.add(unObservador);		
+	}
+	
+	public void desregistrar(ObservadorOrg unObservador) {
+		// TODO Auto-generated method stub
+		observadores.remove(unObservador);
+	}
+	
+	public int cantidadDeObservadores() {
+		// TODO Auto-generated method stub
+		return observadores.size();
 	}
 
 	public boolean estaDentroDeZona(Muestra unaMuestra) {
 		// TODO Auto-generated method stub
 		double distancia = this.ubicacion.distanciaEntre(unaMuestra.getUbicacion());
-		
 		return distancia <= radio;
 	}
-
-	public int cantidadDeMuestras() {
+	
+	public void notificarNuevaMuestraSiEstaDentroDeZona(Muestra unaMuestra) {
 		// TODO Auto-generated method stub
-		return muestras.size();
+		if(estaDentroDeZona(unaMuestra)) {
+			notificarNuevaMuestra(unaMuestra);
+		}
 	}
 
+	private void notificarNuevaMuestra(Muestra unaMuestra) {
+		// TODO Auto-generated method stub
+		for(ObservadorOrg observador : observadores) {
+			observador.funcionNuevaMuestra(this, unaMuestra);
+			registrarAMuestra(unaMuestra);
+		}
+	}
+	
+	private void registrarAMuestra(Muestra unaMuestra) {
+		unaMuestra.registrar(this);
+	}
+
+	public void notificarMuestraValidada(Muestra unaMuestra) {
+		// TODO Auto-generated method stub
+		for(ObservadorOrg observador : observadores) {
+			observador.funcionValidacionMuestra(this, unaMuestra);
+		}
+	}	
+	
 	public boolean solapaCon(ZonaDeCobertura otraZonaDeCobertura) {
 		// TODO Auto-generated method stub
         double distancia = ubicacion.distanciaEntre(otraZonaDeCobertura.getUbicacion());
@@ -60,53 +88,11 @@ public class ZonaDeCobertura {
         return distancia <= (this.radio + otraZonaDeCobertura.getRadio());
 	}
 
-	
-	//PREC: la zona de cobertura a agregar dada debe solapar
-	public void agregarZonaQueSolapa(ZonaDeCobertura otraZonaDeCobertura) {
-		// TODO Auto-generated method stub
-		zonasQueSolapan.add(otraZonaDeCobertura);
+	public Set<ZonaDeCobertura> zonasQueSolapan(Set<ZonaDeCobertura> zonas) {
+		Set<ZonaDeCobertura> zonasQueSolapan = zonas.stream()
+				.filter(zona -> this.solapaCon(zona))
+				.collect(Collectors.toSet());
 		
-	}
-
-	public List<ZonaDeCobertura> getZonasQueSolapan() {
-		// TODO Auto-generated method stub
 		return zonasQueSolapan;
 	}
-
-	public int cantidadDeZonasQueSolapan() {
-		// TODO Auto-generated method stub
-		return zonasQueSolapan.size();
-	}
-
-	public void registrar(Observador unObservador) {
-		// TODO Auto-generated method stub
-		if(!observadores.contains(unObservador)) {
-			observadores.add(unObservador);			
-		}
-	}
-	
-	public void desregistrar(Observador unaOrganizacionNoGubernamental) {
-		// TODO Auto-generated method stub
-		observadores.remove(unaOrganizacionNoGubernamental);
-	}
-
-	private void notificarNuevaMuestra(Muestra unaMuestra) {
-		// TODO Auto-generated method stub
-		for(Observador observador : observadores) {
-			observador.funcionNuevaMuestra(this, unaMuestra);
-		}
-	}
-
-	public void notificarMuestraValidada(Muestra unaMuestra) {
-		// TODO Auto-generated method stub
-		for(Observador observador : observadores) {
-			observador.funcionValidacionMuestra(this, unaMuestra);
-		}
-	}	
-	
-	public int cantidadDeObservadores() {
-		// TODO Auto-generated method stub
-		return observadores.size();
-	}
-	
 }

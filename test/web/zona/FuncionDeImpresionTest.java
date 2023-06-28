@@ -14,14 +14,14 @@ public class FuncionDeImpresionTest {
 	FuncionDeImpresion unaFuncionDeImpresion;
 	ZonaDeCobertura unaZonaDeCobertura;
 	Muestra unaMuestra;
-	OrganizacionNoGubernamental unaOrganizacionNoGubernamental;
+	Organizacion unaOrganizacion;
 
 	@Before
 	public void setUp() {
 		//DOC
 		unaZonaDeCobertura = mock(ZonaDeCobertura.class);
 		unaMuestra = mock(Muestra.class);
-		unaOrganizacionNoGubernamental = mock(OrganizacionNoGubernamental.class);
+		unaOrganizacion = mock(Organizacion.class);
 		
 		//SUT
 		unaFuncionDeImpresion = new FuncionDeImpresion();
@@ -30,12 +30,12 @@ public class FuncionDeImpresionTest {
 	@Test
 	public void nuevoEventoTest() {
 		//exercise
-		unaFuncionDeImpresion.nuevoEvento(unaZonaDeCobertura, unaMuestra, unaOrganizacionNoGubernamental);
+		unaFuncionDeImpresion.nuevoEvento(unaOrganizacion, unaZonaDeCobertura, unaMuestra);
 		
 		//verify
 		verify(unaZonaDeCobertura, times(1)).getNombre();
 		verify(unaMuestra, times(1)).resultadoActual();
-		verify(unaOrganizacionNoGubernamental, times(1)).getTipoDeOrganizacion();
+		verify(unaOrganizacion, times(1)).getTipoDeOrganizacion();
 	}
 
 }

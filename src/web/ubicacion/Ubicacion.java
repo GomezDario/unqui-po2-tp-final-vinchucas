@@ -2,6 +2,11 @@ package web.ubicacion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import web.muestra.Muestra;
+import web.zona.ZonaDeCobertura;
 
 public class Ubicacion {
 
@@ -59,5 +64,15 @@ public class Ubicacion {
 		}
 		
 		return ubicacionesCerca;
+	}
+
+	public List<Muestra> muestrasAMenosDe(double i, Muestra unaMuestra, List<Muestra> muestrasAEvaluar) {
+		// TODO Auto-generated method stub
+		List<Muestra> muestrasAMenos = muestrasAEvaluar.stream()
+				.filter(muestra -> unaMuestra.getUbicacion()
+						.distanciaEntre(muestra.getUbicacion()) < i)
+				.collect(Collectors.toList());
+		
+		return muestrasAMenos;
 	}
 }

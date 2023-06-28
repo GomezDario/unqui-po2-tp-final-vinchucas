@@ -7,6 +7,7 @@ import web.opinion.Opinion;
 import web.opinion.TipoDeOpinion;
 import web.ubicacion.Ubicacion;
 import web.usuario.Usuario;
+import web.zona.ZonaDeCobertura;
 
 public class Muestra {
 	
@@ -100,6 +101,11 @@ public class Muestra {
 	public boolean estaVerificada() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public void registrar(ZonaDeCobertura zonaDeCobertura) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
