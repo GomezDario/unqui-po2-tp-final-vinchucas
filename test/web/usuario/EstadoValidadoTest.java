@@ -18,7 +18,7 @@ class EstadoValidadoTest {
 	Usuario user;
     Usuario user1;
   
- 
+  
 
     EstadoBasico tipoBasico;
     EstadoExperto tipoExperto;
@@ -71,10 +71,19 @@ class EstadoValidadoTest {
 	    user1.setMuestras(muestras);
 	    
 	    
-	    tipoValidado.updateUsuario(user1);
+	    tipoValidado.nivelarUsuario(user1);
 	    
 	    assertTrue(user1.getEstado() instanceof EstadoValidado);
 		
+		
+	}
+	
+	@Test
+	
+	void unUsuarioValidadoEsUnTipoDeExperto() {
+		
+		tipoValidado.nivelarUsuario(user1);
+		assertTrue(user1.esExperto());
 		
 	}
 	

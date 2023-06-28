@@ -4,6 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import web.muestra.Muestra;
+<<<<<<< HEAD
+=======
+import web.usuario.Usuario;
+import web.zona.AdministradorZona;
+>>>>>>> branch 'main' of https://github.com/GomezDario/unqui-po2-tp-final-vinchucas.git
 import web.zona.ZonaDeCobertura;
 import web.opinion.Opinion;
 import web.usuario.Usuario;
@@ -13,6 +18,12 @@ public class Web {
 	Set<ZonaDeCobertura> zonasDeCobertura = new HashSet<>();
 	Set<Usuario> usuarios = new HashSet<>();
 	Set<Muestra> muestras = new HashSet<>();
+
+
+	public void agregarNuevaZonaDeCobertura(ZonaDeCobertura unaZonaDeCobertura) {
+		// TODO Auto-generated method stub
+		administradorZona.agregarZona(unaZonaDeCobertura);
+	}
 
 	public void agregarNuevaMuestra(Muestra unaMuestra) {
 		// TODO Auto-generated method stub
@@ -34,7 +45,7 @@ public class Web {
 	public void agregarNuevaZonaDeCobertura(ZonaDeCobertura unaZonaDeCobertura) {
 		// TODO Auto-generated method stub
 		if(!zonasDeCobertura.contains(unaZonaDeCobertura)) {
-			zonasDeCobertura.add(unaZonaDeCobertura);			
+			zonasDeCobertura.add(unaZonaDeCobertura);		
 		}
 	}
 	

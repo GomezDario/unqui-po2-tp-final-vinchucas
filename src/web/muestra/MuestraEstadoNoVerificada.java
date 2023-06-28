@@ -14,13 +14,14 @@ public class MuestraEstadoNoVerificada implements  MuestraEstado
 		
 	}
 	
-	public TipoDeOpinion resultadoActual(Muestra muestra) 
+	@Override
+    public TipoDeOpinion resultadoActual(Muestra muestra) 
     {
     	 Map<TipoDeOpinion, Integer> frecuencias = new HashMap<>();
     	
     	 for (Opinion opinion : muestra.getlistaDeOpiniones()) 
     	 {
-             frecuencias.put(opinion.getTipoDeOpinion(), frecuencias.getOrDefault(opinion.getTipoDeOpinion(), 0) + 1);
+             frecuencias.put(opinion.getTipo(), frecuencias.getOrDefault(opinion.getTipo(), 0) + 1);
          }
 
          // Encuentra el elemento con el recuento de frecuencia máximo
@@ -57,14 +58,9 @@ public class MuestraEstadoNoVerificada implements  MuestraEstado
 		
 	}
 
-	@Override
-	public TipoDeOpinion resultadoActual(ArrayList<Opinion> listaDeOpiniones) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
    
     
     
 }
+

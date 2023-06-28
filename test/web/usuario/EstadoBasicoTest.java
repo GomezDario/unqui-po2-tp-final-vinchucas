@@ -33,18 +33,6 @@ class EstadoBasicoTest {
         estadoBasico = new EstadoBasico();    
 	}
 	
-//	@Test
-//	void updateUsuarioTest_CuandoCumple() {
-//		//setup
-//		when(unUsuario.cantidadDeMuestrasAMenosDeTreintaDias()).thenReturn(10);
-//		when(unUsuario.cantidadDeOpinionesAMenosDeTreintaDias()).thenReturn(20);
-//		
-//		//exercise
-//		estadoBasico.updateUsuario(unUsuario);
-//		
-//		//verify
-//		verify(unUsuario, times(1)).setEstado(unEstadoExperto);
-//	}
 	
 	@Test
 	void usuarioBasicoNocumpleCondicionDeExpertoTest() {
@@ -71,15 +59,16 @@ class EstadoBasicoTest {
 	     otroUsuario.setOpiniones(opiniones);
 	     otroUsuario.setMuestras(muestras);
 		 
-         estadoBasico.updateUsuario(otroUsuario);
+         estadoBasico.nivelarUsuario(otroUsuario);
          assertFalse(estadoBasico.puedeSerExperto(otroUsuario));
+         assertFalse(otroUsuario.esExperto());
 		 
 	 }
 	 
 	 
 	 
 	@Test 
-	void actualizarUsuarioTest() {
+	void nivelarUsuarioTestTest() {
 		 
 		
 		// TEST DE UN USUARIO CON 21 OPINIONES, Y 11 MUESTRAS. CUMPLE CONDICION PARA SER EXPERTO
@@ -122,13 +111,13 @@ class EstadoBasicoTest {
 	
 		    
 
-		    estadoBasico.updateUsuario(otroUsuario);
+		    estadoBasico.nivelarUsuario(otroUsuario);
 		    
 		    assertTrue(estadoBasico.puedeSerExperto(otroUsuario));
 		    assertTrue(otroUsuario.getEstado() instanceof EstadoExperto);
 	    	
 
-		    
+		     
 	    } 
 	
 	@Test
@@ -159,8 +148,9 @@ class EstadoBasicoTest {
 		    otroUsuario.setMuestras(muestras);
 		
 		    
-		    estadoBasico.updateUsuario(otroUsuario);
+		    estadoBasico.nivelarUsuario(otroUsuario);
 		    assertTrue(otroUsuario.getEstado() instanceof EstadoBasico);
+		    assertFalse(otroUsuario.esExperto());
 		    
 		
 		
