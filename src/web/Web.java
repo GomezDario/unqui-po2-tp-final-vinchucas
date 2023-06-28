@@ -2,24 +2,25 @@ package web;
 
 import web.muestra.AdministradorMuestra;
 import web.muestra.Muestra;
-import web.usuario.AdministradorUsuario;
+import web.usuario.Usuario;
 import web.zona.AdministradorZona;
 import web.zona.ZonaDeCobertura;
 import web.opinion.Opinion;
 
 public class Web {
 
-	AdministradorUsuario administradorUsuario;
+	Usuario usuario;
 	AdministradorMuestra administradorMuestra;
 	AdministradorZona administradorZona;
 	
-	public Web(AdministradorUsuario unAdministradorUsuario, AdministradorMuestra unAdministradorMuestra,
+	public Web(Usuario unUsuario, AdministradorMuestra unAdministradorMuestra,
 			AdministradorZona unAdministradorZona) {
 		// TODO Auto-generated constructor stub
-		administradorUsuario = unAdministradorUsuario;
+		usuario = unUsuario;
 		administradorMuestra = unAdministradorMuestra;
 		administradorZona = unAdministradorZona;
 	}
+
 
 	public void agregarNuevaZonaDeCobertura(ZonaDeCobertura unaZonaDeCobertura) {
 		// TODO Auto-generated method stub
@@ -29,7 +30,7 @@ public class Web {
 	public void agregarNuevaMuestra(Muestra unaMuestra) {
 		// TODO Auto-generated method stub
 		administradorMuestra.agregarMuestra(unaMuestra);
-		administradorUsuario.agregarMuestra(unaMuestra);
+		usuario.agregarMuestra(unaMuestra);
 		administradorZona.agregarMuestra(unaMuestra);
 	}
 
@@ -38,7 +39,7 @@ public class Web {
 		Muestra muestra = unaOpinion.getMuestra();
 		boolean muestraVerificada = muestra.estaVerificada();
 		if(administradorMuestra.agregarOpinion(unaOpinion)) {
-			administradorUsuario.agregarOpinion(unaOpinion);
+			usuario.agregarOpinion(unaOpinion);
 			if(!muestraVerificada) {
 				if(muestra.estaVerificada()) {
 					administradorZona.muestraValidada(muestra);
