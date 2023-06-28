@@ -17,7 +17,7 @@ public class Usuario {
 	public Usuario(String nombre) {
 		this.nombre = nombre;
 		this.estado = new EstadoBasico();
-		this.muestras  = new ArrayList<Muestra>();
+		this.muestras  = new ArrayList<Muestra>(); 
 		this.opiniones = new ArrayList<Opinion>();
 	}
 
@@ -90,14 +90,14 @@ public class Usuario {
 
 	public void agregarOpinion(Opinion opinion) {
 		opiniones.add(opinion);
-		this.getEstado().updateUsuario(this);
+		this.getEstado().nivelarUsuario(this);
 		
 	}
 	
 	public void agregarMuestra(Muestra muestra) {
 		
 		muestras.add(muestra);
-		this.getEstado().updateUsuario(this);
+		this.getEstado().nivelarUsuario(this);
 	}
 	
 	public void validacionExterna() {
@@ -121,39 +121,6 @@ public class Usuario {
 		return estado.esExperto();
 	}
 
-//	public Integer cantidadDeMuestrasAMenosDeTreintaDias() {
-//		// TODO Auto-generated method stub
-//		LocalDate fechaActual = LocalDate.now();
-//		List<Muestra> muestrasAMenos = new ArrayList<>();
-//		
-//		for (Muestra muestra : muestras) {
-//            long diferenciaDias = ChronoUnit.DAYS.between(muestra.getFecha(), fechaActual);
-//            if (diferenciaDias < 30) {
-//                muestrasAMenos.add(muestra);
-//            }
-//        }
-//		
-//		return muestrasAMenos.size();
-//	}
-//
-//	public Integer cantidadDeOpinionesAMenosDeTreintaDias() {
-//		// TODO Auto-generated method stub
-//		LocalDate fechaActual = LocalDate.now();
-//		List<Opinion> opinionesAMenos = new ArrayList<>();
-//		
-//		for (Opinion opinion : opiniones) {
-//            long diferenciaDias = ChronoUnit.DAYS.between(opinion.getFecha(), fechaActual);
-//            if (diferenciaDias < 30) {
-//            	opinionesAMenos.add(opinion);
-//            }
-//        }
-//		
-//		return opinionesAMenos.size();
-//	}
-	
-	
-	
-	
-	
+		
 	
 }
