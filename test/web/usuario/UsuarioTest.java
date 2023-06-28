@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +26,7 @@ class UsuarioTest {
 	@BeforeEach
 	void setUp() {
 		//setup
-		estado = mock(EstadoUsuario.class);
+		estado =  new EstadoBasico();
 		unaOpinion = mock(Opinion.class);
 		unaMuestra = mock(Muestra.class);
 		
@@ -39,10 +41,10 @@ class UsuarioTest {
 		assertEquals(usuario.getNombre(), "Gabriel Gomez");
 	}
 	
-//	@Test
-//	void getEstadoTest() {
-//		assertEquals(usuario.getEstado(), estado);
-//	}
+	@Test
+	void getEstadoTest() {
+		assertTrue(usuario.getEstado() instanceof EstadoBasico);
+	}
 	
 	@Test
 	void getRegistroOpinionesTest() {
@@ -63,7 +65,7 @@ class UsuarioTest {
 		assertEquals(usuario.getNombre(), "Gabi");
 	}
 	
-	
+	 
 	@Test
 	void setTipoTest() {
 		EstadoUsuario estadoUserNuevo = mock(EstadoUsuario.class);
@@ -120,83 +122,83 @@ class UsuarioTest {
 		assertEquals(1, opinionesDespues);
 	}
 	
-	
-	
+	 
+	@Test
 	void agregarMuestraTest_SiendoLaPrimerMuestra() {
 		//setup
-		int muestrasAntes = usuario.cantidadDeMuestras();
+		int muestrasAntes = usuario.cantidadDeMuestras(); 
 		
 		//exercise
 		usuario.agregarOpinion(unaOpinion);
-		int muestrasDespues = usuario.cantidadDeMuestras();
+		int muestrasDespues = usuario.cantidadDeOpiniones();
 		
 		//verify
 		assertEquals(0, muestrasAntes);
 		assertEquals(1, muestrasDespues);
 	}
+
 	
-//	void cuandoUnUsuarioBasicoLLegaADiezMuestrasYVeinteRevisionesEnLosUltimosTreintaDiasSuEstadoCambiaAExperto() {
-//		//setup
-//		boolean esExpertoAntes = usuario.esExperto();
-//		
-//		//exercise
-//		for (int i = 0; i < 10; i++) {
-//			usuario.agregarMuestra(unaMuestra);
-//		}
-//		for (int i = 0; i < 20; i++) {
-//			usuario.agregarOpinion(unaOpinion);
-//		}
-//		boolean esExpertoDespues = usuario.esExperto();
-//		
-//		//verify
-//		assertEquals(10, usuario.cantidadDeMuestras());
-//		assertEquals(10, usuario.cantidadDeMuestrasAMenosDeTreintaDias());
-//		assertEquals(20, usuario.cantidadDeOpiniones());
-//		assertEquals(20, usuario.cantidadDeOpinionesAMenosDeTreintaDias());
-//		assertEquals(false, esExpertoAntes);
-//		assertEquals(true, esExpertoDespues);
-//		verify(usuario.getEstado(), times(2)).esExperto();
-//	}
+	@Test
+	void testFechaDeOpiniones() {
+		
+		Opinion opinion1 = mock(Opinion.class);
+        Opinion opinion2 = mock(Opinion.class);
+        ArrayList<Opinion> opiniones = new ArrayList<Opinion>();
+        
+        opiniones.add(opinion1);
+        opiniones.add(opinion2);
+        
+        LocalDate fecha1 = LocalDate.of(2023, 6, 28);
+        LocalDate fecha2 = LocalDate.of(2023, 6, 29);
+        when(opinion1.getFecha()).thenReturn(fecha1);
+        when(opinion2.getFecha()).thenReturn(fecha2);
+        
+        ArrayList<LocalDate> fechas = usuario.fechasDeOpiniones(opiniones);
+
+        ArrayList<LocalDate> fechasEsperadas = new ArrayList<LocalDate>();
+        fechasEsperadas.add(fecha1);
+        fechasEsperadas.add(fecha2);
+        
+        assertEquals(fechasEsperadas, fechas);
+		
+	}
 	
 	
+	@Test
 	void testFechaDeMuestras() {
 		
 		
-		usuario.agregarMuestra(mock(Muestra.class));
-		usuario.agregarMuestra(mock(Muestra.class));
-		usuario.agregarMuestra(mock(Muestra.class));
-		
-		ArrayList<Muestra> muestras = usuario.getMuestras();
-		
-		
-        usuario.fechasDeMuestrasPublicadas(usuario.getMuestras());
-		
-        assertEquals(usuario.getMuestras().size(), 3);
+		Muestra muestra1 = mock(Muestra.class);
+        Muestra muestra2 = mock(Muestra.class);
+        ArrayList<Muestra> muestras = new ArrayList<Muestra>();
         
-        for (Muestra muestra : muestras) {
-            verify(muestra, times(1)).getFecha();
-        }
-	
+        muestras.add(muestra1);
+        muestras.add(muestra2);
         
+        LocalDate fecha1 = LocalDate.of(2023, 6, 28);
+        LocalDate fecha2 = LocalDate.of(2023, 6, 29);
+        when(muestra1.getFecha()).thenReturn(fecha1);
+        when(muestra2.getFecha()).thenReturn(fecha2);
+        
+        ArrayList<LocalDate> fechas = usuario.fechasDeMuestrasPublicadas(muestras);
+
+        ArrayList<LocalDate> fechasEsperadas = new ArrayList<LocalDate>();
+        fechasEsperadas.add(fecha1);
+        fechasEsperadas.add(fecha2);
+        
+        assertEquals(fechasEsperadas, fechas);
+		
+		
 	}
 	
-	void testFechaDeOpiniones() {
-		
-		usuario.agregarOpinion(mock(Opinion.class));
-		usuario.agregarOpinion(mock(Opinion.class));
-		usuario.agregarOpinion(mock(Opinion.class));
-		
-		ArrayList<Opinion> opiniones = usuario.getOpiniones();
-		
-		usuario.fechasDeOpiniones(usuario.getOpiniones());
-		
-		assertEquals(usuario.getOpiniones().size(), 3);
-		
-		for (Opinion opinion : opiniones) {
-            verify(opinion, times(1)).getFecha();
-        }
-		
-	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

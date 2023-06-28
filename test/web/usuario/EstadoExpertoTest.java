@@ -64,7 +64,7 @@ class EstadoExpertoTest {
 		    user1.setOpiniones(opiniones);
 		    user1.setMuestras(muestras);
 		    
-		    tipoExperto.updateUsuario(user1);
+		    tipoExperto.nivelarUsuario(user1);
 		    assertTrue(tipoExperto.puedeSerExperto(user1));
 		    
 		    
@@ -96,13 +96,14 @@ class EstadoExpertoTest {
 	        Muestra muestra = mock(Muestra.class);
 	        when(muestra.getFecha()).thenReturn(fechaActual);
 	        muestras.add(muestra);
-	    }
+	    } 
 	    
 	    user1.setOpiniones(opiniones);
 	    user1.setMuestras(muestras);
 		
 	    
 	    assertFalse(tipoExperto.puedeSerExperto(user1));
+	    assertFalse(user1.esExperto());
 		
 		
 	}
@@ -136,9 +137,10 @@ class EstadoExpertoTest {
 	    user1.setOpiniones(opiniones);
 	    user1.setMuestras(muestras);
 		
-	    tipoExperto.updateUsuario(user1);
+	    tipoExperto.nivelarUsuario(user1);
 	   
 	    assertTrue(user1.getEstado() instanceof EstadoBasico);
+	    assertFalse(user1.esExperto());
 	    
 		
 		
@@ -174,12 +176,14 @@ class EstadoExpertoTest {
 	    user1.setOpiniones(opiniones);
 	    user1.setMuestras(muestras);
 		
-	    tipoExperto.updateUsuario(user1);
+	    tipoExperto.nivelarUsuario(user1);
 	   
 	    assertTrue(user1.getEstado() instanceof EstadoExperto);
-		
+	    assertTrue(user1.esExperto());
 		
 	}
+	
+	
 	
 	
 	
