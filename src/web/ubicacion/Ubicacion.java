@@ -2,11 +2,9 @@ package web.ubicacion;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import web.muestra.Muestra;
-import web.zona.ZonaDeCobertura;
 
 public class Ubicacion {
 
