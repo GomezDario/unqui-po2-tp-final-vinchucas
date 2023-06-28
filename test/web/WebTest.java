@@ -1,11 +1,5 @@
 package web;
 
-import web.administradorMuestra.AdministradorMuestra;
-import web.administradorMuestra.Muestra;
-import web.administradorUsuario.AdministradorUsuario;
-import web.administradorZona.*;
-import web.extras.Opinion;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -13,6 +7,13 @@ import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import web.muestra.AdministradorMuestra;
+import web.muestra.Muestra;
+import web.opinion.Opinion;
+import web.usuario.AdministradorUsuario;
+import web.zona.AdministradorZona;
+import web.zona.ZonaDeCobertura;
 
 public class WebTest {
 	
@@ -41,7 +42,7 @@ public class WebTest {
 	@Test
 	public void agregarNuevaZonaTest() {
 		//exercise
-		web.agregarNuevaZona(unaZonaDeCobertura);
+		web.agregarNuevaZonaDeCobertura(unaZonaDeCobertura);
 		
 		//verify
 		verify(unAdministradorZona, times(1)).agregarZona(unaZonaDeCobertura);
