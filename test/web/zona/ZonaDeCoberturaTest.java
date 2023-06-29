@@ -250,4 +250,5 @@ public class ZonaDeCoberturaTest {
 		assertTrue(zonasResultantes.contains(otraZonaDeCoberturaQueSolapa));
 		assertFalse(zonasResultantes.contains(unaZonaDeCoberturaQueNoSolapa));
 	}
+	
 }

@@ -4,6 +4,6 @@ import java.time.LocalDate;
 
 public interface ComparadorFechas {
 
-	boolean compararEntre(LocalDate ultimaVotacion, LocalDate fecha);
-
+	boolean compararEntre(LocalDate unaFecha, LocalDate otraFecha);
+	
 } 

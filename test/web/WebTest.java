@@ -113,10 +113,8 @@ public class WebTest {
 	}
 	
 	@Test
-	public void agregarOpinion() throws Exception 
-	{
+	public void agregarOpinion() throws Exception {
 		//setup
-		setUp();
 		when(unaOpinion.getUsuario()).thenReturn(unUsuario);
 		when(unaOpinion.getMuestra()).thenReturn(unaMuestra);
 		
@@ -125,8 +123,5 @@ public class WebTest {
 		
 		//verify
 		verify(unaMuestra).agregarOpinion(unaOpinion);;
-		
-	
-		
 	}
 }

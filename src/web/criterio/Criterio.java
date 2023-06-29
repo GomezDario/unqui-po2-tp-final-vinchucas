@@ -9,5 +9,4 @@ public interface Criterio {
 
 	 public List<Muestra> buscarEn(ArrayList<Muestra> muestras); 
 	
-	 
 }

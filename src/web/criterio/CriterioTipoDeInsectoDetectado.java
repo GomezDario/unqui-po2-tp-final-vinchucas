@@ -27,14 +27,11 @@ public class CriterioTipoDeInsectoDetectado implements Criterio {
 	public List<Muestra> buscarEn(ArrayList<Muestra> muestras){
 		
     	List<Muestra> resultado = muestras.stream()
-    			
     			.filter(m-> m.resultadoActual().equals(this.getTipoABuscar()))
     			.collect(Collectors.toList());
     	
     	return resultado;
     	
     }
-	
-	
 	
 }

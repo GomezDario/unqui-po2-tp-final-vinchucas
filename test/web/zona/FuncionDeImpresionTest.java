@@ -33,9 +33,9 @@ public class FuncionDeImpresionTest {
 		unaFuncionDeImpresion.nuevoEvento(unaOrganizacion, unaZonaDeCobertura, unaMuestra);
 		
 		//verify
+		verify(unaOrganizacion, times(1)).getTipoDeOrganizacion();
 		verify(unaZonaDeCobertura, times(1)).getNombre();
 		verify(unaMuestra, times(1)).resultadoActual();
-		verify(unaOrganizacion, times(1)).getTipoDeOrganizacion();
 	}
 
 }

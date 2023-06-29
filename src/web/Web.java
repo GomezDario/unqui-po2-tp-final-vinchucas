@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import web.muestra.Muestra;
-
-
 import web.zona.ZonaDeCobertura;
 import web.opinion.Opinion;
 import web.usuario.Usuario;
@@ -15,8 +13,6 @@ public class Web {
 	Set<ZonaDeCobertura> zonasDeCobertura = new HashSet<>();
 	Set<Usuario> usuarios = new HashSet<>();
 	Set<Muestra> muestras = new HashSet<>();
-
-
 
 	public void agregarNuevaMuestra(Muestra unaMuestra) {
 		// TODO Auto-generated method stub
@@ -28,19 +24,11 @@ public class Web {
 		}
 	}
 	
-
-
 	public void agregarNuevaOpinion(Opinion unaOpinion) throws Exception {
-		
-		
 		Muestra muestra = unaOpinion.getMuestra();
 		muestra.agregarOpinion(unaOpinion);
 		Usuario unUsuario = unaOpinion.getUsuario();
 		unUsuario.agregarOpinion(unaOpinion); // agregarle una precondicion 
-		
-		
-		
-		
 	}
 	
 	//ZONAS

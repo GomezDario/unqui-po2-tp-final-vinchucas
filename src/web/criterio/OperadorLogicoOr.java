@@ -1,35 +1,22 @@
 package web.criterio;
 
-import java.util.List; 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
+
 import web.muestra.*;
 
 public class OperadorLogicoOr implements OperadorLogico {
 	
 	public List<Muestra> juntarArrays(List<Muestra> xs, List<Muestra> ys){
 		
-        for(int i = 0;i<ys.size();i++){
-        	
-            this.agregarSiNoEsta(xs,ys.get(i));
-            
-        }
+        Set<Muestra> union = new HashSet<>();        
+        union.addAll(xs);
+        union.addAll(ys);
         
-        return xs;
+        List<Muestra> list = new ArrayList<>(union);
+        
+        return list;
     }
-	
-	public void agregarSiNoEsta(List<Muestra> array, Muestra m) {
-	    
-		boolean estaPresente = false;
-	    for (Muestra muestra : array) {
-	        if (muestra.equals(m)) {
-	            estaPresente = true;
-	            break;
-	        }
-	    }
-	    
-	    if (!estaPresente) {
-	        array.add(m);
-	    }
-	}
-	
-
 }

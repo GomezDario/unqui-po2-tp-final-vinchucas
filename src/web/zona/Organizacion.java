@@ -42,4 +42,5 @@ public class Organizacion implements ObservadorOrg {
 		// TODO Auto-generated method stub
 		eventoValidacionMuestra.nuevoEvento(this, unaZonaDeCobertura, unaMuestra);
 	}
+	
 }
