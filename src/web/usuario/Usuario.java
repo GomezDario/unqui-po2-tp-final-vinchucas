@@ -89,7 +89,8 @@ public class Usuario {
 	
 
 	public void agregarOpinion(Opinion opinion) {
-		
+
+		this.opiniones.add(opinion);
 		this.getEstado().nivelarUsuario(this);
 		
 		
