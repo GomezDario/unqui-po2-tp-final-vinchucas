@@ -1,8 +1,6 @@
 package web.muestra;
 
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import web.opinion.Opinion;
 import web.opinion.TipoDeOpinion;
@@ -16,12 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-
-
-
 
 public class MuestraEstadoNoVerificadaTest 
 {

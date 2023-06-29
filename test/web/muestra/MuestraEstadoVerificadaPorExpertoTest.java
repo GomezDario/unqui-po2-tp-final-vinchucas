@@ -6,22 +6,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import web.opinion.Opinion;
 import web.opinion.TipoDeOpinion;
 import web.ubicacion.Ubicacion;
 import web.usuario.Usuario;
-
-
-
-
-
 
 public class MuestraEstadoVerificadaPorExpertoTest 
 {

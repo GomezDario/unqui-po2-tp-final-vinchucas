@@ -28,7 +28,7 @@ public class Web {
 		Muestra muestra = unaOpinion.getMuestra();
 		muestra.agregarOpinion(unaOpinion);
 		Usuario unUsuario = unaOpinion.getUsuario();
-		unUsuario.agregarOpinion(unaOpinion); // agregarle una precondicion 
+		unUsuario.agregarOpinion(unaOpinion);
 	}
 	
 	//ZONAS

@@ -16,7 +16,7 @@ public class MuestraEstadoNoVerificada implements  MuestraEstado, ObservableZona
 		
 	}
 	
-	ArrayList<ObservadorZona> zonasObservadoras = new ArrayList();
+	ArrayList<ObservadorZona> zonasObservadoras = new ArrayList<>();
 	
 	@Override
     public TipoDeOpinion resultadoActual(Muestra muestra) 
@@ -66,7 +66,7 @@ public class MuestraEstadoNoVerificada implements  MuestraEstado, ObservableZona
 			
 			for (ObservadorZona zona : this.zonasObservadoras )
 			{
-				zona.notificarMuestraValidada(muestra);;
+				zona.notificarMuestraValidada(muestra);
 			}
 		
 		}

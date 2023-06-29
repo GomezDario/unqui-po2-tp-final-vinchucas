@@ -1,22 +1,14 @@
 package web.muestra;
 
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
 import web.opinion.Opinion;
 import web.opinion.TipoDeOpinion;
 import web.ubicacion.Ubicacion;
 import web.usuario.Usuario;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
-import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 
-import static org.mockito.Mockito.verify;
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
