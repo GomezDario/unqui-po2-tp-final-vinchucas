@@ -106,35 +106,37 @@ class UsuarioTest {
 		
 		assertTrue(usuario.getEstado() instanceof EstadoExperto);
 		
-	}
+	} 
 	
 	@Test
-	void agregarOpinionTest_SiendoLaPrimerOpinion() {
-		//setup
-		int opinionesAntes = usuario.cantidadDeOpiniones();
-		
-		//exercise
-		usuario.agregarOpinion(unaOpinion);
-		int opinionesDespues = usuario.cantidadDeOpiniones();
-		
-		//verify
-		assertEquals(0, opinionesAntes);
-		assertEquals(1, opinionesDespues);
+	void agregarOpinionTest_SiendoLaPrimerOpinion(){
+		// Crear una muestra mock
+        Opinion opinionMock = mock(Opinion.class);
+
+        // Agregar la muestra mock al usuario
+        usuario.agregarOpinion(opinionMock);
+
+        // Verificar que la muestra se agregó correctamente a la lista de muestras del usuario
+        ArrayList<Opinion> opiniones = usuario.getOpiniones();
+        assertEquals(1, opiniones.size());
+        assertTrue(opiniones.contains(opinionMock));
+        
 	}
 	
-	 
 	@Test
 	void agregarMuestraTest_SiendoLaPrimerMuestra() {
-		//setup
-		int muestrasAntes = usuario.cantidadDeMuestras(); 
-		
-		//exercise
-		usuario.agregarOpinion(unaOpinion);
-		int muestrasDespues = usuario.cantidadDeOpiniones();
-		
-		//verify
-		assertEquals(0, muestrasAntes);
-		assertEquals(1, muestrasDespues);
+	
+        // Crear una muestra mock
+        Muestra muestraMock = mock(Muestra.class);
+
+        // Agregar la muestra mock al usuario
+        usuario.agregarMuestra(muestraMock);
+
+        // Verificar que la muestra se agregó correctamente a la lista de muestras del usuario
+        ArrayList<Muestra> muestras = usuario.getMuestras();
+        assertEquals(1, muestras.size());
+        assertTrue(muestras.contains(muestraMock));
+
 	}
 
 	
