@@ -107,7 +107,12 @@ public class Muestra {
 	}
 
 	public void registrar(ZonaDeCobertura zonaDeCobertura) {
-		// TODO Auto-generated method stub
+
+	}
+	
+	public boolean  esteUsuarioYaOpino(Usuario usuario) {
+		
+		return listaDeOpiniones.stream().anyMatch(opinion -> opinion.getUsuario().equals(usuario));
 		
 	}
 }

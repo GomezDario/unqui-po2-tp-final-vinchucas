@@ -13,6 +13,7 @@ import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -123,5 +124,32 @@ public class MuestraEstadoNoVerificadaTest
 		
 	    verify(muestra).cambiarEstado(Mockito.any(MuestraEstadoVerificadaPorExperto.class));
 
+	}
+	
+	@Test
+	public void usuarioIntentaOpinarDosVeces() throws Exception
+	{
+		this.setUp();
+		
+		
+		
+		when(muestra.getlistaDeOpiniones()).thenReturn(listaDeOpinionesTest);  
+		
+		when(opinion2.getTipoDeOpinion()).thenReturn(TipoDeOpinion.IMAGENPOCOCLARA);
+		
+		when(opinion2.getUsuario()).thenReturn(usuario); 
+		
+		listaDeOpinionesTest.add(opinion2);
+		
+		when(opinion2.getUsuario().esExperto()).thenReturn(true); 
+		
+		when(opinion1.getUsuario()).thenReturn(usuario); 
+		
+		when(opinion1.getUsuario().esExperto()).thenReturn(true); 
+		
+		when(muestra.esteUsuarioYaOpino(usuario)).thenReturn(true);
+		
+		assertThrows(Exception.class, () -> estado.agregarOpinion(opinion1, muestra));
+		
 	}
 }

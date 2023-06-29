@@ -45,6 +45,7 @@ public class MuestraTest
 		this.estado = mock(MuestraEstadoNoVerificada.class);
 		this.opinion1 = mock(Opinion.class);
 		this.opinion2 = mock(Opinion.class);
+	
 		this.ubicacion = mock(Ubicacion.class);
 		
 		muestra = new Muestra(ubicacion, "test.jpg", opinion1, usuario);
@@ -60,17 +61,19 @@ public class MuestraTest
 	{
 		setUp();
 		
+		when(opinion1.getUsuario()).thenReturn(usuario);
 		when(usuario.esExperto()).thenReturn(false);
-	    when(opinion2.getUsuario()).thenReturn(usuario);
+	    when(opinion2.getUsuario()).thenReturn(usuario2);
+	    when(usuario2.esExperto()).thenReturn(true);
+	    
 
-	    muestra.agregarOpinion(opinion2);
+	    
 	    
 	    assert muestra.getEstado() instanceof MuestraEstadoNoVerificada;
 		
-	    when(usuario.esExperto()).thenReturn(true);
-	    when(opinion1.getUsuario()).thenReturn(usuario);
+	   
 
-	    muestra.agregarOpinion(opinion1);
+	    muestra.agregarOpinion(opinion2);
 
 	    assert muestra.getEstado() instanceof MuestraEstadoVerificadaPorExperto;
 	    
@@ -81,17 +84,24 @@ public class MuestraTest
 	@Test
 	public void exceptCuandoUnUsuarioNoPuedeOpinar() throws Exception 
 	{
+		
 		setUp();
 		
+		
+		
 		when(usuario.esExperto()).thenReturn(true);
-	    when(opinion1.getUsuario()).thenReturn(usuario);
+		when(opinion1.getUsuario()).thenReturn(usuario);
+	    
+	    when(usuario2.esExperto()).thenReturn(false);
+	    when(opinion2.getUsuario()).thenReturn(usuario2);
 
-	    muestra.agregarOpinion(opinion1);
+	    muestra = new Muestra(ubicacion, "test.jpg", opinion1, usuario);
+	    
+	   
 
 	    assert muestra.getEstado() instanceof MuestraEstadoVerificadaPorExperto;
 	    
-	    when(usuario.esExperto()).thenReturn(false);
-	    when(opinion2.getUsuario()).thenReturn(usuario);
+	   
 
 	    
 	    org.junit.jupiter.api.Assertions.assertThrows(Exception.class, () -> muestra.agregarOpinion(opinion2));
@@ -121,7 +131,7 @@ public class MuestraTest
 		
 		
 		when(opinion2.getTipoDeOpinion()).thenReturn(TipoDeOpinion.PHTIA_CHINCHE);
-		when(opinion2.getUsuario()).thenReturn(usuario);
+		when(opinion2.getUsuario()).thenReturn(usuario2);
 		muestra.agregarOpinion(opinion2);
 		
 		assertEquals(muestra.resultadoActual(), TipoDeOpinion.NODEFINIDO);

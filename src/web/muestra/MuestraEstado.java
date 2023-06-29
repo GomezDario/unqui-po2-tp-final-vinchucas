@@ -11,8 +11,7 @@ public interface MuestraEstado {
 
 	 public TipoDeOpinion resultadoActual(Muestra muestra);
 	 public void agregarOpinion(Opinion opinion, Muestra muestra) throws Exception;
-	
-	
+	 
 	 
 		
 }
