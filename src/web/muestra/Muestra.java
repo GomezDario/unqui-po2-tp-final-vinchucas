@@ -80,8 +80,6 @@ public class Muestra {
 		Si fuese c# pasaria como referencia la variable estado de esta clase asi estado.agregarOpinion(opinion, REF this);  
 		
 		No creo una clase contenedor ya que de todas formas deberia llamar a un metodo en esta clase 
-		
-		
 		 
 		*/
 		

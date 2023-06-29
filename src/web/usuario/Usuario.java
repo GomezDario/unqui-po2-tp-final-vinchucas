@@ -87,7 +87,8 @@ public class Usuario {
 		return fechas;
 	}
 	
-
+	//prec: no se agrega una opinion de una muestra de un mismo usuario
+	//		ni se agrega una opinion a una muestra en la que ya opino
 	public void agregarOpinion(Opinion opinion) {
 
 		this.opiniones.add(opinion);
