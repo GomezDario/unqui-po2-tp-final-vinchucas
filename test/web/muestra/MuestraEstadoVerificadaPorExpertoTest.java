@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 import org.mockito.Mock;
@@ -32,6 +33,7 @@ public class MuestraEstadoVerificadaPorExpertoTest
 	Opinion opinion3;
 	Ubicacion ubicacion;
 	MuestraEstado estado;
+	List<Opinion> listaDeOpinionesTest;
 	
 	public void setUp() 
 	{
@@ -49,7 +51,7 @@ public class MuestraEstadoVerificadaPorExpertoTest
 		this.muestra = mock(Muestra.class);
 		
 		
-		
+		listaDeOpinionesTest = new ArrayList<Opinion>();
 		estado = new MuestraEstadoVerificadaPorExperto();
 	}
 
@@ -57,36 +59,44 @@ public class MuestraEstadoVerificadaPorExpertoTest
 	public void devolverOpinionYEmpate() throws Exception 
 	{
 		
+		setUp();
 		
-		when(muestra.getlistaDeOpiniones()).thenReturn(Arrays.asList(opinion2));  
+		listaDeOpinionesTest.add(opinion2);
+		
+		when(muestra.getlistaDeOpiniones()).thenReturn(listaDeOpinionesTest);  
 		
 		when(opinion2.getTipoDeOpinion()).thenReturn(TipoDeOpinion.IMAGENPOCOCLARA);  
 		
+		when(opinion2.getUsuario()).thenReturn(usuario);
+		
 		when(opinion2.getUsuario().esExperto()).thenReturn(true); 
-	
 		
-		assertEquals(muestra.resultadoActual(), TipoDeOpinion.IMAGENPOCOCLARA);
-		
-		
+		assertEquals(estado.resultadoActual(muestra), TipoDeOpinion.IMAGENPOCOCLARA);
 		
 		when(opinion1.getTipoDeOpinion()).thenReturn(TipoDeOpinion.VINCHUCAINFESTANS);  
 		
-		when(opinion1.getUsuario().esExperto()).thenReturn(true); 
+		when(opinion1.getUsuario()).thenReturn(usuario);
 		
+		when(opinion1.getUsuario().esExperto()).thenReturn(true); 
+	
 		estado.agregarOpinion(opinion1, muestra);
 		
-		assertEquals(muestra.resultadoActual(), TipoDeOpinion.NODEFINIDO);
+		assertEquals(estado.resultadoActual(muestra), TipoDeOpinion.NODEFINIDO);
 	}
 	
 	@Test
 	public void intentarAgregarUnaOpinionNoValidadA() 
 	{
+		setUp();
+		
 		when(opinion1.getTipoDeOpinion()).thenReturn(TipoDeOpinion.VINCHUCAINFESTANS);  
+		
+		when(opinion1.getUsuario()).thenReturn(usuario);
 		
 		when(opinion1.getUsuario().esExperto()).thenReturn(false); 
 		
 		
-		assertThrows(RuntimeException.class, () -> estado.agregarOpinion(opinion1, muestra));
+		assertThrows(Exception.class, () -> estado.agregarOpinion(opinion1, muestra));
 	}
 	
 	

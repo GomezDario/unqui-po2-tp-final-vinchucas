@@ -16,6 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 
@@ -31,6 +32,7 @@ public class MuestraEstadoNoVerificadaTest
 	Opinion opinion3;
 	Ubicacion ubicacion;
 	MuestraEstado estado;
+	List<Opinion> listaDeOpinionesTest;
 	
 	public void setUp() 
 	{
@@ -48,57 +50,78 @@ public class MuestraEstadoNoVerificadaTest
 		this.muestra = mock(Muestra.class);
 		
 		
-		
+		listaDeOpinionesTest = new ArrayList<Opinion>();
 		estado = new MuestraEstadoNoVerificada();
 	}
 
 	@Test
-	private void cambiosDeResultadosCorrectos() throws Exception
+	public void cambiosDeResultadosCorrectos() throws Exception
 	{
-		when(muestra.getlistaDeOpiniones()).thenReturn(Arrays.asList(opinion2));  
+		this.setUp();
+		
+		
+		
+		listaDeOpinionesTest.add(opinion2);
+		
+		when(muestra.getlistaDeOpiniones()).thenReturn(listaDeOpinionesTest);  
 		
 		when(opinion2.getTipoDeOpinion()).thenReturn(TipoDeOpinion.IMAGENPOCOCLARA);  
 		
+		when(opinion2.getUsuario()).thenReturn(usuario); 
+		
 		when(opinion2.getUsuario().esExperto()).thenReturn(false); 
 		
-		assertEquals(muestra.resultadoActual(), TipoDeOpinion.IMAGENPOCOCLARA);
+		assertEquals(estado.resultadoActual(muestra), TipoDeOpinion.IMAGENPOCOCLARA);
+		
 		
 		
 		
 		when(opinion1.getTipoDeOpinion()).thenReturn(TipoDeOpinion.VINCHUCAINFESTANS);  
+		
+		when(opinion1.getUsuario()).thenReturn(usuario); 
 		
 		when(opinion1.getUsuario().esExperto()).thenReturn(false); 
 		
 		estado.agregarOpinion(opinion1, muestra);
 		
-		assertEquals(muestra.resultadoActual(), TipoDeOpinion.NODEFINIDO);
+		assertEquals(estado.resultadoActual(muestra), TipoDeOpinion.NODEFINIDO);
 		
 		
 		
-		when(opinion1.getTipoDeOpinion()).thenReturn(TipoDeOpinion.VINCHUCAINFESTANS);  
+		when(opinion3.getTipoDeOpinion()).thenReturn(TipoDeOpinion.VINCHUCAINFESTANS);  
+		
+		when(opinion3.getUsuario()).thenReturn(usuario); 
 		
 		when(opinion3.getUsuario().esExperto()).thenReturn(false); 
 		
 		estado.agregarOpinion(opinion3, muestra);
 		
-		assertEquals(muestra.resultadoActual(), TipoDeOpinion.VINCHUCAINFESTANS);
+		assertEquals(estado.resultadoActual(muestra), TipoDeOpinion.VINCHUCAINFESTANS);
 		
 		
 	}
 	
 	@Test
-	private void cambiarDeEstado() throws Exception
+	public void cambiarDeEstado() throws Exception
 	{
 		
-		when(muestra.getlistaDeOpiniones()).thenReturn(Arrays.asList(opinion2));  
 		
-		when(opinion2.getTipoDeOpinion()).thenReturn(TipoDeOpinion.IMAGENPOCOCLARA);  
+		this.setUp();
+		
+		
+		listaDeOpinionesTest.add(opinion2);
+		
+		when(muestra.getlistaDeOpiniones()).thenReturn(listaDeOpinionesTest);  
+		
+		when(opinion2.getTipoDeOpinion()).thenReturn(TipoDeOpinion.IMAGENPOCOCLARA);
+		
+		when(opinion2.getUsuario()).thenReturn(usuario); 
 		
 		when(opinion2.getUsuario().esExperto()).thenReturn(true); 
 		
 		estado.agregarOpinion(opinion2, muestra);
 		
-		verify(muestra).cambiarEstado(Mockito.any(MuestraEstadoVerificadaPorExperto.class));
+	    verify(muestra).cambiarEstado(Mockito.any(MuestraEstadoVerificadaPorExperto.class));
 
 	}
 }
