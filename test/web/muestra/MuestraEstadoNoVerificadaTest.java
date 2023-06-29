@@ -53,7 +53,7 @@ public class MuestraEstadoNoVerificadaTest
 	}
 
 	@Test
-	private void cambiosDeResultadosCorrectos() throws Exception
+	public void cambiosDeResultadosCorrectos() throws Exception
 	{
 		when(muestra.getlistaDeOpiniones()).thenReturn(Arrays.asList(opinion2));  
 		
@@ -87,7 +87,7 @@ public class MuestraEstadoNoVerificadaTest
 	}
 	
 	@Test
-	private void cambiarDeEstado() throws Exception
+	public void cambiarDeEstado() throws Exception
 	{
 		
 		when(muestra.getlistaDeOpiniones()).thenReturn(Arrays.asList(opinion2));  

@@ -13,32 +13,24 @@ public class CriterioFechaUltimaVotacion implements Criterio {
 	private LocalDate fecha;
 	
 	public CriterioFechaUltimaVotacion(ComparadorFechas comparador, LocalDate fecha) {
-		
     	this.comparador = comparador;
     	this.fecha = fecha;
-    	
     }
 	
 	public ComparadorFechas getComparador() {
-		
     	return this.comparador;
-    	
     }
 	
+	public LocalDate getFecha() {
+	    return this.fecha;
+	}
 	
-	 public LocalDate getFecha() {
-	    	return this.fecha;
-	 }
-	
-	 
-	 public List<Muestra> buscarEn(ArrayList<Muestra> muestras) { 
-			
-		 List<Muestra> resultado = muestras.stream()
-				    .filter(m -> comparador.compararEntre(m.getFechaUltimaVotacion(), fecha))
-					.collect(Collectors.toList());
+	public List<Muestra> buscarEn(ArrayList<Muestra> muestras) { 
+		List<Muestra> resultado = muestras.stream()
+									.filter(m -> comparador.compararEntre(m.getFechaUltimaVotacion(), fecha))
+									.collect(Collectors.toList());
 		 
 			return resultado;
-			
 		}
 	
 }

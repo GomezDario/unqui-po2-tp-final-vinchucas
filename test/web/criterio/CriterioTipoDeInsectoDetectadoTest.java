@@ -28,10 +28,8 @@ class CriterioTipoDeInsectoDetectadoTest {
     Muestra muestra3;
     Muestra muestra4;
 	
-	
     @BeforeEach
     void setUp() {
-    	
     	tipoDeInsecto = TipoDeOpinion.CHINCHEFOLIADA;
     	estadoMuestra = mock(MuestraEstado.class);
     	
@@ -46,19 +44,11 @@ class CriterioTipoDeInsectoDetectadoTest {
         muestras.add(muestra3);
         muestras.add(muestra4);
     	
-    	
         criterioInsectoDetectado = new CriterioTipoDeInsectoDetectado(tipoDeInsecto);
-    	
-    	
-    	
     }
-    
     
     @Test
     void busquedaDeUnaMuestraConUn_TipoDeInsecto_Especifico() {
-    	
-    	
-
         //Genero un tipo de opinion no querido
         TipoDeOpinion tipoDeInsectoNoQuerido = TipoDeOpinion.VINCHUCAGUASAYANA;
 
@@ -73,21 +63,7 @@ class CriterioTipoDeInsectoDetectadoTest {
         muestrasEsperadas.add(muestra2);
         muestrasEsperadas.add(muestra3);
 
-        assertEquals(muestrasEsperadas,criterioInsectoDetectado.buscarEn(muestras));
-    	
-    	
+        assertEquals(muestrasEsperadas, criterioInsectoDetectado.buscarEn(muestras));
     	
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	
 }

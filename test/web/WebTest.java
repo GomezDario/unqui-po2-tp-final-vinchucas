@@ -2,12 +2,15 @@ package web;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import web.muestra.Muestra;
 import web.opinion.Opinion;
+import web.usuario.Usuario;
 import web.zona.ZonaDeCobertura;
 
 public class WebTest {
@@ -17,6 +20,7 @@ public class WebTest {
 	Opinion unaOpinion;
 	ZonaDeCobertura unaZonaDeCobertura;
 	ZonaDeCobertura otraZonaDeCobertura;
+	Usuario unUsuario;
 	
 	@Before
 	public void setUp() {
@@ -25,6 +29,7 @@ public class WebTest {
 		unaOpinion = mock(Opinion.class);
 		unaZonaDeCobertura = mock(ZonaDeCobertura.class);
 		otraZonaDeCobertura = mock(ZonaDeCobertura.class);
+		unUsuario = mock(Usuario.class);
 		
 		//SUT
 		web = new Web();
@@ -101,6 +106,19 @@ public class WebTest {
 		//verify
 		assertEquals(0, cantidadDeMuestrasAntes);
 		assertEquals(1, cantidadDeMuestrasDespues);
+	}
+	
+	@Test
+	public void agregarOpinion() throws Exception {
+		//setup
+		when(unaOpinion.getUsuario()).thenReturn(unUsuario);
+		when(unaOpinion.getMuestra()).thenReturn(unaMuestra);
+		
+		//exercise
+		web.agregarNuevaOpinion(unaOpinion); 
+		
+		//verify
+		verify(unaMuestra).agregarOpinion(unaOpinion);;
 	}
 	
 }

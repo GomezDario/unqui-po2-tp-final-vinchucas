@@ -12,11 +12,10 @@ public class CriterioCombinado implements Criterio{
     private Criterio criterio1;
     private Criterio criterio2;
     
-    
-    public CriterioCombinado(OperadorLogico conectorAPoner, Criterio criterioAponer1, Criterio criterioAponer2) {
+    public CriterioCombinado(OperadorLogico conectorAPoner, Criterio criterioAPoner1, Criterio criterioAPoner2) {
         conector = conectorAPoner;
-        criterio1 = criterioAponer1;
-        criterio2 = criterioAponer2;
+        criterio1 = criterioAPoner1;
+        criterio2 = criterioAPoner2;
     }
     
     public OperadorLogico getOperador() {

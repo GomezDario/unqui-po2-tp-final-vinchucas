@@ -1,6 +1,5 @@
 package web.criterio;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import web.muestra.*;
@@ -9,21 +8,9 @@ public class OperadorLogicoAnd implements OperadorLogico {
 	
 	public List<Muestra> juntarArrays(List<Muestra> xs, List<Muestra> ys){
 		
-        List<Muestra> muestrasEnComun = new ArrayList<>();
+        xs.retainAll(ys);
         
-        for (int i = 0; i < ys.size(); i++) {
-            
-        	if(xs.contains(ys.get(i)) && ! muestrasEnComun.contains(ys.get(i))){
-                muestrasEnComun.add(ys.get(i));
-                
-            }
-        	
-        }
-        
-        return muestrasEnComun;
-        
+        return xs;
     }
-
-	
 
 }

@@ -107,7 +107,6 @@ public class Muestra {
 	}
 
 	public void registrar(ZonaDeCobertura zonaDeCobertura) {
-		// TODO Auto-generated method stub
-		
+
 	}
 }

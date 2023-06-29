@@ -11,30 +11,20 @@ public class CriterioNivelVerificacion implements Criterio {
 
 	private MuestraEstado estadoBuscado;
 	
-	public CriterioNivelVerificacion (MuestraEstado estado) {
-		
+	public CriterioNivelVerificacion(MuestraEstado estado) {
         this.estadoBuscado = estado;
-        	
-        
     }
 
-	
 	public MuestraEstado getEstadoBuscado(){
-		
-        return this.estadoBuscado;
-        
-        
+        return this.estadoBuscado;    
     }
 	
-	
 	public List<Muestra> buscarEn(ArrayList<Muestra> muestras){
-		
     	List<Muestra> resultado = muestras.stream()
     			.filter(m-> m.getEstado().equals(this.getEstadoBuscado()))
     			.collect(Collectors.toList());
     	
     	return resultado;
     }
-	
 	
 }
