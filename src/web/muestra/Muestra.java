@@ -2,6 +2,7 @@ package web.muestra;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import web.opinion.Opinion;
 import web.opinion.TipoDeOpinion;
@@ -13,7 +14,7 @@ public class Muestra {
 	
 	private Ubicacion ubicacion;
 	private String foto;
-	private ArrayList<Opinion> listaDeOpiniones;
+	private List<Opinion> listaDeOpiniones;
 	private MuestraEstado estado;
 	private LocalDate fecha;
 	private Usuario usuarioQueLaRecolecto;
@@ -37,7 +38,7 @@ public class Muestra {
 	public TipoDeOpinion resultadoActual() 
 	{
 
-		return estado.resultadoActual(this.listaDeOpiniones);
+		return estado.resultadoActual(this);
 	}
 
 	public LocalDate getFecha() {
@@ -49,7 +50,7 @@ public class Muestra {
 		return this.foto;
 	}
 	
-	public void agregarOpinion(Opinion opinion) 
+	public void agregarOpinion(Opinion opinion) throws Exception 
 	{
 		estado.agregarOpinion(opinion, this);
 	}
@@ -64,7 +65,7 @@ public class Muestra {
 		return this.usuarioQueLaRecolecto;
 	}
 
-	public ArrayList<Opinion> getlistaDeOpiniones()
+	public List<Opinion> getlistaDeOpiniones()
 	{
 		return this.listaDeOpiniones;
 	}
@@ -90,17 +91,19 @@ public class Muestra {
 	{
 		if(usuarioQueLaRecolecta.esExperto()) 
 		{
-			this.estado = new MuestraEstadoVerificadaPorExperado();
+			this.estado = new MuestraEstadoVerificadaPorExperto();
 		}
 		else
 		{
-			this.estado = new MUestraEstadoNoVerificada();
+			this.estado = new MuestraEstadoNoVerificada();
 		}
 	}
 	
-	public boolean estaVerificada() {
-		// TODO Auto-generated method stub
-		return false;
+	public LocalDate getFechaUltimaVotacion() 
+	{
+		Opinion opinion = listaDeOpiniones.get(listaDeOpiniones.size()-1);
+				
+		return opinion.getFecha();
 	}
 
 	public void registrar(ZonaDeCobertura zonaDeCobertura) {

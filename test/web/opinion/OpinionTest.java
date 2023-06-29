@@ -41,4 +41,5 @@ public class OpinionTest {
 		//verify
 		assertEquals(fechaEsperada, fechaOpinion);
 	}
+	
 }

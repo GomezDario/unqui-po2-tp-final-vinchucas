@@ -23,10 +23,12 @@ public class Web {
 			}			
 		}
 	}
-
-	public void agregarNuevaOpinion(Opinion unaOpinion) {
-		// TODO Auto-generated method stub
-
+	
+	public void agregarNuevaOpinion(Opinion unaOpinion) throws Exception {
+		Muestra muestra = unaOpinion.getMuestra();
+		muestra.agregarOpinion(unaOpinion);
+		Usuario unUsuario = unaOpinion.getUsuario();
+		unUsuario.agregarOpinion(unaOpinion); // agregarle una precondicion 
 	}
 	
 	//ZONAS
