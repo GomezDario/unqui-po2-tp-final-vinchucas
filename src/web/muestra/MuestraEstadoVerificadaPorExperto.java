@@ -1,5 +1,6 @@
 package web.muestra;
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,6 +54,12 @@ public class MuestraEstadoVerificadaPorExperto implements MuestraEstado
 	
 	public void agregarOpinion(Opinion opinion, Muestra muestra) throws Exception
 	{
+		if(muestra.esteUsuarioYaOpino(opinion.getUsuario())) 
+		{
+			throw new Exception("No se puede agregar la opinión. El usuario ya opino en esta muestra");
+		}
+		
+		
 		if (opinion.getUsuario().esExperto()) 
 		{
 			muestra.getlistaDeOpiniones().add(opinion);

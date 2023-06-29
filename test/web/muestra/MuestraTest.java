@@ -7,13 +7,17 @@ import web.opinion.Opinion;
 import web.opinion.TipoDeOpinion;
 import web.ubicacion.Ubicacion;
 import web.usuario.Usuario;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+
 import static org.mockito.Mockito.verify;
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 
@@ -41,29 +45,35 @@ public class MuestraTest
 		this.estado = mock(MuestraEstadoNoVerificada.class);
 		this.opinion1 = mock(Opinion.class);
 		this.opinion2 = mock(Opinion.class);
+	
 		this.ubicacion = mock(Ubicacion.class);
 		
 		muestra = new Muestra(ubicacion, "test.jpg", opinion1, usuario);
 		
-		muestra.agregarOpinion(opinion2);
+		
 		
 		
 		
 	}
 	
+	@Test
 	public void verificacionDeUnaMuestra() throws Exception 
 	{
+		setUp();
+		
+		when(opinion1.getUsuario()).thenReturn(usuario);
 		when(usuario.esExperto()).thenReturn(false);
-	    when(opinion2.getUsuario()).thenReturn(usuario);
+	    when(opinion2.getUsuario()).thenReturn(usuario2);
+	    when(usuario2.esExperto()).thenReturn(true);
+	    
 
-	    muestra.agregarOpinion(opinion2);
+	    
 	    
 	    assert muestra.getEstado() instanceof MuestraEstadoNoVerificada;
 		
-	    when(usuario.esExperto()).thenReturn(true);
-	    when(opinion1.getUsuario()).thenReturn(usuario);
+	   
 
-	    muestra.agregarOpinion(opinion1);
+	    muestra.agregarOpinion(opinion2);
 
 	    assert muestra.getEstado() instanceof MuestraEstadoVerificadaPorExperto;
 	    
@@ -71,50 +81,74 @@ public class MuestraTest
 	    
 	}
 	
+	@Test
 	public void exceptCuandoUnUsuarioNoPuedeOpinar() throws Exception 
 	{
+		
+		setUp();
+		
+		
+		
 		when(usuario.esExperto()).thenReturn(true);
-	    when(opinion1.getUsuario()).thenReturn(usuario);
+		when(opinion1.getUsuario()).thenReturn(usuario);
+	    
+	    when(usuario2.esExperto()).thenReturn(false);
+	    when(opinion2.getUsuario()).thenReturn(usuario2);
 
-	    muestra.agregarOpinion(opinion1);
+	    muestra = new Muestra(ubicacion, "test.jpg", opinion1, usuario);
+	    
+	   
 
 	    assert muestra.getEstado() instanceof MuestraEstadoVerificadaPorExperto;
 	    
-	    when(usuario.esExperto()).thenReturn(false);
-	    when(opinion2.getUsuario()).thenReturn(usuario);
+	   
 
-	    //assertThrows(Exception.class, () -> {muestra.agregarOpinion(opinion2);});
 	    
-	    
-	    
+	    org.junit.jupiter.api.Assertions.assertThrows(Exception.class, () -> muestra.agregarOpinion(opinion2));
+
+	    //assertThrows(Exception.class, () -> muestra.agregarOpinion(opinion2));
+	 
 	}
 	
-	
-	public void consultarIdentificacionFotoYUbicacion() 
+	@Test
+	public void consultarIdentificacionFotoYUbicacion() throws Exception 
 	{
+		setUp();
+		
 		assertEquals(ubicacion, muestra.getUbicacion());
 		assertEquals("test.jpg", muestra.getFoto());
 		assertEquals(usuario, muestra.getUsuario());
 		
 	}
 	
+	@Test
 	public void resultadoNoIdentificadoCuandoEmpate() throws Exception
 	{
+		setUp();
+		
 		when(opinion1.getTipoDeOpinion()).thenReturn(TipoDeOpinion.VINCHUCAINFESTANS);
-		muestra.agregarOpinion(opinion1);
+		when(opinion1.getUsuario()).thenReturn(usuario);
+		
 		
 		when(opinion2.getTipoDeOpinion()).thenReturn(TipoDeOpinion.PHTIA_CHINCHE);
+		when(opinion2.getUsuario()).thenReturn(usuario2);
 		muestra.agregarOpinion(opinion2);
 		
-		assert muestra.resultadoActual() == TipoDeOpinion.NODEFINIDO;
+		assertEquals(muestra.resultadoActual(), TipoDeOpinion.NODEFINIDO);
 	}
 	
-	
-	public void muestraTomadaPorExpertoVerificadaDesdeInicio() 
+	@Test
+	public void muestraTomadaPorExpertoVerificadaDesdeInicio() throws Exception 
 	{
+		
+		this.usuario = mock(Usuario.class);
+		
 		when(usuario.esExperto()).thenReturn(true);
 		
-		assert muestra.getEstado()  instanceof MuestraEstadoVerificadaPorExperto;
+		muestra = new Muestra(ubicacion, "test.jpg", opinion1, usuario);
+		
+		
+		assert muestra.getEstado() instanceof MuestraEstadoVerificadaPorExperto;
 	}
 	
 	

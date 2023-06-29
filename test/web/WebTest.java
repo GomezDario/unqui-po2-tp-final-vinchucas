@@ -5,10 +5,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import web.muestra.Muestra;
+import web.muestra.MuestraEstadoVerificadaPorExperto;
 import web.opinion.Opinion;
 import web.usuario.Usuario;
 import web.zona.ZonaDeCobertura;
@@ -120,5 +124,4 @@ public class WebTest {
 		//verify
 		verify(unaMuestra).agregarOpinion(unaOpinion);;
 	}
-	
 }

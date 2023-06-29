@@ -51,8 +51,13 @@ public class MuestraEstadoNoVerificada implements  MuestraEstado, ObservableZona
     }
 
 	@Override
-	public void agregarOpinion(Opinion opinion, Muestra muestra) 
+	public void agregarOpinion(Opinion opinion, Muestra muestra) throws Exception 
 	{
+		if(muestra.esteUsuarioYaOpino(opinion.getUsuario())) 
+		{
+			throw new Exception("No se puede agregar la opinión. El usuario ya opino en esta muestra");
+		}
+		
 		muestra.getlistaDeOpiniones().add(opinion);
 		
 		if (opinion.getUsuario().esExperto()) 

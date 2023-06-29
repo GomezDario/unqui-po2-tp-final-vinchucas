@@ -14,7 +14,7 @@ public class Muestra {
 	
 	private Ubicacion ubicacion;
 	private String foto;
-	private List<Opinion> listaDeOpiniones;
+	private List<Opinion> listaDeOpiniones = new ArrayList<Opinion>();
 	private MuestraEstado estado;
 	private LocalDate fecha;
 	private Usuario usuarioQueLaRecolecto;
@@ -108,5 +108,11 @@ public class Muestra {
 
 	public void registrar(ZonaDeCobertura zonaDeCobertura) {
 
+	}
+	
+	public boolean  esteUsuarioYaOpino(Usuario usuario) {
+		
+		return listaDeOpiniones.stream().anyMatch(opinion -> opinion.getUsuario().equals(usuario));
+		
 	}
 }
