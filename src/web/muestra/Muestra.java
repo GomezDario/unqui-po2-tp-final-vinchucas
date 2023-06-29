@@ -2,6 +2,7 @@ package web.muestra;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import web.opinion.Opinion;
 import web.opinion.TipoDeOpinion;
@@ -13,7 +14,7 @@ public class Muestra {
 	
 	private Ubicacion ubicacion;
 	private String foto;
-	private ArrayList<Opinion> listaDeOpiniones;
+	private List<Opinion> listaDeOpiniones;
 	private MuestraEstado estado;
 	private LocalDate fecha;
 	private Usuario usuarioQueLaRecolecto;
@@ -64,7 +65,7 @@ public class Muestra {
 		return this.usuarioQueLaRecolecto;
 	}
 
-	public ArrayList<Opinion> getlistaDeOpiniones()
+	public List<Opinion> getlistaDeOpiniones()
 	{
 		return this.listaDeOpiniones;
 	}

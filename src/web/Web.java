@@ -4,11 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import web.muestra.Muestra;
-<<<<<<< HEAD
-=======
-import web.usuario.Usuario;
-import web.zona.AdministradorZona;
->>>>>>> branch 'main' of https://github.com/GomezDario/unqui-po2-tp-final-vinchucas.git
+
+
 import web.zona.ZonaDeCobertura;
 import web.opinion.Opinion;
 import web.usuario.Usuario;
@@ -30,14 +27,16 @@ public class Web {
 			}			
 		}
 	}
+	
 
-	public void agregarNuevaOpinion(Opinion unaOpinion) {
+
+	public void agregarNuevaOpinion(Opinion unaOpinion) throws Exception {
 		
 		
 		Muestra muestra = unaOpinion.getMuestra();
 		muestra.agregarOpinion(unaOpinion);
 		Usuario unUsuario = unaOpinion.getUsuario();
-		unUsuario.agregarOpinion(unaOpinion);
+		unUsuario.agregarOpinion(unaOpinion); // agregarle una precondicion 
 		
 		
 		

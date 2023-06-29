@@ -58,6 +58,12 @@ public class MuestraEstadoNoVerificada implements  MuestraEstado, ObservableZona
 		if (opinion.getUsuario().esExperto()) 
 		{
 			muestra.cambiarEstado(new MuestraEstadoVerificadaPorExperto()); // error de imports creo, arreglar despues
+			
+			for (ObservadorZona zona : this.zonasObservadoras )
+			{
+				zona.notificarMuestraValidada(muestra);;
+			}
+		
 		}
 		
 	}
