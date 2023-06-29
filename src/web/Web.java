@@ -31,8 +31,6 @@ public class Web {
 		unUsuario.agregarOpinion(unaOpinion);
 	}
 	
-	//ZONAS
-	
 	public void agregarNuevaZonaDeCobertura(ZonaDeCobertura unaZonaDeCobertura) {
 		// TODO Auto-generated method stub
 		if(!zonasDeCobertura.contains(unaZonaDeCobertura)) {
