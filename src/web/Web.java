@@ -20,10 +20,6 @@ public class Web {
 	Set<Muestra> muestras = new HashSet<>();
 
 
-	public void agregarNuevaZonaDeCobertura(ZonaDeCobertura unaZonaDeCobertura) {
-		// TODO Auto-generated method stub
-		administradorZona.agregarZona(unaZonaDeCobertura);
-	}
 
 	public void agregarNuevaMuestra(Muestra unaMuestra) {
 		// TODO Auto-generated method stub
@@ -36,8 +32,16 @@ public class Web {
 	}
 
 	public void agregarNuevaOpinion(Opinion unaOpinion) {
-		// TODO Auto-generated method stub
-
+		
+		
+		Muestra muestra = unaOpinion.getMuestra();
+		muestra.agregarOpinion(unaOpinion);
+		Usuario unUsuario = unaOpinion.getUsuario();
+		unUsuario.agregarOpinion(unaOpinion);
+		
+		
+		
+		
 	}
 	
 	//ZONAS

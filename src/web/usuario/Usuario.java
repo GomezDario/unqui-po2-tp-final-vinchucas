@@ -89,9 +89,15 @@ public class Usuario {
 	
 
 	public void agregarOpinion(Opinion opinion) {
-		opiniones.add(opinion);
+		
 		this.getEstado().nivelarUsuario(this);
 		
+		
+		/*
+	  	 
+	  	aca se le envia a la web la opinion
+		  
+		 */
 	}
 	
 	public void agregarMuestra(Muestra muestra) {

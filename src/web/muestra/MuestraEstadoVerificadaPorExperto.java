@@ -21,7 +21,7 @@ public class MuestraEstadoVerificadaPorExperto implements MuestraEstado
 	    	 {
 	    		 if(opinion.getUsuario().esExperto())         
 	    		 {
-	    			 frecuencias.put(opinion.getTipo(), frecuencias.getOrDefault(opinion.getTipo(), 0) + 1); 
+	    			 frecuencias.put(opinion.getTipoDeOpinion(), frecuencias.getOrDefault(opinion.getTipoDeOpinion(), 0) + 1); 
 	    		 }
 	             
 	         }
@@ -51,7 +51,7 @@ public class MuestraEstadoVerificadaPorExperto implements MuestraEstado
 	         // AUNQUE REALMENTE ES UN ESTADO DE LA MUESTRA
 	}
 	
-	public void agregarOpinion(Opinion opinion, Muestra muestra)
+	public void agregarOpinion(Opinion opinion, Muestra muestra) throws Exception
 	{
 		if (opinion.getUsuario().esExperto()) 
 		{
