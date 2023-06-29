@@ -128,9 +128,12 @@ class UsuarioTest {
 	
         // Crear una muestra mock
         Muestra muestraMock = mock(Muestra.class);
+        
+        when(muestraMock.getFecha()).thenReturn(LocalDate.now()); // agrego esto porque sino rompe por las fechas
+        
 
         // Agregar la muestra mock al usuario
-        usuario.agregarMuestra(muestraMock);
+        usuario.agregarMuestra(muestraMock); 
 
         // Verificar que la muestra se agregó correctamente a la lista de muestras del usuario
         ArrayList<Muestra> muestras = usuario.getMuestras();
