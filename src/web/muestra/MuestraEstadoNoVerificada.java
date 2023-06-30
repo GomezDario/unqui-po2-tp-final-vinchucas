@@ -7,7 +7,6 @@ import web.opinion.Opinion;
 import web.opinion.TipoDeOpinion;
 import web.zona.ObservableZona;
 import web.zona.ObservadorZona;
-import web.zona.ZonaDeCobertura;
 
 
 public class MuestraEstadoNoVerificada implements  MuestraEstado, ObservableZona

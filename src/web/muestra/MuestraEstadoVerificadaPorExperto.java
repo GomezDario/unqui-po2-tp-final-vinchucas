@@ -5,7 +5,6 @@ import java.util.Map;
 
 import web.opinion.Opinion;
 import web.opinion.TipoDeOpinion;
-import web.zona.ObservadorZona;
 
 public class MuestraEstadoVerificadaPorExperto implements MuestraEstado 
 {

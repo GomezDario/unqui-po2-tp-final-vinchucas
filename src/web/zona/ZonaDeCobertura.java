@@ -4,11 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.mockito.internal.matchers.InstanceOf;
-
 import web.muestra.Muestra;
-import web.muestra.MuestraEstado;
-import web.muestra.MuestraEstadoNoVerificada;
 import web.ubicacion.Ubicacion;
 
 public class ZonaDeCobertura implements ObservableOrg, ObservadorZona{
