@@ -1,51 +1,56 @@
 package web;
 
-import web.muestra.AdministradorMuestra;
+import java.util.HashSet;
+import java.util.Set;
+
 import web.muestra.Muestra;
-import web.usuario.Usuario;
-import web.zona.AdministradorZona;
 import web.zona.ZonaDeCobertura;
 import web.opinion.Opinion;
+import web.usuario.Usuario;
 
 public class Web {
 
-	Usuario usuario;
-	AdministradorMuestra administradorMuestra;
-	AdministradorZona administradorZona;
-	
-	public Web(Usuario unUsuario, AdministradorMuestra unAdministradorMuestra,
-			AdministradorZona unAdministradorZona) {
-		// TODO Auto-generated constructor stub
-		usuario = unUsuario;
-		administradorMuestra = unAdministradorMuestra;
-		administradorZona = unAdministradorZona;
-	}
-
-
-	public void agregarNuevaZonaDeCobertura(ZonaDeCobertura unaZonaDeCobertura) {
-		// TODO Auto-generated method stub
-		administradorZona.agregarZona(unaZonaDeCobertura);
-	}
+	Set<ZonaDeCobertura> zonasDeCobertura = new HashSet<>();
+	Set<Usuario> usuarios = new HashSet<>();
+	Set<Muestra> muestras = new HashSet<>();
 
 	public void agregarNuevaMuestra(Muestra unaMuestra) {
 		// TODO Auto-generated method stub
-		administradorMuestra.agregarMuestra(unaMuestra);
-		usuario.agregarMuestra(unaMuestra);
-		administradorZona.agregarMuestra(unaMuestra);
+		if(!muestras.contains(unaMuestra)) {
+			muestras.add(unaMuestra);
+			for(ZonaDeCobertura unaZona : zonasDeCobertura) {
+				unaZona.notificarNuevaMuestraSiEstaDentroDeZona(unaMuestra);
+			}			
+		}
+	}
+	
+	public void agregarNuevaOpinion(Opinion unaOpinion) throws Exception {
+		Muestra muestra = unaOpinion.getMuestra();
+		muestra.agregarOpinion(unaOpinion);
+		Usuario unUsuario = unaOpinion.getUsuario();
+		unUsuario.agregarOpinion(unaOpinion);
+	}
+	
+	public void agregarNuevaZonaDeCobertura(ZonaDeCobertura unaZonaDeCobertura) {
+		// TODO Auto-generated method stub
+		if(!zonasDeCobertura.contains(unaZonaDeCobertura)) {
+			zonasDeCobertura.add(unaZonaDeCobertura);		
+		}
+	}
+	
+	public int cantidadDeZonasDeCobertura() {
+		// TODO Auto-generated method stub
+		return zonasDeCobertura.size();
 	}
 
-	public void agregarNuevaOpinion(Opinion unaOpinion) {
+	public int cantidadDeUsuarios() {
 		// TODO Auto-generated method stub
-		Muestra muestra = unaOpinion.getMuestra();
-		boolean muestraVerificada = muestra.estaVerificada();
-		if(administradorMuestra.agregarOpinion(unaOpinion)) {
-			usuario.agregarOpinion(unaOpinion);
-			if(!muestraVerificada) {
-				if(muestra.estaVerificada()) {
-					administradorZona.muestraValidada(muestra);
-				}
-			}
-		}
+		return usuarios.size();
+	}
+
+	public int cantidadDeMuestras() {
+		// TODO Auto-generated method stub
+		return muestras.size();
 	}
 	
 }

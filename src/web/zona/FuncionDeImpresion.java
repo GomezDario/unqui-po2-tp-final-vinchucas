@@ -5,10 +5,10 @@ import web.muestra.Muestra;
 public class FuncionDeImpresion implements FuncionExterna {
 
 	@Override
-	public void nuevoEvento(ZonaDeCobertura unaZonaDeCobertura, Muestra unaMuestra,
-			OrganizacionNoGubernamental unaOrganizacionNoGubernamental) {
+	public void nuevoEvento(Organizacion unaOrganizacion, ZonaDeCobertura unaZonaDeCobertura, 
+			Muestra unaMuestra) {
 		// TODO Auto-generated method stub
-		unaOrganizacionNoGubernamental.getTipoDeOrganizacion();
+		unaOrganizacion.getTipoDeOrganizacion();
 		unaZonaDeCobertura.getNombre();
 		unaMuestra.resultadoActual();
 //		System.out.println("Una organizacion " + unaOrganizacionNoGubernamental.getTipoDeOrganizacion());

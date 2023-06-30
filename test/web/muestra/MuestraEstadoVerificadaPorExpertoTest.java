@@ -1,5 +1,13 @@
 package web.muestra;
 
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 import web.opinion.Opinion;
@@ -7,16 +15,7 @@ import web.opinion.TipoDeOpinion;
 import web.ubicacion.Ubicacion;
 import web.usuario.Usuario;
 
-import org.mockito.Mockito;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
-import static org.mockito.Mockito.*;
-import java.util.ArrayList;
-import java.util.List;
-
-public class MuestraEstadoNoVerificadaTest 
+public class MuestraEstadoVerificadaPorExpertoTest 
 {
 	Muestra muestra;
 	Usuario usuario;
@@ -45,15 +44,14 @@ public class MuestraEstadoNoVerificadaTest
 		
 		
 		listaDeOpinionesTest = new ArrayList<Opinion>();
-		estado = new MuestraEstadoNoVerificada();
+		estado = new MuestraEstadoVerificadaPorExperto();
 	}
 
 	@Test
-	public void cambiosDeResultadosCorrectos() throws Exception
+	public void devolverOpinionYEmpate() throws Exception 
 	{
-		this.setUp();
 		
-		
+		setUp();
 		
 		listaDeOpinionesTest.add(opinion2);
 		
@@ -61,62 +59,36 @@ public class MuestraEstadoNoVerificadaTest
 		
 		when(opinion2.getTipoDeOpinion()).thenReturn(TipoDeOpinion.IMAGENPOCOCLARA);  
 		
-		when(opinion2.getUsuario()).thenReturn(usuario); 
-		
-		when(opinion2.getUsuario().esExperto()).thenReturn(false); 
-		
-		assertEquals(estado.resultadoActual(muestra), TipoDeOpinion.IMAGENPOCOCLARA);
-		
-		
-		
-		
-		when(opinion1.getTipoDeOpinion()).thenReturn(TipoDeOpinion.VINCHUCAINFESTANS);  
-		
-		when(opinion1.getUsuario()).thenReturn(usuario); 
-		
-		when(opinion1.getUsuario().esExperto()).thenReturn(false); 
-		
-		estado.agregarOpinion(opinion1, muestra);
-		
-		assertEquals(estado.resultadoActual(muestra), TipoDeOpinion.NODEFINIDO);
-		
-		
-		
-		when(opinion3.getTipoDeOpinion()).thenReturn(TipoDeOpinion.VINCHUCAINFESTANS);  
-		
-		when(opinion3.getUsuario()).thenReturn(usuario); 
-		
-		when(opinion3.getUsuario().esExperto()).thenReturn(false); 
-		
-		estado.agregarOpinion(opinion3, muestra);
-		
-		assertEquals(estado.resultadoActual(muestra), TipoDeOpinion.VINCHUCAINFESTANS);
-		
-		
-	}
-	
-	@Test
-	public void cambiarDeEstado() throws Exception
-	{
-		
-		
-		this.setUp();
-		
-		
-		listaDeOpinionesTest.add(opinion2);
-		
-		when(muestra.getlistaDeOpiniones()).thenReturn(listaDeOpinionesTest);  
-		
-		when(opinion2.getTipoDeOpinion()).thenReturn(TipoDeOpinion.IMAGENPOCOCLARA);
-		
-		when(opinion2.getUsuario()).thenReturn(usuario); 
+		when(opinion2.getUsuario()).thenReturn(usuario);
 		
 		when(opinion2.getUsuario().esExperto()).thenReturn(true); 
 		
-		estado.agregarOpinion(opinion2, muestra);
+		assertEquals(estado.resultadoActual(muestra), TipoDeOpinion.IMAGENPOCOCLARA);
 		
-	    verify(muestra).cambiarEstado(Mockito.any(MuestraEstadoVerificadaPorExperto.class));
-
+		when(opinion1.getTipoDeOpinion()).thenReturn(TipoDeOpinion.VINCHUCAINFESTANS);  
+		
+		when(opinion1.getUsuario()).thenReturn(usuario);
+		
+		when(opinion1.getUsuario().esExperto()).thenReturn(true); 
+	
+		estado.agregarOpinion(opinion1, muestra);
+		
+		assertEquals(estado.resultadoActual(muestra), TipoDeOpinion.NODEFINIDO);
+	}
+	
+	@Test
+	public void intentarAgregarUnaOpinionNoValidadA() 
+	{
+		setUp();
+		
+		when(opinion1.getTipoDeOpinion()).thenReturn(TipoDeOpinion.VINCHUCAINFESTANS);  
+		
+		when(opinion1.getUsuario()).thenReturn(usuario);
+		
+		when(opinion1.getUsuario().esExperto()).thenReturn(false); 
+		
+		
+		assertThrows(Exception.class, () -> estado.agregarOpinion(opinion1, muestra));
 	}
 	
 	@Test
@@ -145,4 +117,12 @@ public class MuestraEstadoNoVerificadaTest
 		assertThrows(Exception.class, () -> estado.agregarOpinion(opinion1, muestra));
 		
 	}
+	
 }
+
+
+// verificar el throw exception, <>
+
+// agregr opinion y cambie / empate
+
+// que solo tome en cuenta las opiniones si son deexpertos

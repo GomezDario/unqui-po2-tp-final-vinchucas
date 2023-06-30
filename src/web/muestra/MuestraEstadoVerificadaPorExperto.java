@@ -1,5 +1,5 @@
 package web.muestra;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public class MuestraEstadoVerificadaPorExperto implements MuestraEstado
 	    	 {
 	    		 if(opinion.getUsuario().esExperto())         
 	    		 {
-	    			 frecuencias.put(opinion.getTipo(), frecuencias.getOrDefault(opinion.getTipo(), 0) + 1); 
+	    			 frecuencias.put(opinion.getTipoDeOpinion(), frecuencias.getOrDefault(opinion.getTipoDeOpinion(), 0) + 1); 
 	    		 }
 	             
 	         }
@@ -51,8 +51,14 @@ public class MuestraEstadoVerificadaPorExperto implements MuestraEstado
 	         // AUNQUE REALMENTE ES UN ESTADO DE LA MUESTRA
 	}
 	
-	public void agregarOpinion(Opinion opinion, Muestra muestra)
+	public void agregarOpinion(Opinion opinion, Muestra muestra) throws Exception
 	{
+		if(muestra.esteUsuarioYaOpino(opinion.getUsuario())) 
+		{
+			throw new Exception("No se puede agregar la opinión. El usuario ya opino en esta muestra");
+		}
+		
+		
 		if (opinion.getUsuario().esExperto()) 
 		{
 			muestra.getlistaDeOpiniones().add(opinion);
@@ -64,10 +70,6 @@ public class MuestraEstadoVerificadaPorExperto implements MuestraEstado
 		}
 		
 	}
-
-	
-	
-	
 	
 }
 
