@@ -9,10 +9,9 @@ import web.zona.ObservableZona;
 import web.zona.ObservadorZona;
 
 
-public class MuestraEstadoNoVerificada implements  MuestraEstado, ObservableZona
+public class MuestraEstadoNoVerificada implements  MuestraEstado
 {
-	
-	ArrayList<ObservadorZona> zonasObservadoras = new ArrayList<>();
+
 	
 	@Override
     public TipoDeOpinion resultadoActual(Muestra muestra) 
@@ -58,31 +57,16 @@ public class MuestraEstadoNoVerificada implements  MuestraEstado, ObservableZona
 		
 		if (opinion.getUsuario().esExperto()) 
 		{
-			muestra.cambiarEstado(new MuestraEstadoVerificadaPorExperto()); // error de imports creo, arreglar despues
+			muestra.cambiarEstado(new MuestraEstadoVerificadaPorExperto());
 			
-			for (ObservadorZona zona : this.zonasObservadoras )
-			{
-				zona.notificarMuestraValidada(muestra);
-			}
+			muestra.notificarAObservadores();
 		
 		}
 		
 	}
 
-
-	@Override
-	public void registrar(ObservadorZona observador) 
-	{
-		
-		zonasObservadoras.add(observador);
-	}
-
-	@Override
-	public void desregistrar(ObservadorZona observador) 
-	{
-		
-		zonasObservadoras.remove(observador);
-	}
-    
 }
 
+
+
+	

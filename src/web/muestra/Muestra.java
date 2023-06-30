@@ -8,9 +8,11 @@ import web.opinion.Opinion;
 import web.opinion.TipoDeOpinion;
 import web.ubicacion.Ubicacion;
 import web.usuario.Usuario;
+import web.zona.ObservableZona;
+import web.zona.ObservadorZona;
 import web.zona.ZonaDeCobertura;
 
-public class Muestra {
+public class Muestra implements ObservableZona{
 	
 	private Ubicacion ubicacion;
 	private String foto;
@@ -18,6 +20,7 @@ public class Muestra {
 	private MuestraEstado estado;
 	private LocalDate fecha;
 	private Usuario usuarioQueLaRecolecto;
+	private ArrayList<ObservadorZona> zonasObservadoras = new ArrayList<>();
 
 
 	public Muestra(Ubicacion ubicacion, String foto, Opinion opinion, Usuario usuariousuarioQueLaRecolecto ) 
@@ -104,12 +107,30 @@ public class Muestra {
 		return opinion.getFecha();
 	}
 
-	public void registrar(ZonaDeCobertura zonaDeCobertura) {
-	}
 	
 	public boolean esteUsuarioYaOpino(Usuario usuario) {
 		
 		return listaDeOpiniones.stream().anyMatch(opinion -> opinion.getUsuario().equals(usuario));
 		
+	}
+
+	@Override
+	public void registrar(ObservadorZona observador) {
+		
+		zonasObservadoras.add(observador);
+	}
+
+	@Override
+	public void desregistrar(ObservadorZona observador) {
+	
+		zonasObservadoras.remove(observador);
+	}
+	
+	void notificarAObservadores() {
+		
+		for (ObservadorZona zona : this.zonasObservadoras )
+		{
+			zona.notificarMuestraValidada(this);
+		}
 	}
 }
