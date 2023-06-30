@@ -2,6 +2,7 @@ package web;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -95,7 +96,23 @@ public class WebTest {
 	}
 	
 	@Test
-	public void agregarNuevaMuestraTest_CuandoEsLaPrimerMuestra() {
+	public void agregarNuevaMuestraTest_CuandoEsLaPrimerMuestraYTieneUnaZona() {
+		//setup
+		web.agregarNuevaZonaDeCobertura(unaZonaDeCobertura);
+		int cantidadDeMuestrasAntes = web.cantidadDeMuestras();
+		
+		//exercise
+		web.agregarNuevaMuestra(unaMuestra);
+		int cantidadDeMuestrasDespues = web.cantidadDeMuestras();
+		
+		//verify
+		assertEquals(0, cantidadDeMuestrasAntes);
+		assertEquals(1, cantidadDeMuestrasDespues);
+		verify(unaZonaDeCobertura, times(1)).notificarNuevaMuestraSiEstaDentroDeZona(unaMuestra);
+	}
+	
+	@Test
+	public void agregarNuevaMuestraTest_CuandoEsLaPrimerMuestraYNoTieneZonas() {
 		//setup
 		int cantidadDeMuestrasAntes = web.cantidadDeMuestras();
 		
@@ -106,6 +123,7 @@ public class WebTest {
 		//verify
 		assertEquals(0, cantidadDeMuestrasAntes);
 		assertEquals(1, cantidadDeMuestrasDespues);
+		verify(unaZonaDeCobertura, times(0)).notificarNuevaMuestraSiEstaDentroDeZona(unaMuestra);
 	}
 	
 	@Test
