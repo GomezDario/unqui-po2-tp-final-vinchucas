@@ -9,10 +9,10 @@ import web.ubicacion.Ubicacion;
 
 public class ZonaDeCobertura implements ObservableOrg, ObservadorZona{
 	
-	Ubicacion ubicacion;
-	double radio; 
-	String nombre;
-	Set<ObservadorOrg> observadores = new HashSet<>();
+	private Ubicacion ubicacion;
+	private double radio; 
+	private String nombre;
+	private Set<ObservadorOrg> observadores = new HashSet<>();
 	
 	public ZonaDeCobertura(Ubicacion unaUbicacion, double unRadio, String unNombre) {
 		// TODO Auto-generated constructor stub

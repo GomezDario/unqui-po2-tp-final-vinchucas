@@ -11,10 +11,6 @@ import web.zona.ObservadorZona;
 
 public class MuestraEstadoNoVerificada implements  MuestraEstado, ObservableZona
 {
-	public MuestraEstadoNoVerificada()
-	{
-		
-	}
 	
 	ArrayList<ObservadorZona> zonasObservadoras = new ArrayList<>();
 	
@@ -87,7 +83,6 @@ public class MuestraEstadoNoVerificada implements  MuestraEstado, ObservableZona
 		
 		zonasObservadoras.remove(observador);
 	}
-    
     
 }
 
